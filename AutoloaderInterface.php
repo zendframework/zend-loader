@@ -20,6 +20,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+namespace Zend\Loader;
+
 /**
  * Autoloader interface
  *
@@ -28,7 +30,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Loader_Autoloader_Interface
+interface AutoloaderInterface
 {
     public function autoload($class);
 }
