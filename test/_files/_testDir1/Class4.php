@@ -20,13 +20,18 @@
  * @version    $Id$
  */
 
+
+PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+
 /**
+ * Empty class that is used in unit testing by ZendTest::testLoadClassValid()
+ *
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FooBar_Model_ZendLoaderAutoloaderResourceMethodOverloading
+class Class4
 {
 }
