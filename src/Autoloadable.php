@@ -14,27 +14,32 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
+ * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @namespace
- */
-namespace Zend\Loader\PluginLoader;
+namespace Zend\Loader;
 
 /**
- * Plugin class loader exceptions
+ * Autoloader interface
  *
- * @uses       \Zend\Loader\Exception
- * @category   Zend
  * @package    Zend_Loader
- * @subpackage PluginLoader
+ * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Exception extends \DomainException implements \Zend\Loader\Exception
+interface Autoloadable
 {
+    /**
+     * Autoload a class
+     *
+     * @abstract
+     * @param   $class
+     * @return  mixed
+     *          False [if unable to load $class]
+     *          get_class($class) [if $class is successfully loaded]
+     */
+    public function autoload($class);
 }
