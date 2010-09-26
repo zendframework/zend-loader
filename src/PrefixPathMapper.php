@@ -14,23 +14,41 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-namespace ZfTest;
-
-\PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+/**
+ * @namespace
+ */
+namespace Zend\Loader;
 
 /**
+ * Plugin class loader interface
+ *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class FormSubmit
+interface PrefixPathMapper extends ShortNameLocater
 {
+    /**
+     * Add prefixed paths to the registry of paths
+     *
+     * @param string $prefix
+     * @param string $path
+     * @return \Zend\Loader\PrefixPathMapper
+     */
+    public function addPrefixPath($prefix, $path);
+
+    /**
+     * Remove a prefix (or prefixed-path) from the registry
+     *
+     * @param string $prefix
+     * @param string $path OPTIONAL
+     * @return \Zend\Loader\PrefixPathMapper
+     */
+    public function removePrefixPath($prefix, $path = null);
 }
