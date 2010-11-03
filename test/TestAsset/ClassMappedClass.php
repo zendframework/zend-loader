@@ -13,35 +13,29 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+namespace ZendTest\UnusualNamespace;
 
 /**
- * Static methods for loading classes and files.
- *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-class Zend_Loader_MyOverloader extends Zend_Loader
+class ClassMappedClass
 {
-    public static function loadClass($class, $dirs = null)
-    {
-        parent::loadClass($class, $dirs);
-    }
+    public $options;
 
-    public static function autoload($class)
+    public function __construct($options = null)
     {
-        try {
-            self::loadClass($class);
-            return $class;
-        } catch (Exception $e) {
-            return false;
-        }
+        $this->options = $options;
     }
 }

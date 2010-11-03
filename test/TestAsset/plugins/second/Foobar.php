@@ -13,35 +13,24 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
+namespace ZendTest\PluginTest2;
 
 /**
- * Static methods for loading classes and files.
+ * This file should never be loaded
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-class Zend_Loader_MyOverloader extends Zend_Loader
+class Foobar
 {
-    public static function loadClass($class, $dirs = null)
-    {
-        parent::loadClass($class, $dirs);
-    }
-
-    public static function autoload($class)
-    {
-        try {
-            self::loadClass($class);
-            return $class;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
 }

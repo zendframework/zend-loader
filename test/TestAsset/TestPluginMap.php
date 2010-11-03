@@ -13,35 +13,43 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
+
+namespace ZendTest\Loader\TestAsset;
 
 /**
- * Static methods for loading classes and files.
- *
  * @category   Zend
- * @package    Zend_Loader
+ * @package    Loader
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Loader
  */
-class Zend_Loader_MyOverloader extends Zend_Loader
+class TestPluginMap implements \IteratorAggregate
 {
-    public static function loadClass($class, $dirs = null)
-    {
-        parent::loadClass($class, $dirs);
-    }
+    /**
+     * Plugin map
+     * 
+     * @var array
+     */
+    public $map = array(
+        'map'    => __CLASS__,
+        'test'   => 'ZendTest\Loader\PluginClassLoaderTest',
+        'loader' => 'Zend\Loader\PluginClassLoader',
+    );
 
-    public static function autoload($class)
+    /**
+     * Return iterator
+     * 
+     * @return Traversable
+     */
+    public function getIterator()
     {
-        try {
-            self::loadClass($class);
-            return $class;
-        } catch (Exception $e) {
-            return false;
-        }
+        return new \ArrayIterator($this->map);
     }
 }
