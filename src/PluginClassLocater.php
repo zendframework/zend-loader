@@ -14,34 +14,48 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 /**
- * Static methods for loading classes and files.
+ * @namespace
+ */
+namespace Zend\Loader;
+
+/**
+ * Plugin class locater interface
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Loader_MyOverloader extends Zend_Loader
+interface PluginClassLocater extends ShortNameLocater, \IteratorAggregate
 {
-    public static function loadClass($class, $dirs = null)
-    {
-        parent::loadClass($class, $dirs);
-    }
+    /**
+     * Register a class to a given short name
+     * 
+     * @param  string $shortName 
+     * @param  string $className 
+     * @return PluginClassLocater
+     */
+    public function registerPlugin($shortName, $className);
 
-    public static function autoload($class)
-    {
-        try {
-            self::loadClass($class);
-            return $class;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
+    /**
+     * Unregister a short name lookup
+     * 
+     * @param mixed $shortName 
+     * @return void
+     */
+    public function unregisterPlugin($shortName);
+
+    /**
+     * Get a list of all registered plugins
+     * 
+     * @return array|Traversable
+     */
+    public function getRegisteredPlugins();
 }
+
