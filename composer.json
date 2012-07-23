@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-loader",
-    "description": "Zend\\Loader component",
+    "description": " ",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -9,11 +9,11 @@
     "homepage": "https://github.com/zendframework/zend-loader",
     "autoload": {
         "psr-4": {
-            "Zend\\Loader\\": "src/"
+            "Zend\\Loader": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.23"
+        "php": ">=5.3.3"
     },
     "extra": {
         "branch-alias": {
@@ -21,14 +21,17 @@
             "dev-develop": "2.5-dev"
         }
     },
-    "require-dev": {
-        "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
+    "suggest": {
+        "zendframework/zend-stdlib": "Zend\\Stdlib component"
     },
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Loader\\": "test/"
         }
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "1.7.*",
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/PHPUnit": "~4.0"
     }
 }
