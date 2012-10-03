@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-loader",
     "autoload": {
         "psr-4": {
-            "Zend\\Loader": "src/"
+            "Zend\\Loader\\": "src/"
         }
     },
     "require": {
