@@ -8,14 +8,8 @@
  * @package   Zend_Loader
  */
 
-namespace TestNamespace;
+namespace FooModule\BarModule;
 
-/**
- * @category   Zend
- * @package    Loader
- * @subpackage UnitTests
- * @group      Loader
- */
-class NoDuplicateAutoloadersCase
+class Module
 {
 }
