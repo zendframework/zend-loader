@@ -8,14 +8,8 @@
  * @package   Zend_Loader
  */
 
-/**
- * A class containing a parse error
- *
- * @category   Zend
- * @package    Zend_Loader
- * @subpackage UnitTests
- */
-class ParseError
+namespace FooModule\BarModule;
+
+class Module
 {
-    parseError;
 }
