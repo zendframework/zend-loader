@@ -21,9 +21,6 @@
             "dev-develop": "2.3-dev"
         }
     },
-    "suggest": {
-        "zendframework/zend-stdlib": "Zend\\Stdlib component"
-    },
     "autoload-dev": {
         "psr-4": {
             "ZendTest\\Loader\\": "test/"
