@@ -7,11 +7,11 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ZendTest\Loader\TestAsset\TestPlugins;
+namespace ZendTest\Loader\TestAsset\Parent\Child;
 
 /**
  * @group      Loader
  */
-class Bar
+class Subclass
 {
 }
