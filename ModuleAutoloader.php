@@ -13,8 +13,6 @@ namespace Zend\Loader;
 require_once __DIR__ . '/SplAutoloader.php';
 
 use GlobIterator;
-use Phar;
-use PharFileInfo;
 use SplFileInfo;
 use Traversable;
 
@@ -36,11 +34,6 @@ class ModuleAutoloader implements SplAutoloader
     protected $namespacedPaths = array();
 
     /**
-     * @var string Will contain the absolute phar:// path to the executable when packaged as phar file
-     */
-    protected $pharBasePath = "";
-
-    /**
      * @var array An array of supported phar extensions (filled on constructor)
      */
     protected $pharExtensions = array();
@@ -60,7 +53,6 @@ class ModuleAutoloader implements SplAutoloader
     public function __construct($options = null)
     {
         if (extension_loaded('phar')) {
-            $this->pharBasePath = Phar::running(true);
             $this->pharExtensions = array(
                 'phar',
                 'phar.tar',
@@ -193,9 +185,7 @@ class ModuleAutoloader implements SplAutoloader
             $path = $path . $moduleClassPath;
 
             if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
-                if (!$basePath = $this->pharBasePath) {
-                    $basePath = realpath('.');
-                }
+                $basePath = realpath('.');
 
                 if (false === $basePath) {
                     $basePath = getcwd();
@@ -242,19 +232,12 @@ class ModuleAutoloader implements SplAutoloader
      */
     protected function loadModuleFromDir($dirPath, $class)
     {
-        $modulePath = $dirPath . '/Module.php';
-        if (substr($modulePath, 0, 7) === 'phar://') {
-            $file = new PharFileInfo($modulePath);
-        } else {
-            $file = new SplFileInfo($modulePath);
-        }
-
-        if (($file->isReadable() && $file->isFile())) {
+        $file = new SplFileInfo($dirPath . '/Module.php');
+        if ($file->isReadable() && $file->isFile()) {
             // Found directory with Module.php in it
-            $absModulePath = $this->pharBasePath ? (string) $file : $file->getRealPath();
-            require_once $absModulePath;
+            require_once $file->getRealPath();
             if (class_exists($class)) {
-                $this->moduleClassMap[$class] = $absModulePath;
+                $this->moduleClassMap[$class] = $file->getRealPath();
                 return $class;
             }
         }
