@@ -3,12 +3,13 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 namespace Zend\Loader;
 
+use ReflectionClass;
 use Traversable;
 
 if (class_exists('Zend\Loader\AutoloaderFactory')) {
@@ -86,7 +87,7 @@ abstract class AutoloaderFactory
                     );
                 }
 
-                if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
+                if (!static::isSubclassOf($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
@@ -107,7 +108,7 @@ abstract class AutoloaderFactory
     }
 
     /**
-     * Get a list of all autoloaders registered with the factory
+     * Get an list of all autoloaders registered with the factory
      *
      * Returns an array of autoloader instances.
      *
@@ -198,14 +199,22 @@ abstract class AutoloaderFactory
      * @see https://bugs.php.net/bug.php?id=53727
      * @see https://github.com/zendframework/zf2/pull/1807
      *
-     * @deprecated since zf 2.3 requires PHP >= 5.3.23
-     *
      * @param  string $className
      * @param  string $type
      * @return bool
      */
     protected static function isSubclassOf($className, $type)
     {
-        return is_subclass_of($className, $type);
+        if (is_subclass_of($className, $type)) {
+            return true;
+        }
+        if (version_compare(PHP_VERSION, '5.3.7', '>=')) {
+            return false;
+        }
+        if (!interface_exists($type)) {
+            return false;
+        }
+        $r = new ReflectionClass($className);
+        return $r->implementsInterface($type);
     }
 }
