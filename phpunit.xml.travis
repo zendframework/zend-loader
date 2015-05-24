@@ -45,14 +45,14 @@
 
              As an example, consider the following tree:
                  ZendFramework/
-                 |-- 1.9.2
-                 |-- ZendFramework-1.9.1-minimal
-                 |-- 1.8.4PL1
-                 |-- 1.8.4
-                 |-- ZendFramework-1.8.3
-                 |-- 1.7.8
-                 |-- 1.7.7
-                 |-- 1.7.6
+                 |- 1.9.2
+                 |- ZendFramework-1.9.1-minimal
+                 |- 1.8.4PL1
+                 |- 1.8.4
+                 |- ZendFramework-1.8.3
+                 |- 1.7.8
+                 |- 1.7.7
+                 |- 1.7.6
 
              You would then set the value of "LATEST" and "LATEST_MAJOR" to
              "1.9.2", and could choose between "1.9.2", "1.8.4PL1", and "1.7.8"
