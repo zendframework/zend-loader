@@ -28,7 +28,7 @@
              functionality works as expected. Such tests include those for
              Zend\Soap and Zend\Session, which require that headers not be sent
              in order to work. -->
-        <const name="TESTS_ZEND_OB_ENABLED" value="false" />
+        <env name="TESTS_ZEND_OB_ENABLED" value="false" />
 
         <!-- Zend\Loader\Autoloader multi-version support tests
 
@@ -58,11 +58,11 @@
              "1.9.2", and could choose between "1.9.2", "1.8.4PL1", and "1.7.8"
              for "LATEST_MINOR", and any version number for "SPECIFIC". "PATH"
             would point to the parent "ZendFramework" directory. -->
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED" value="false" />
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_PATH" value="false" />
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST" value="false" />
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MAJOR" value="false" />
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR" value="false" />
-        <const name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_ENABLED" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_PATH" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MAJOR" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_LATEST_MINOR" value="false" />
+        <env name="TESTS_ZEND_LOADER_AUTOLOADER_MULTIVERSION_SPECIFIC" value="false" />
     </php>
 </phpunit>
