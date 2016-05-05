@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>PluginClassLoader - zend-loader</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-loader</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../autoloader-factory/">AutoloaderFactory</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../standard-autoloader/">StandardAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../class-map-autoloader/">ClassMapAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../module-autoloader/">ModuleAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spl-autoloader/">SplAutoloader</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">PluginClassLoader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../short-name-locator/">ShortNameLocator</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../plugin-class-locator/">PluginClassLocator</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../classmap-generator/">ClassMap Generator</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-loader">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#the-pluginclassloader">The PluginClassLoader</a></li>
+        
+            <li><a href="#quick-start">Quick Start</a></li>
+        
+            <li><a href="#configuration-options">Configuration Options</a></li>
+        
+            <li><a href="#available-methods">Available Methods</a></li>
+        
+            <li><a href="#examples">Examples</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../spl-autoloader/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../short-name-locator/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">PluginClassLoader</li>
+</ol>
+
+<h1 id="the-pluginclassloader">The PluginClassLoader</h1>
+<p>Resolving plugin names to class names is a common requirement within
+applications.  The <code>PluginClassLoader</code> implements the interfaces
+<a href="../plugin-class-locator/">PluginClassLocator</a>,
+<a href="../short-name-locator/">ShortNameLocator</a>, and <code>IteratorAggregate</code>, providing a
+mechanism for aliasing plugin names to classnames for later retrieval.</p>
+<p>While it can act as a standalone class, it is intended that developers will
+extend the class to provide a per-component plugin map. This allows seeding the
+map with the most often-used plugins, while simultaneously allowing the end-user
+to overwrite existing or register new plugins.</p>
+<p>Additionally, <code>PluginClassLoader</code> provides the ability to statically seed all
+new instances of a given <code>PluginClassLoader</code> or one of its extensions (via Late
+Static Binding). If your application will always call for defining or overriding
+particular plugin maps on given <code>PluginClassLoader</code> extensions, this is a
+powerful capability.</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>Typical use cases involve instantiating a <code>PluginClassLoader</code>, seeding it
+with one or more plugin/class name associations, and then using it to retrieve
+the class name associated with a given plugin name.</p>
+<pre class="codehilite"><code class="language-php">use Zend\Http\HeaderLoader;
+
+// Provide a global map, or override defaults:
+HeaderLoader::addStaticMap([
+    'xrequestedfor' =&gt; 'My\Http\Header\XRequestedFor',
+]);
+
+// Instantiate the loader:
+$loader = new Zend\Http\HeaderLoader();
+
+// Register a new plugin:
+$loader-&gt;registerPlugin('xForwardedFor', 'My\Http\Header\XForwardedFor');
+
+// Load/retrieve the associated plugin class:
+$class = $loader-&gt;load('xrequestedfor'); // 'My\Http\Header\XRequestedFor'</code></pre>
+
+
+<blockquote>
+<h3 id="case-sensitivity">Case Sensitivity</h3>
+<p>The <code>PluginClassLoader</code> is designed to do case-insensitive plugin name
+lookups. While the above example defines an "xForwardedFor" plugin name,
+internally, this will be stored as "xforwardedfor". If another plugin is
+registered with the same word but using a different casing structure, it will
+overwrite this entry.</p>
+</blockquote>
+<h2 id="configuration-options">Configuration Options</h2>
+<p>The constructor may take a single option, an array or <code>Traversable</code> object of key/value pairs
+corresponding to a plugin name and class name, respectively.</p>
+<h2 id="available-methods">Available Methods</h2>
+<h3 id="9595construct">__construct</h3>
+<pre class="codehilite"><code class="language-php">__construct(string|array|Traversable $map = null) : void</code></pre>
+
+
+<p>The constructor is used to instantiate and initialize the plugin class loader.
+If passed a string, an array, or a <code>Traversable</code> object, it will pass this to
+the <a href="#registerplugins">registerPlugins()</a> method in order to seed (or overwrite)
+the plugin class map.</p>
+<h3 id="addstaticmap">addStaticMap</h3>
+<pre class="codehilite"><code class="language-php">static addStaticMap(array|Traversable $map) : void</code></pre>
+
+
+<p>Static method for globally pre-seeding the loader with a class map. It accepts
+either an array or <code>Traversable</code> object of plugin name/class name pairs.</p>
+<p>When using this method, be certain you understand the precedence in which maps
+will be merged; in decreasing order of preference:</p>
+<ul>
+<li>Manually registered plugin/class name pairs (e.g., via
+  <a href="#registerplugin">registerPlugin()</a> or
+  <a href="#registerplugins">registerPlugins()</a>.</li>
+<li>A map passed to the constructor.</li>
+<li>The static map.</li>
+<li>The map defined within the class itself.</li>
+</ul>
+<p>Also, please note that calling the method will <strong>not</strong> affect any instances
+already created.</p>
+<h3 id="registerplugin">registerPlugin</h3>
+<pre class="codehilite"><code class="language-php">registerPlugin(string $shortName, string $className) : void</code></pre>
+
+
+<p>Defined by the <a href="../plugin-class-locator/">PluginClassLocator</a> interface. Expects
+two string arguments, the plugin <code>$shortName</code>, and the class <code>$className</code> which
+it represents.</p>
+<h3 id="registerplugins">registerPlugins</h3>
+<pre class="codehilite"><code class="language-php">registerPlugins(string|array|Traversable $map) : void</code></pre>
+
+
+<p>If a string argument is provided, <code>registerPlugins()</code> assumes this is a class
+name. If the class does not exist, an exception will be thrown. If it does, it
+then instantiates the class and checks to see whether or not it implements
+<code>Traversable</code>, iterating it if it does.</p>
+<p>Each key/value pair obtained during iteration is then passed to
+<a href="#registerPlugin">registerPlugin()</a> using the key as the plugin name and the
+value as the class name.</p>
+<h3 id="unregisterplugin">unregisterPlugin</h3>
+<pre class="codehilite"><code class="language-php">unregisterPlugin(string $shortName) : void</code></pre>
+
+
+<p>Defined by the <code>PluginClassLocator</code> interface; remove a plugin/class association
+from the plugin class map.</p>
+<h3 id="getregisteredplugins">getRegisteredPlugins</h3>
+<pre class="codehilite"><code class="language-php">getRegisteredPlugins() : array</code></pre>
+
+
+<p>Defined by the <code>PluginClassLocator</code> interface; return the entire plugin class
+map as an array.</p>
+<h3 id="isloaded">isLoaded</h3>
+<pre class="codehilite"><code class="language-php">isLoaded(string $name) : bool</code></pre>
+
+
+<p>Defined by the <code>ShortNameLocator</code> interface; determine if the given plugin has
+been resolved to a class name.</p>
+<h3 id="getclassname">getClassName</h3>
+<pre class="codehilite"><code class="language-php">getClassName(string $name) : string</code></pre>
+
+
+<p>Defined by the <code>ShortNameLocator</code> interface; return the class name to which a
+plugin name resolves.</p>
+<h3 id="load">load</h3>
+<pre class="codehilite"><code class="language-php">load(string $name) : string|false</code></pre>
+
+
+<p>Defined by the <code>ShortNameLocator</code> interface; attempt to resolve a plugin name to
+a class name. If successful, returns the class name; otherwise, returns a
+boolean <code>false</code>.</p>
+<h3 id="getiterator">getIterator</h3>
+<pre class="codehilite"><code class="language-php">getIterator() : Traversable</code></pre>
+
+
+<p>Defined by the <code>IteratorAggregate</code> interface; allows iteration over the plugin
+class map. This can come in useful for using <code>PluginClassLoader</code> instances to
+other <code>PluginClassLoader</code> instances in order to merge maps.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="using-static-maps">Using Static Maps</h3>
+<p>It's often convenient to provide global overrides or additions to the maps in a
+<code>PluginClassLoader</code> instance. This can be done using the <code>addStaticMap()</code>
+method:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Loader\PluginClassLoader;
+
+PluginClassLoader::addStaticMap([
+    'xrequestedfor' =&gt; 'My\Http\Header\XRequestedFor',
+]);</code></pre>
+
+
+<p>Any later instances created will now have this map defined, allowing you to load
+that plugin.</p>
+<pre class="codehilite"><code class="language-php">use Zend\Loader\PluginClassLoader;
+
+$loader = new PluginClassLoader();
+$class = $loader-&gt;load('xrequestedfor'); // My\Http\Header\XRequestedFor</code></pre>
+
+
+<h3 id="creating-a-pre-loaded-map">Creating a pre-loaded map</h3>
+<p>In many cases, you know exactly which plugins you may be drawing upon on a
+regular basis, and which classes they will refer to. In this case, extend
+the <code>PluginClassLoader</code> and define the map within the extending class.</p>
+<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+
+use Zend\Loader\PluginClassLoader;
+
+class PluginLoader extends PluginClassLoader
+{
+    /**
+     * @var array Plugin map
+     */
+    protected $plugins = [
+        'foo'    =&gt; 'My\Plugins\Foo',
+        'bar'    =&gt; 'My\Plugins\Bar',
+        'foobar' =&gt; 'My\Plugins\FooBar',
+    ];
+}</code></pre>
+
+
+<p>At this point, you can instantiate the map and immediately use it.</p>
+<pre class="codehilite"><code class="language-php">$loader = new My\Plugins\PluginLoader();
+$class  = $loader-&gt;load('foobar'); // My\Plugins\FooBar</code></pre>
+
+
+<p><code>PluginClassLoader</code> makes use of late static binding, allowing per-class static
+maps. If you want to allow defining a <a href="#using-static-maps">static map</a> specific
+to this extending class, declare a protected static <code>$staticMap</code> property:</p>
+<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+
+use Zend\Loader\PluginClassLoader;
+
+class PluginLoader extends PluginClassLoader
+{
+    protected static $staticMap = [];
+
+    // ...
+}</code></pre>
+
+
+<p>To inject the static map, call the <code>addStaticMap()</code> on the extension class:</p>
+<pre class="codehilite"><code class="language-php">PluginLoader::addStaticMap([
+    'baz' =&gt; 'My\Plugins\Baz',
+]);</code></pre>
+
+
+<h3 id="extending-a-plugin-map-using-another-plugin-map">Extending a plugin map using another plugin map</h3>
+<p>In some cases, a general map class may already exist; as an example, several
+Zend Framework components defining plugin brokers have an associated
+<code>PluginClassLoader</code> extension defining the plugins available for that component
+within the framework. What if you want to define some additions to these? Where
+should that code go?</p>
+<p>One possibility is to define the map in a configuration file, and then inject
+the configuration into an instance of the plugin loader.</p>
+<p>Another solution is to define a new plugin map class. The class name or an
+instance of the class may then be passed to the constructor or
+<code>registerPlugins()</code>.</p>
+<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+
+use Zend\Loader\PluginClassLoader;
+use Zend\Http\HeaderLoader;
+
+class PluginLoader extends PluginClassLoader
+{
+    /**
+     * @var array Plugin map
+     */
+    protected $plugins = [
+        'foo'    =&gt; 'My\Plugins\Foo',
+        'bar'    =&gt; 'My\Plugins\Bar',
+        'foobar' =&gt; 'My\Plugins\FooBar',
+    ];
+}
+
+// Inject in constructor:
+$loader = new HeaderLoader(PluginLoader::class); // as string class name
+$loader = new HeaderLoader(new PluginLoader());  // as instance
+
+// Or via registerPlugins():
+$loader-&gt;registerPlugins(PluginLoader::class); // as string class name
+$loader-&gt;registerPlugins(new PluginLoader());  // as instance</code></pre>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../spl-autoloader/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../short-name-locator/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>

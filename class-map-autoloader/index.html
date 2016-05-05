@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>ClassMapAutoloader - zend-loader</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-loader</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../autoloader-factory/">AutoloaderFactory</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../standard-autoloader/">StandardAutoloader</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">ClassMapAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../module-autoloader/">ModuleAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../spl-autoloader/">SplAutoloader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../plugin-class-loader/">PluginClassLoader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../short-name-locator/">ShortNameLocator</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../plugin-class-locator/">PluginClassLocator</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../classmap-generator/">ClassMap Generator</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" class="component-toggle" data-toggle="tooltip" data-placement="bottom" title="Show component list">
+                        <i class="fa fa-book"></i> Components
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-loader">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#the-classmapautoloader">The ClassMapAutoloader</a></li>
+        
+            <li><a href="#quick-start">Quick Start</a></li>
+        
+            <li><a href="#configuration-options">Configuration Options</a></li>
+        
+            <li><a href="#available-methods">Available Methods</a></li>
+        
+            <li><a href="#examples">Examples</a></li>
+        
+    
+    </ul>
+
+    
+    <ul class="pager hidden-print">
+      <li class="previous">
+        <a rel="prev" href="../standard-autoloader/"><i class="fa fa-arrow-left"></i> Previous</a>
+      </li>
+      <li class="next">
+        <a rel="next" href="../module-autoloader/">Next <i class="fa fa-arrow-right"></i></a>
+      </li>
+    </ul>
+    
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">ClassMapAutoloader</li>
+</ol>
+
+<h1 id="the-classmapautoloader">The ClassMapAutoloader</h1>
+<p>The <code>ClassMapAutoloader</code> is designed with performance in mind. Instead of doing
+a filesystem lookup, it checks the class against an in-memory classmap, loading
+the file associated with that class on a match.  This avoids unnecessary
+filesystem operations, and can also ensure the autoloader "plays nice" with
+opcode caches and PHP's realpath cache.</p>
+<p>The zend-loader component provides a tool for generating classmaps via
+<code>bin/classmap_generator.php</code>; read the <a href="../classmap-generator/">tool's documentation</a> for more details.</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>The first step is to generate a class map file. You may run this over any
+directory containing source code anywhere underneath it.</p>
+<pre class="codehilite"><code class="language-bash">$ php classmap_generator.php Some/Directory/</code></pre>
+
+
+<p>This will create a file named <code>Some/Directory/autoload_classmap.php</code>, which is a
+PHP file returning an associative array that represents the class map.</p>
+<p>Within your code, you will now instantiate the <code>ClassMapAutoloader</code>, and provide
+it the location of the map.</p>
+<pre class="codehilite"><code class="language-php">// This example assumes the ClassMapAutoloader is autoloadable.
+use Zend\Loader\ClassMapAutoloader;
+
+$loader = new ClassMapAutoloader();
+
+// Register the class map:
+$loader-&gt;registerAutoloadMap('Some/Directory/autoload_classmap.php');
+
+// Register with spl_autoload:
+$loader-&gt;register();</code></pre>
+
+
+<p>At this point, you may now use any classes referenced in your class map.</p>
+<h2 id="configuration-options">Configuration Options</h2>
+<p>The <code>ClassMapAutoloader</code> expects an array of options, where each option is
+either a filename referencing a class map, or an associative array of class
+name/filename pairs.</p>
+<p>As an example:</p>
+<pre class="codehilite"><code class="language-php">// Configuration defining both a file-based class map, and an array map
+$config = [
+    __DIR__ . '/library/autoloader_classmap.php', // file-based class map
+    [                                             // array class map
+        'Application\Bootstrap' =&gt; __DIR__ . '/application/Bootstrap.php',
+        'Test\Bootstrap'        =&gt; __DIR__ . '/tests/Bootstrap.php',
+    ],
+];</code></pre>
+
+
+<h2 id="available-methods">Available Methods</h2>
+<h3 id="9595construct">__construct</h3>
+<pre class="codehilite"><code class="language-php">__construct(array|Traversable $options = null) : void</code></pre>
+
+
+<p>Initialize and configure the object <code>__construct($options = null)</code>; <code>$options</code>
+will be passed to <a href="#setoptions">setOptions()</a>.</p>
+<h3 id="setoptions">setOptions</h3>
+<pre class="codehilite"><code class="language-php">setOptions(array|Traversable $options) : void</code></pre>
+
+
+<p>Configures the state of the autoloader, including registering class maps.
+<code>$options</code> will be passed to <a href="#registerautoloadmaps">registerAutoloadMaps()</a>.</p>
+<h3 id="registerautoloadmap">registerAutoloadMap</h3>
+<pre class="codehilite"><code class="language-php">registerAutoloadMap(string|array $map) : void</code></pre>
+
+
+<p>Registers a class map with the autoloader. <code>$map</code> may be either a string
+referencing a PHP script that returns a class map, or an array defining a class
+map.</p>
+<p>More than one class map may be registered; each will be merged with the
+previous, meaning it's possible for a later class map to overwrite entries from
+a previously registered map.</p>
+<h3 id="registerautoloadmaps">registerAutoloadMaps</h3>
+<pre class="codehilite"><code class="language-php">registerAutoloadMaps(array|Traversable $maps) : void</code></pre>
+
+
+<p>Register multiple class maps with the autoloader, iterating over <code>$maps</code> and
+passing each value to <a href="#registerautoloadmap">registerAutoloadMap()</a>.</p>
+<h3 id="getautoloadmap">getAutoloadMap</h3>
+<pre class="codehilite"><code class="language-php">getAutoloadMap() : array</code></pre>
+
+
+<p>Retrieves the current class map as an associative array.</p>
+<h3 id="autoload">autoload</h3>
+<pre class="codehilite"><code class="language-php">autoload(string $class) : false|string</code></pre>
+
+
+<p>Attempts to load the class specified. Returns a boolean <code>false</code> on failure, or a
+string indicating the class loaded on success.</p>
+<h3 id="register">register</h3>
+<pre class="codehilite"><code class="language-php">register() : void</code></pre>
+
+
+<p>Registers the <code>autoload()</code> method of the current instance with
+<code>spl_autoload_register()</code>.</p>
+<h2 id="examples">Examples</h2>
+<h3 id="using-configuration-to-seed-classmapautoloader">Using configuration to seed ClassMapAutoloader</h3>
+<p>You can use configuration to seed a <code>ClassMapAutoloader</code>; values might come from
+a configuration file, a cache, or even a PHP array.  The following is an example
+of a PHP array that could be used to configure the autoloader:</p>
+<pre class="codehilite"><code class="language-php">// Configuration defining both a file-based class map, and an array map
+$config = [
+    APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map
+    [                                                         // array class map
+        'Application\Bootstrap' =&gt; APPLICATION_PATH . '/Bootstrap.php',
+        'Test\Bootstrap'        =&gt; APPLICATION_PATH . '/../tests/Bootstrap.php',
+    ],
+];</code></pre>
+
+
+<p>Once you have your configuration, you can pass it either to the constructor of
+the <code>ClassMapAutoloader</code>, to its <code>setOptions()</code> method, or to
+<code>registerAutoloadMaps()</code>.</p>
+<pre class="codehilite"><code class="language-php">use Zend\Loader\ClassMapAutoloader;
+
+/* The following are all equivalent */
+
+// To the constructor:
+$loader = new ClassMapAutoloader($config);
+
+// To setOptions():
+$loader = new ClassMapAutoloader();
+$loader-&gt;setOptions($config);
+
+// To registerAutoloadMaps():
+$loader = new ClassMapAutoloader();
+$loader-&gt;registerAutoloadMaps($config);</code></pre>
+
+<hr />
+
+
+<nav>
+  <ul class="pager hidden-print">
+    <li class="previous">
+      <a rel="prev" href="../standard-autoloader/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../module-autoloader/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+</div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="zf-components">
+  <div class="zf-components-grid">
+    <div class="zf-logo">
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
+    </div>
+
+    <div class="component-list"></div>
+
+    <p class="zf-components-rollup"><a href="#">Hide list</a></p>
+  </div>
+</div>
+
+    <script>
+  // Prepare the component list dropdown for display
+  $(function () {
+    var components = $(".zf-components"),
+        componentList = components.find(".component-list"),
+        sidebar = $(".bs-sidebar.affix"),
+        sidebarInitialPos = sidebar.css("position"),
+        hidden,
+        componentToggle = $(".component-toggle"),
+        navbar = $(".navbar-fixed-top"),
+        rollUpLink = $(".zf-components-rollup a");
+
+    // Initial setup on document load
+    components.insertBefore(navbar);
+    $(".zf-logo a").tooltip();
+    componentToggle.tooltip();
+    rollUpLink.attr({ href: "#", alt: "Hide component list" });
+
+    // Cast initial sidebar position value
+    if (undefined === sidebarInitialPos) {
+      sidebarInitialPos = "fixed";
+    }
+
+    // Setup onclick events to toggle list
+    componentToggle.click(toggleComponentList);
+    rollUpLink.click(toggleComponentList);
+
+    // Toggle the component list display
+    function toggleComponentList(event) {
+      event.preventDefault();
+
+      if (hidden === undefined) {
+        // Not loaded yet; load and display.
+        loadComponentList();
+        return;
+      }
+
+      if (hidden) {
+        // Hidden; display.
+        showComponentList();
+        return;
+      }
+
+      // Currently visible; hide
+      hideComponentList();
+    }
+
+    // Show the component list
+    function showComponentList() {
+      navbar.css({position: "relative"});
+      sidebar.css({position: "relative"});
+      components
+        .css({"margin-top": "-" + components.outerHeight() + "px"})
+        .show()
+        .animate({"margin-top": 0}, {
+          complete: function () {
+            componentToggle
+              .data("placement", "top")
+              .attr("data-original-title", "Hide component list");
+            hidden = false;
+          },
+          queue: false
+        });
+    }
+
+    // Hide the component list
+    function hideComponentList() {
+      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
+        complete: function () {
+          navbar.css({position: "fixed"});
+          sidebar.css({position: sidebarInitialPos});
+          componentToggle
+            .data("placement", "bottom")
+            .attr("data-original-title", "Show component list");
+          components.hide();
+          hidden = true;
+        },
+        queue: false
+      });
+      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
+    }
+
+    // Inject a component into the componet list DOM.
+    function injectComponent(index, component) {
+      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
+    }
+
+    // Parse the component list, build the DOM, and display it.
+    function parseComponentList(components) {
+      $.each(components, injectComponent);
+      showComponentList();
+    }
+
+    // Fetch the component list and display it.
+    function loadComponentList () {
+      $.ajax({
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
+        dataType: "text json",
+        success: parseComponentList,
+        error: function (e) {
+          console.log("Error occurred with XHR call", e);
+        }
+      });
+    }
+  });
+</script>
+    </body>
+
+</html>
