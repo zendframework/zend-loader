@@ -1,558 +1,558 @@
 {
     "docs": [
         {
-            "location": "/",
-            "text": "zend-loader\n\n\n\n\n\n\nzend-loader provides different strategies for autoloading PHP classes.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-loader/issues\n\n\nDocumentation is at https://zendframework.github.io/zend-loader/",
+            "location": "/", 
+            "text": "zend-loader\n\n\n\n\n\n\nzend-loader provides different strategies for autoloading PHP classes.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-loader/issues\n\n\nDocumentation is at https://zendframework.github.io/zend-loader/", 
             "title": "Home"
-        },
+        }, 
         {
-            "location": "/#zend-loader",
-            "text": "zend-loader provides different strategies for autoloading PHP classes.   File issues at https://github.com/zendframework/zend-loader/issues  Documentation is at https://zendframework.github.io/zend-loader/",
+            "location": "/#zend-loader", 
+            "text": "zend-loader provides different strategies for autoloading PHP classes.   File issues at https://github.com/zendframework/zend-loader/issues  Documentation is at https://zendframework.github.io/zend-loader/", 
             "title": "zend-loader"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/",
-            "text": "The AutoloaderFactory\n\n\nzend-loader provides multiple autoloader strategies.\n\nZend\\Loader\\AutoloaderFactory\n allows you to define configuration for each\nstrategy you wish to use and register them at once. As an example, you may have\na class map for your most used classes, but want to use a PSR-0 style autoloader\nfor 3rd party libraries. The factory uses configuration, allowing you to cache\nyour autoloader definitions or define them centrally for your application.\n\n\nQuick Start\n\n\nThe \nAutoloaderFactory\n expects an array of configuration.\n\n\n$config = [\n    'Zend\\Loader\\ClassMapAutoloader' => [\n        'application' => APPLICATION_PATH . '/.classmap.php',\n        'zf'          => APPLICATION_PATH . '/../library/Zend/.classmap.php',\n    ],\n    'Zend\\Loader\\StandardAutoloader' => [\n        'namespaces' => [\n            'Phly\\Mustache' => APPLICATION_PATH . '/../library/Phly/Mustache',\n            'Doctrine'      => APPLICATION_PATH . '/../library/Doctrine',\n        ],\n    ],\n];\n\n\n\n\nOnce you have your configuration in a PHP array, pass it to the\n\nAutoloaderFactory\n:\n\n\n// This example assumes that the AutoloaderFactory is itself autoloadable!\nuse Zend\\Loader\\AutoloaderFactory;\n\nAutoloaderFactory::factory($config);\n\n\n\n\nThe \nAutoloaderFactory\n will instantiate each autoloader with the given options,\nand also call its \nregister()\n method to register it with the SPL autoloader.\n\n\nConfiguration options\n\n\nThe \nAutoloaderFactory\n expects an associative array or \nTraversable\n object.\nKeys should be valid autoloader class names, and the values should be the\noptions that should be passed to the class constructor.\n\n\nInternally, the \nAutoloaderFactory\n checks to see if the autoloader class\nreferenced exists. If not, it will use the \nStandardAutoloader\n\nto attempt to load the class via the \ninclude_path\n.\nIf the class is not found, or does not implement the\n\nSplAutoloader\n interface, an exception will be raised.\n\n\nAvailable methods\n\n\nfactory\n\n\nstatic factory(array|Traversable $options) : void\n\n\n\n\nInstantiate and register autoloaders.\n\n\nThis method is \nstatic\n, and is used to instantiate autoloaders and register them\nwith the SPL autoloader. It expects either an array or \nTraversable\n object as denoted in the\n\noptions section\n.\n\n\ngetRegisteredAutoloaders\n\n\nstatic getRegisteredAutoloaders() : SplAutoloader[]\n\n\n\n\nRetrieve a list of all autoloaders registered using the factory.\n\n\nThis method is \nstatic\n, and may be used to retrieve a list of all autoloaders\nregistered via the \nfactory()\n method. It returns an array of \nSplAutoloader\n\ninstances.\n\n\ngetRegisteredAutoloader\n\n\nstatic getRegisteredAutoloader($class) : SplAutoloader\n\n\n\n\nRetrieve an autoloader by class name.\n\n\nThis method is \nstatic\n, and is used to retrieve a specific autoloader by\nclass name. If the autoloader is not registered, an exception will be thrown.\n\n\nunregisterAutoloaders\n\n\nstatic unregisterAutoloaders() : void\n\n\n\n\nUnregister all autoloaders registered via the factory.\n\n\nThis method is \nstatic\n, and can be used to unregister all autoloaders that\nwere registered via the factory. Note that this will \nnot\n unregister\nautoloaders that were registered outside of the factory.\n\n\nunregisterAutoloader\n\n\nstatic unregisterAutoloader($class) : bool\n\n\n\n\nUnregister an autoloader registered via the factory.\n\n\nThis method is \nstatic\n, and can be used to unregister an autoloader that was\nregistered via the factory. Note that this will \nnot\n unregister autoloaders\nthat were registered outside of the factory. If the autoloader is registered via\nthe factory, after unregistering it will return \nTRUE\n, otherwise \nFALSE\n.",
+            "location": "/autoloader-factory/", 
+            "text": "The AutoloaderFactory\n\n\nzend-loader provides multiple autoloader strategies.\n\nZend\\Loader\\AutoloaderFactory\n allows you to define configuration for each\nstrategy you wish to use and register them at once. As an example, you may have\na class map for your most used classes, but want to use a PSR-0 style autoloader\nfor 3rd party libraries. The factory uses configuration, allowing you to cache\nyour autoloader definitions or define them centrally for your application.\n\n\nQuick Start\n\n\nThe \nAutoloaderFactory\n expects an array of configuration.\n\n\n$config = [\n    'Zend\\Loader\\ClassMapAutoloader' =\n [\n        'application' =\n APPLICATION_PATH . '/.classmap.php',\n        'zf'          =\n APPLICATION_PATH . '/../library/Zend/.classmap.php',\n    ],\n    'Zend\\Loader\\StandardAutoloader' =\n [\n        'namespaces' =\n [\n            'Phly\\Mustache' =\n APPLICATION_PATH . '/../library/Phly/Mustache',\n            'Doctrine'      =\n APPLICATION_PATH . '/../library/Doctrine',\n        ],\n    ],\n];\n\n\n\n\nOnce you have your configuration in a PHP array, pass it to the\n\nAutoloaderFactory\n:\n\n\n// This example assumes that the AutoloaderFactory is itself autoloadable!\nuse Zend\\Loader\\AutoloaderFactory;\n\nAutoloaderFactory::factory($config);\n\n\n\n\nThe \nAutoloaderFactory\n will instantiate each autoloader with the given options,\nand also call its \nregister()\n method to register it with the SPL autoloader.\n\n\nConfiguration options\n\n\nThe \nAutoloaderFactory\n expects an associative array or \nTraversable\n object.\nKeys should be valid autoloader class names, and the values should be the\noptions that should be passed to the class constructor.\n\n\nInternally, the \nAutoloaderFactory\n checks to see if the autoloader class\nreferenced exists. If not, it will use the \nStandardAutoloader\n\nto attempt to load the class via the \ninclude_path\n.\nIf the class is not found, or does not implement the\n\nSplAutoloader\n interface, an exception will be raised.\n\n\nAvailable methods\n\n\nfactory\n\n\nstatic factory(array|Traversable $options) : void\n\n\n\n\nInstantiate and register autoloaders.\n\n\nThis method is \nstatic\n, and is used to instantiate autoloaders and register them\nwith the SPL autoloader. It expects either an array or \nTraversable\n object as denoted in the\n\noptions section\n.\n\n\ngetRegisteredAutoloaders\n\n\nstatic getRegisteredAutoloaders() : SplAutoloader[]\n\n\n\n\nRetrieve a list of all autoloaders registered using the factory.\n\n\nThis method is \nstatic\n, and may be used to retrieve a list of all autoloaders\nregistered via the \nfactory()\n method. It returns an array of \nSplAutoloader\n\ninstances.\n\n\ngetRegisteredAutoloader\n\n\nstatic getRegisteredAutoloader($class) : SplAutoloader\n\n\n\n\nRetrieve an autoloader by class name.\n\n\nThis method is \nstatic\n, and is used to retrieve a specific autoloader by\nclass name. If the autoloader is not registered, an exception will be thrown.\n\n\nunregisterAutoloaders\n\n\nstatic unregisterAutoloaders() : void\n\n\n\n\nUnregister all autoloaders registered via the factory.\n\n\nThis method is \nstatic\n, and can be used to unregister all autoloaders that\nwere registered via the factory. Note that this will \nnot\n unregister\nautoloaders that were registered outside of the factory.\n\n\nunregisterAutoloader\n\n\nstatic unregisterAutoloader($class) : bool\n\n\n\n\nUnregister an autoloader registered via the factory.\n\n\nThis method is \nstatic\n, and can be used to unregister an autoloader that was\nregistered via the factory. Note that this will \nnot\n unregister autoloaders\nthat were registered outside of the factory. If the autoloader is registered via\nthe factory, after unregistering it will return \nTRUE\n, otherwise \nFALSE\n.", 
             "title": "AutoloaderFactory"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#the-autoloaderfactory",
-            "text": "zend-loader provides multiple autoloader strategies. Zend\\Loader\\AutoloaderFactory  allows you to define configuration for each\nstrategy you wish to use and register them at once. As an example, you may have\na class map for your most used classes, but want to use a PSR-0 style autoloader\nfor 3rd party libraries. The factory uses configuration, allowing you to cache\nyour autoloader definitions or define them centrally for your application.",
+            "location": "/autoloader-factory/#the-autoloaderfactory", 
+            "text": "zend-loader provides multiple autoloader strategies. Zend\\Loader\\AutoloaderFactory  allows you to define configuration for each\nstrategy you wish to use and register them at once. As an example, you may have\na class map for your most used classes, but want to use a PSR-0 style autoloader\nfor 3rd party libraries. The factory uses configuration, allowing you to cache\nyour autoloader definitions or define them centrally for your application.", 
             "title": "The AutoloaderFactory"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#quick-start",
-            "text": "The  AutoloaderFactory  expects an array of configuration.  $config = [\n    'Zend\\Loader\\ClassMapAutoloader' => [\n        'application' => APPLICATION_PATH . '/.classmap.php',\n        'zf'          => APPLICATION_PATH . '/../library/Zend/.classmap.php',\n    ],\n    'Zend\\Loader\\StandardAutoloader' => [\n        'namespaces' => [\n            'Phly\\Mustache' => APPLICATION_PATH . '/../library/Phly/Mustache',\n            'Doctrine'      => APPLICATION_PATH . '/../library/Doctrine',\n        ],\n    ],\n];  Once you have your configuration in a PHP array, pass it to the AutoloaderFactory :  // This example assumes that the AutoloaderFactory is itself autoloadable!\nuse Zend\\Loader\\AutoloaderFactory;\n\nAutoloaderFactory::factory($config);  The  AutoloaderFactory  will instantiate each autoloader with the given options,\nand also call its  register()  method to register it with the SPL autoloader.",
+            "location": "/autoloader-factory/#quick-start", 
+            "text": "The  AutoloaderFactory  expects an array of configuration.  $config = [\n    'Zend\\Loader\\ClassMapAutoloader' =  [\n        'application' =  APPLICATION_PATH . '/.classmap.php',\n        'zf'          =  APPLICATION_PATH . '/../library/Zend/.classmap.php',\n    ],\n    'Zend\\Loader\\StandardAutoloader' =  [\n        'namespaces' =  [\n            'Phly\\Mustache' =  APPLICATION_PATH . '/../library/Phly/Mustache',\n            'Doctrine'      =  APPLICATION_PATH . '/../library/Doctrine',\n        ],\n    ],\n];  Once you have your configuration in a PHP array, pass it to the AutoloaderFactory :  // This example assumes that the AutoloaderFactory is itself autoloadable!\nuse Zend\\Loader\\AutoloaderFactory;\n\nAutoloaderFactory::factory($config);  The  AutoloaderFactory  will instantiate each autoloader with the given options,\nand also call its  register()  method to register it with the SPL autoloader.", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#configuration-options",
-            "text": "The  AutoloaderFactory  expects an associative array or  Traversable  object.\nKeys should be valid autoloader class names, and the values should be the\noptions that should be passed to the class constructor.  Internally, the  AutoloaderFactory  checks to see if the autoloader class\nreferenced exists. If not, it will use the  StandardAutoloader \nto attempt to load the class via the  include_path .\nIf the class is not found, or does not implement the SplAutoloader  interface, an exception will be raised.",
+            "location": "/autoloader-factory/#configuration-options", 
+            "text": "The  AutoloaderFactory  expects an associative array or  Traversable  object.\nKeys should be valid autoloader class names, and the values should be the\noptions that should be passed to the class constructor.  Internally, the  AutoloaderFactory  checks to see if the autoloader class\nreferenced exists. If not, it will use the  StandardAutoloader \nto attempt to load the class via the  include_path .\nIf the class is not found, or does not implement the SplAutoloader  interface, an exception will be raised.", 
             "title": "Configuration options"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#available-methods",
-            "text": "",
+            "location": "/autoloader-factory/#available-methods", 
+            "text": "", 
             "title": "Available methods"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#factory",
-            "text": "static factory(array|Traversable $options) : void  Instantiate and register autoloaders.  This method is  static , and is used to instantiate autoloaders and register them\nwith the SPL autoloader. It expects either an array or  Traversable  object as denoted in the options section .",
+            "location": "/autoloader-factory/#factory", 
+            "text": "static factory(array|Traversable $options) : void  Instantiate and register autoloaders.  This method is  static , and is used to instantiate autoloaders and register them\nwith the SPL autoloader. It expects either an array or  Traversable  object as denoted in the options section .", 
             "title": "factory"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#getregisteredautoloaders",
-            "text": "static getRegisteredAutoloaders() : SplAutoloader[]  Retrieve a list of all autoloaders registered using the factory.  This method is  static , and may be used to retrieve a list of all autoloaders\nregistered via the  factory()  method. It returns an array of  SplAutoloader \ninstances.",
+            "location": "/autoloader-factory/#getregisteredautoloaders", 
+            "text": "static getRegisteredAutoloaders() : SplAutoloader[]  Retrieve a list of all autoloaders registered using the factory.  This method is  static , and may be used to retrieve a list of all autoloaders\nregistered via the  factory()  method. It returns an array of  SplAutoloader \ninstances.", 
             "title": "getRegisteredAutoloaders"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#getregisteredautoloader",
-            "text": "static getRegisteredAutoloader($class) : SplAutoloader  Retrieve an autoloader by class name.  This method is  static , and is used to retrieve a specific autoloader by\nclass name. If the autoloader is not registered, an exception will be thrown.",
+            "location": "/autoloader-factory/#getregisteredautoloader", 
+            "text": "static getRegisteredAutoloader($class) : SplAutoloader  Retrieve an autoloader by class name.  This method is  static , and is used to retrieve a specific autoloader by\nclass name. If the autoloader is not registered, an exception will be thrown.", 
             "title": "getRegisteredAutoloader"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#unregisterautoloaders",
-            "text": "static unregisterAutoloaders() : void  Unregister all autoloaders registered via the factory.  This method is  static , and can be used to unregister all autoloaders that\nwere registered via the factory. Note that this will  not  unregister\nautoloaders that were registered outside of the factory.",
+            "location": "/autoloader-factory/#unregisterautoloaders", 
+            "text": "static unregisterAutoloaders() : void  Unregister all autoloaders registered via the factory.  This method is  static , and can be used to unregister all autoloaders that\nwere registered via the factory. Note that this will  not  unregister\nautoloaders that were registered outside of the factory.", 
             "title": "unregisterAutoloaders"
-        },
+        }, 
         {
-            "location": "/autoloader-factory/#unregisterautoloader",
-            "text": "static unregisterAutoloader($class) : bool  Unregister an autoloader registered via the factory.  This method is  static , and can be used to unregister an autoloader that was\nregistered via the factory. Note that this will  not  unregister autoloaders\nthat were registered outside of the factory. If the autoloader is registered via\nthe factory, after unregistering it will return  TRUE , otherwise  FALSE .",
+            "location": "/autoloader-factory/#unregisterautoloader", 
+            "text": "static unregisterAutoloader($class) : bool  Unregister an autoloader registered via the factory.  This method is  static , and can be used to unregister an autoloader that was\nregistered via the factory. Note that this will  not  unregister autoloaders\nthat were registered outside of the factory. If the autoloader is registered via\nthe factory, after unregistering it will return  TRUE , otherwise  FALSE .", 
             "title": "unregisterAutoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/",
-            "text": "The StandardAutoloader\n\n\nOverview\n\n\nZend\\Loader\\StandardAutoloader\n is designed as a\n\nPSR-0\n-compliant\nautoloader. It assumes a 1:1 mapping of the namespace+classname to the\nfilesystem, wherein namespace separators and underscores are translated to\ndirectory separators. The following statement illustrates how resolution works:\n\n\n$filename = str_replace(\n    ['_', '\\\\'],\n    DIRECTORY_SEPARATOR,\n    $classname\n) . '.php';\n\n\n\n\nThe \nStandardAutoloader\n requires that you explicitly register namespace/path\npairs (or vendor prefix/path pairs), and will only load a file if it exists\nwithin the given path. Multiple pairs may be provided.\n\n\nAs a measure of last resort, you may also use the \nStandardAutoloader\n as a\n\"fallback\" autoloader \u2014 one that will look for classes of any namespace or\nvendor prefix on the \ninclude_path\n. This practice is not recommended, however,\ndue to performance implications.\n\n\nFinally, as with all autoloaders in zend-loader, the \nStandardAutoloader\n is\ncapable of registering itself with PHP's SPL autoloader registry.\n\n\n\n\nVocabulary: Namespaces vs. Vendor Prefixes\n\n\nIn terms of autoloading, a \"namespace\" corresponds to PHP's own definition of\nnamespaces.\n\n\nA \"vendor prefix\" refers to the practice, popularized in PHP versions prior to\n5.3, of providing a pseudo-namespace in the form of underscore-separated words\nin class names. As an example, the class \nPhly_Couch_Document\n uses a vendor\nprefix of \nPhly\n, and a component prefix of \nPhly_Couch\n, but it is a class\nsitting in the global namespace.\n\n\nThe \nStandardAutoloader\n is capable of loading either namespaced or vendor\nprefixed class names, but treats them separately when attempting to match them\nto an appropriate path.\n\n\n\n\nQuick Start\n\n\nBasic use of the \nStandardAutoloader\n requires registering namespace/path pairs.\nThis can either be done at instantiation, or via explicit method calls after the\nobject has been initialized.  Calling \nregister()\n will register the autoloader\nwith the SPL autoloader registry.\n\n\nManual Configuration\n\n\nuse Zend\\Loader\\StandardAutoloader;\n\n// This example assumes the StandardAutoloader is autoloadable.\n$loader = new StandardAutoloader();\n\n// Register the \"Phly\" namespace:\n$loader->registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');\n\n// Register the \"Scapi\" vendor prefix:\n$loader->registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');\n\n// Optionally, specify the autoloader as a \"fallback\" autoloader;\n// this is not recommended.\n$loader->setFallbackAutoloader(true);\n\n// Register with spl_autoload:\n$loader->register();\n\n\n\n\nConfiguration at Instantiation\n\n\nThe \nStandardAutoloader\n may also be configured at instantiation. Please note:\n\n\n\n\nThe argument passed may be either an array or a \nTraversable\n object.\n\n\nThe argument passed should also be a valid argument for passing to the\n  \nsetOptions()\n method.\n\n\n\n\nThe following is equivalent to the previous example.\n\n\nuse Zend\\Loader\\StandardAutoloader;\n\n$loader = new StandardAutoloader([\n    'namespaces' => [\n        'Phly' => APPLICATION_PATH . '/../library/Phly',\n    ],\n    'prefixes' => [\n        'Scapi' => APPLICATION_PATH . '/../library/Scapi',\n    ],\n    'fallback_autoloader' => true,\n]);\n\n// Register with spl_autoload:\n$loader->register();\n\n\n\n\nConfiguration Options\n\n\nThe \nStandardAutoloader\n defines the following options.\n\n\nnamespaces\n\n\nAn associative array of namespace/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that live\nin that namespace (or its subnamespaces).\n\n\nprefixes\n\n\nAn associative array of vendor prefix/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that begin\nwith the provided vendor prefix.\n\n\nfallback_autoloader\n\n\nA boolean value indicating whether or not this instance should act as a\n\"fallback\" autoloader (i.e., look for classes of any namespace or vendor prefix\non the \ninclude_path\n). By default, \nfalse\n.\n\n\n\n\nautoregister_zf is deprecated\n\n\nOne other option is available to the \nStandardAutoloader\n: \nautoregister_zf\n.\nWe do not document it any longer, as it is no longer relevant.\n\n\nStarting with the 2.5.0 release of Zend Framework, the framework package\nitself is a \"metapackage\", defining only a \ncomposer.json\n file listing\nthe packages for each component.\n\n\nAs such, there is no single path in which all ZF files live, making the\n\nautoregister_zf\n flag useless for versions starting with 2.5.0; it will\nonly register the zend-loader path!\n\n\nIf you are using this feature, you should update your code. We recommend\nusing \nComposer\n's autoloader for autoloading\nZend Framework classes.\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nCreate a new instance of the object.\n\n\nIf \n$options\n is non-null, the argument is passed to\n\nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nSet object state based on provided options.\n\n\nRecognized keys are detailed under \nConfiguration options\n,\nwith the following behaviors:\n\n\n\n\nThe \nnamespaces\n value will be passed to\n  \nregisterNamespaces()\n.\n\n\nThe \nprefixes\n value will be passed to\n  \nregisterPrefixes()\n.\n\n\nThe \nfallback_autoloader\n value will be passed to\n  \nsetFallbackAutoloader()\n.\n\n\n\n\nsetFallbackAutoloader\n\n\nsetFallbackAutoloader(bool $flag) : void\n\n\n\n\nTakes a boolean flag indicating whether or not to act as a fallback autoloader\nwhen registered with the SPL autoloader.\n\n\nisFallbackAutoloader\n\n\nisFallbackAutoloader() : bool\n\n\n\n\nIndicates whether or not this instance is flagged as a fallback autoloader.\n\n\nregisterNamespace\n\n\nregisterNamespace(string $namespace, string $directory) : void\n\n\n\n\nRegister a namespace with the autoloader, pointing it to a specific directory on\nthe filesystem for class resolution. For classes matching that initial\nnamespace, the autoloader will then perform lookups within that directory.\n\n\nregisterNamespaces\n\n\nregisterNamespaces(array|Traversable $namespaces) : void\n\n\n\n\nRegister multiple namespaces with the autoloader, iterating through\n\n$namespaces\n and passing each key and item to \nregisterNamespace()\n.\n\n\nregisterPrefix\n\n\nregisterPrefix(string $prefix, string $directory) : void\n\n\n\n\nRegister a vendor prefix with the autoloader, pointing it to a specific\ndirectory on the filesystem for class resolution. For classes matching that\ninitial vendor prefix, the autoloader will then perform lookups within that\ndirectory.\n\n\nregisterPrefixes\n\n\nregisterPrefixes(array|Traversable $prefixes) : void\n\n\n\n\nRegister many vendor prefixes with the autoloader, traversing \n$prefixes\n and\npassing each key/value pair to \nregisterPrefix()\n.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the class specified. Returns a boolean \nfalse\n on failure, or a\nstring indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.",
+            "location": "/standard-autoloader/", 
+            "text": "The StandardAutoloader\n\n\nOverview\n\n\nZend\\Loader\\StandardAutoloader\n is designed as a\n\nPSR-0\n-compliant\nautoloader. It assumes a 1:1 mapping of the namespace+classname to the\nfilesystem, wherein namespace separators and underscores are translated to\ndirectory separators. The following statement illustrates how resolution works:\n\n\n$filename = str_replace(\n    ['_', '\\\\'],\n    DIRECTORY_SEPARATOR,\n    $classname\n) . '.php';\n\n\n\n\nThe \nStandardAutoloader\n requires that you explicitly register namespace/path\npairs (or vendor prefix/path pairs), and will only load a file if it exists\nwithin the given path. Multiple pairs may be provided.\n\n\nAs a measure of last resort, you may also use the \nStandardAutoloader\n as a\n\"fallback\" autoloader \n one that will look for classes of any namespace or\nvendor prefix on the \ninclude_path\n. This practice is not recommended, however,\ndue to performance implications.\n\n\nFinally, as with all autoloaders in zend-loader, the \nStandardAutoloader\n is\ncapable of registering itself with PHP's SPL autoloader registry.\n\n\n\n\nVocabulary: Namespaces vs. Vendor Prefixes\n\n\nIn terms of autoloading, a \"namespace\" corresponds to PHP's own definition of\nnamespaces.\n\n\nA \"vendor prefix\" refers to the practice, popularized in PHP versions prior to\n5.3, of providing a pseudo-namespace in the form of underscore-separated words\nin class names. As an example, the class \nPhly_Couch_Document\n uses a vendor\nprefix of \nPhly\n, and a component prefix of \nPhly_Couch\n, but it is a class\nsitting in the global namespace.\n\n\nThe \nStandardAutoloader\n is capable of loading either namespaced or vendor\nprefixed class names, but treats them separately when attempting to match them\nto an appropriate path.\n\n\n\n\nQuick Start\n\n\nBasic use of the \nStandardAutoloader\n requires registering namespace/path pairs.\nThis can either be done at instantiation, or via explicit method calls after the\nobject has been initialized.  Calling \nregister()\n will register the autoloader\nwith the SPL autoloader registry.\n\n\nManual Configuration\n\n\nuse Zend\\Loader\\StandardAutoloader;\n\n// This example assumes the StandardAutoloader is autoloadable.\n$loader = new StandardAutoloader();\n\n// Register the \nPhly\n namespace:\n$loader-\nregisterNamespace('Phly', APPLICATION_PATH . '/../library/Phly');\n\n// Register the \nScapi\n vendor prefix:\n$loader-\nregisterPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');\n\n// Optionally, specify the autoloader as a \nfallback\n autoloader;\n// this is not recommended.\n$loader-\nsetFallbackAutoloader(true);\n\n// Register with spl_autoload:\n$loader-\nregister();\n\n\n\n\nConfiguration at Instantiation\n\n\nThe \nStandardAutoloader\n may also be configured at instantiation. Please note:\n\n\n\n\nThe argument passed may be either an array or a \nTraversable\n object.\n\n\nThe argument passed should also be a valid argument for passing to the\n  \nsetOptions()\n method.\n\n\n\n\nThe following is equivalent to the previous example.\n\n\nuse Zend\\Loader\\StandardAutoloader;\n\n$loader = new StandardAutoloader([\n    'namespaces' =\n [\n        'Phly' =\n APPLICATION_PATH . '/../library/Phly',\n    ],\n    'prefixes' =\n [\n        'Scapi' =\n APPLICATION_PATH . '/../library/Scapi',\n    ],\n    'fallback_autoloader' =\n true,\n]);\n\n// Register with spl_autoload:\n$loader-\nregister();\n\n\n\n\nConfiguration Options\n\n\nThe \nStandardAutoloader\n defines the following options.\n\n\nnamespaces\n\n\nAn associative array of namespace/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that live\nin that namespace (or its subnamespaces).\n\n\nprefixes\n\n\nAn associative array of vendor prefix/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that begin\nwith the provided vendor prefix.\n\n\nfallback_autoloader\n\n\nA boolean value indicating whether or not this instance should act as a\n\"fallback\" autoloader (i.e., look for classes of any namespace or vendor prefix\non the \ninclude_path\n). By default, \nfalse\n.\n\n\n\n\nautoregister_zf is deprecated\n\n\nOne other option is available to the \nStandardAutoloader\n: \nautoregister_zf\n.\nWe do not document it any longer, as it is no longer relevant.\n\n\nStarting with the 2.5.0 release of Zend Framework, the framework package\nitself is a \"metapackage\", defining only a \ncomposer.json\n file listing\nthe packages for each component.\n\n\nAs such, there is no single path in which all ZF files live, making the\n\nautoregister_zf\n flag useless for versions starting with 2.5.0; it will\nonly register the zend-loader path!\n\n\nIf you are using this feature, you should update your code. We recommend\nusing \nComposer\n's autoloader for autoloading\nZend Framework classes.\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nCreate a new instance of the object.\n\n\nIf \n$options\n is non-null, the argument is passed to\n\nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nSet object state based on provided options.\n\n\nRecognized keys are detailed under \nConfiguration options\n,\nwith the following behaviors:\n\n\n\n\nThe \nnamespaces\n value will be passed to\n  \nregisterNamespaces()\n.\n\n\nThe \nprefixes\n value will be passed to\n  \nregisterPrefixes()\n.\n\n\nThe \nfallback_autoloader\n value will be passed to\n  \nsetFallbackAutoloader()\n.\n\n\n\n\nsetFallbackAutoloader\n\n\nsetFallbackAutoloader(bool $flag) : void\n\n\n\n\nTakes a boolean flag indicating whether or not to act as a fallback autoloader\nwhen registered with the SPL autoloader.\n\n\nisFallbackAutoloader\n\n\nisFallbackAutoloader() : bool\n\n\n\n\nIndicates whether or not this instance is flagged as a fallback autoloader.\n\n\nregisterNamespace\n\n\nregisterNamespace(string $namespace, string $directory) : void\n\n\n\n\nRegister a namespace with the autoloader, pointing it to a specific directory on\nthe filesystem for class resolution. For classes matching that initial\nnamespace, the autoloader will then perform lookups within that directory.\n\n\nregisterNamespaces\n\n\nregisterNamespaces(array|Traversable $namespaces) : void\n\n\n\n\nRegister multiple namespaces with the autoloader, iterating through\n\n$namespaces\n and passing each key and item to \nregisterNamespace()\n.\n\n\nregisterPrefix\n\n\nregisterPrefix(string $prefix, string $directory) : void\n\n\n\n\nRegister a vendor prefix with the autoloader, pointing it to a specific\ndirectory on the filesystem for class resolution. For classes matching that\ninitial vendor prefix, the autoloader will then perform lookups within that\ndirectory.\n\n\nregisterPrefixes\n\n\nregisterPrefixes(array|Traversable $prefixes) : void\n\n\n\n\nRegister many vendor prefixes with the autoloader, traversing \n$prefixes\n and\npassing each key/value pair to \nregisterPrefix()\n.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the class specified. Returns a boolean \nfalse\n on failure, or a\nstring indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.", 
             "title": "StandardAutoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#the-standardautoloader",
-            "text": "",
+            "location": "/standard-autoloader/#the-standardautoloader", 
+            "text": "", 
             "title": "The StandardAutoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#overview",
-            "text": "Zend\\Loader\\StandardAutoloader  is designed as a PSR-0 -compliant\nautoloader. It assumes a 1:1 mapping of the namespace+classname to the\nfilesystem, wherein namespace separators and underscores are translated to\ndirectory separators. The following statement illustrates how resolution works:  $filename = str_replace(\n    ['_', '\\\\'],\n    DIRECTORY_SEPARATOR,\n    $classname\n) . '.php';  The  StandardAutoloader  requires that you explicitly register namespace/path\npairs (or vendor prefix/path pairs), and will only load a file if it exists\nwithin the given path. Multiple pairs may be provided.  As a measure of last resort, you may also use the  StandardAutoloader  as a\n\"fallback\" autoloader \u2014 one that will look for classes of any namespace or\nvendor prefix on the  include_path . This practice is not recommended, however,\ndue to performance implications.  Finally, as with all autoloaders in zend-loader, the  StandardAutoloader  is\ncapable of registering itself with PHP's SPL autoloader registry.",
+            "location": "/standard-autoloader/#overview", 
+            "text": "Zend\\Loader\\StandardAutoloader  is designed as a PSR-0 -compliant\nautoloader. It assumes a 1:1 mapping of the namespace+classname to the\nfilesystem, wherein namespace separators and underscores are translated to\ndirectory separators. The following statement illustrates how resolution works:  $filename = str_replace(\n    ['_', '\\\\'],\n    DIRECTORY_SEPARATOR,\n    $classname\n) . '.php';  The  StandardAutoloader  requires that you explicitly register namespace/path\npairs (or vendor prefix/path pairs), and will only load a file if it exists\nwithin the given path. Multiple pairs may be provided.  As a measure of last resort, you may also use the  StandardAutoloader  as a\n\"fallback\" autoloader   one that will look for classes of any namespace or\nvendor prefix on the  include_path . This practice is not recommended, however,\ndue to performance implications.  Finally, as with all autoloaders in zend-loader, the  StandardAutoloader  is\ncapable of registering itself with PHP's SPL autoloader registry.", 
             "title": "Overview"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#vocabulary-namespaces-vs-vendor-prefixes",
-            "text": "In terms of autoloading, a \"namespace\" corresponds to PHP's own definition of\nnamespaces.  A \"vendor prefix\" refers to the practice, popularized in PHP versions prior to\n5.3, of providing a pseudo-namespace in the form of underscore-separated words\nin class names. As an example, the class  Phly_Couch_Document  uses a vendor\nprefix of  Phly , and a component prefix of  Phly_Couch , but it is a class\nsitting in the global namespace.  The  StandardAutoloader  is capable of loading either namespaced or vendor\nprefixed class names, but treats them separately when attempting to match them\nto an appropriate path.",
+            "location": "/standard-autoloader/#vocabulary-namespaces-vs-vendor-prefixes", 
+            "text": "In terms of autoloading, a \"namespace\" corresponds to PHP's own definition of\nnamespaces.  A \"vendor prefix\" refers to the practice, popularized in PHP versions prior to\n5.3, of providing a pseudo-namespace in the form of underscore-separated words\nin class names. As an example, the class  Phly_Couch_Document  uses a vendor\nprefix of  Phly , and a component prefix of  Phly_Couch , but it is a class\nsitting in the global namespace.  The  StandardAutoloader  is capable of loading either namespaced or vendor\nprefixed class names, but treats them separately when attempting to match them\nto an appropriate path.", 
             "title": "Vocabulary: Namespaces vs. Vendor Prefixes"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#quick-start",
-            "text": "Basic use of the  StandardAutoloader  requires registering namespace/path pairs.\nThis can either be done at instantiation, or via explicit method calls after the\nobject has been initialized.  Calling  register()  will register the autoloader\nwith the SPL autoloader registry.",
+            "location": "/standard-autoloader/#quick-start", 
+            "text": "Basic use of the  StandardAutoloader  requires registering namespace/path pairs.\nThis can either be done at instantiation, or via explicit method calls after the\nobject has been initialized.  Calling  register()  will register the autoloader\nwith the SPL autoloader registry.", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#manual-configuration",
-            "text": "use Zend\\Loader\\StandardAutoloader;\n\n// This example assumes the StandardAutoloader is autoloadable.\n$loader = new StandardAutoloader();\n\n// Register the \"Phly\" namespace:\n$loader->registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');\n\n// Register the \"Scapi\" vendor prefix:\n$loader->registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');\n\n// Optionally, specify the autoloader as a \"fallback\" autoloader;\n// this is not recommended.\n$loader->setFallbackAutoloader(true);\n\n// Register with spl_autoload:\n$loader->register();",
+            "location": "/standard-autoloader/#manual-configuration", 
+            "text": "use Zend\\Loader\\StandardAutoloader;\n\n// This example assumes the StandardAutoloader is autoloadable.\n$loader = new StandardAutoloader();\n\n// Register the  Phly  namespace:\n$loader- registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');\n\n// Register the  Scapi  vendor prefix:\n$loader- registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');\n\n// Optionally, specify the autoloader as a  fallback  autoloader;\n// this is not recommended.\n$loader- setFallbackAutoloader(true);\n\n// Register with spl_autoload:\n$loader- register();", 
             "title": "Manual Configuration"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#configuration-at-instantiation",
-            "text": "The  StandardAutoloader  may also be configured at instantiation. Please note:   The argument passed may be either an array or a  Traversable  object.  The argument passed should also be a valid argument for passing to the\n   setOptions()  method.   The following is equivalent to the previous example.  use Zend\\Loader\\StandardAutoloader;\n\n$loader = new StandardAutoloader([\n    'namespaces' => [\n        'Phly' => APPLICATION_PATH . '/../library/Phly',\n    ],\n    'prefixes' => [\n        'Scapi' => APPLICATION_PATH . '/../library/Scapi',\n    ],\n    'fallback_autoloader' => true,\n]);\n\n// Register with spl_autoload:\n$loader->register();",
+            "location": "/standard-autoloader/#configuration-at-instantiation", 
+            "text": "The  StandardAutoloader  may also be configured at instantiation. Please note:   The argument passed may be either an array or a  Traversable  object.  The argument passed should also be a valid argument for passing to the\n   setOptions()  method.   The following is equivalent to the previous example.  use Zend\\Loader\\StandardAutoloader;\n\n$loader = new StandardAutoloader([\n    'namespaces' =  [\n        'Phly' =  APPLICATION_PATH . '/../library/Phly',\n    ],\n    'prefixes' =  [\n        'Scapi' =  APPLICATION_PATH . '/../library/Scapi',\n    ],\n    'fallback_autoloader' =  true,\n]);\n\n// Register with spl_autoload:\n$loader- register();", 
             "title": "Configuration at Instantiation"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#configuration-options",
-            "text": "The  StandardAutoloader  defines the following options.",
+            "location": "/standard-autoloader/#configuration-options", 
+            "text": "The  StandardAutoloader  defines the following options.", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#namespaces",
-            "text": "An associative array of namespace/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that live\nin that namespace (or its subnamespaces).",
+            "location": "/standard-autoloader/#namespaces", 
+            "text": "An associative array of namespace/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that live\nin that namespace (or its subnamespaces).", 
             "title": "namespaces"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#prefixes",
-            "text": "An associative array of vendor prefix/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that begin\nwith the provided vendor prefix.",
+            "location": "/standard-autoloader/#prefixes", 
+            "text": "An associative array of vendor prefix/path pairs. The path should be an absolute\npath or path relative to the calling script, and contain only classes that begin\nwith the provided vendor prefix.", 
             "title": "prefixes"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#fallback_autoloader",
-            "text": "A boolean value indicating whether or not this instance should act as a\n\"fallback\" autoloader (i.e., look for classes of any namespace or vendor prefix\non the  include_path ). By default,  false .",
+            "location": "/standard-autoloader/#fallback_autoloader", 
+            "text": "A boolean value indicating whether or not this instance should act as a\n\"fallback\" autoloader (i.e., look for classes of any namespace or vendor prefix\non the  include_path ). By default,  false .", 
             "title": "fallback_autoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#autoregister_zf-is-deprecated",
-            "text": "One other option is available to the  StandardAutoloader :  autoregister_zf .\nWe do not document it any longer, as it is no longer relevant.  Starting with the 2.5.0 release of Zend Framework, the framework package\nitself is a \"metapackage\", defining only a  composer.json  file listing\nthe packages for each component.  As such, there is no single path in which all ZF files live, making the autoregister_zf  flag useless for versions starting with 2.5.0; it will\nonly register the zend-loader path!  If you are using this feature, you should update your code. We recommend\nusing  Composer 's autoloader for autoloading\nZend Framework classes.",
+            "location": "/standard-autoloader/#autoregister_zf-is-deprecated", 
+            "text": "One other option is available to the  StandardAutoloader :  autoregister_zf .\nWe do not document it any longer, as it is no longer relevant.  Starting with the 2.5.0 release of Zend Framework, the framework package\nitself is a \"metapackage\", defining only a  composer.json  file listing\nthe packages for each component.  As such, there is no single path in which all ZF files live, making the autoregister_zf  flag useless for versions starting with 2.5.0; it will\nonly register the zend-loader path!  If you are using this feature, you should update your code. We recommend\nusing  Composer 's autoloader for autoloading\nZend Framework classes.", 
             "title": "autoregister_zf is deprecated"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#available-methods",
-            "text": "",
+            "location": "/standard-autoloader/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#9595construct",
-            "text": "__construct(array|Traversable $options = null) : void  Create a new instance of the object.  If  $options  is non-null, the argument is passed to setOptions() .",
+            "location": "/standard-autoloader/#9595construct", 
+            "text": "__construct(array|Traversable $options = null) : void  Create a new instance of the object.  If  $options  is non-null, the argument is passed to setOptions() .", 
             "title": "__construct"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#setoptions",
-            "text": "setOptions(array|Traversable $options) : void  Set object state based on provided options.  Recognized keys are detailed under  Configuration options ,\nwith the following behaviors:   The  namespaces  value will be passed to\n   registerNamespaces() .  The  prefixes  value will be passed to\n   registerPrefixes() .  The  fallback_autoloader  value will be passed to\n   setFallbackAutoloader() .",
+            "location": "/standard-autoloader/#setoptions", 
+            "text": "setOptions(array|Traversable $options) : void  Set object state based on provided options.  Recognized keys are detailed under  Configuration options ,\nwith the following behaviors:   The  namespaces  value will be passed to\n   registerNamespaces() .  The  prefixes  value will be passed to\n   registerPrefixes() .  The  fallback_autoloader  value will be passed to\n   setFallbackAutoloader() .", 
             "title": "setOptions"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#setfallbackautoloader",
-            "text": "setFallbackAutoloader(bool $flag) : void  Takes a boolean flag indicating whether or not to act as a fallback autoloader\nwhen registered with the SPL autoloader.",
+            "location": "/standard-autoloader/#setfallbackautoloader", 
+            "text": "setFallbackAutoloader(bool $flag) : void  Takes a boolean flag indicating whether or not to act as a fallback autoloader\nwhen registered with the SPL autoloader.", 
             "title": "setFallbackAutoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#isfallbackautoloader",
-            "text": "isFallbackAutoloader() : bool  Indicates whether or not this instance is flagged as a fallback autoloader.",
+            "location": "/standard-autoloader/#isfallbackautoloader", 
+            "text": "isFallbackAutoloader() : bool  Indicates whether or not this instance is flagged as a fallback autoloader.", 
             "title": "isFallbackAutoloader"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#registernamespace",
-            "text": "registerNamespace(string $namespace, string $directory) : void  Register a namespace with the autoloader, pointing it to a specific directory on\nthe filesystem for class resolution. For classes matching that initial\nnamespace, the autoloader will then perform lookups within that directory.",
+            "location": "/standard-autoloader/#registernamespace", 
+            "text": "registerNamespace(string $namespace, string $directory) : void  Register a namespace with the autoloader, pointing it to a specific directory on\nthe filesystem for class resolution. For classes matching that initial\nnamespace, the autoloader will then perform lookups within that directory.", 
             "title": "registerNamespace"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#registernamespaces",
-            "text": "registerNamespaces(array|Traversable $namespaces) : void  Register multiple namespaces with the autoloader, iterating through $namespaces  and passing each key and item to  registerNamespace() .",
+            "location": "/standard-autoloader/#registernamespaces", 
+            "text": "registerNamespaces(array|Traversable $namespaces) : void  Register multiple namespaces with the autoloader, iterating through $namespaces  and passing each key and item to  registerNamespace() .", 
             "title": "registerNamespaces"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#registerprefix",
-            "text": "registerPrefix(string $prefix, string $directory) : void  Register a vendor prefix with the autoloader, pointing it to a specific\ndirectory on the filesystem for class resolution. For classes matching that\ninitial vendor prefix, the autoloader will then perform lookups within that\ndirectory.",
+            "location": "/standard-autoloader/#registerprefix", 
+            "text": "registerPrefix(string $prefix, string $directory) : void  Register a vendor prefix with the autoloader, pointing it to a specific\ndirectory on the filesystem for class resolution. For classes matching that\ninitial vendor prefix, the autoloader will then perform lookups within that\ndirectory.", 
             "title": "registerPrefix"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#registerprefixes",
-            "text": "registerPrefixes(array|Traversable $prefixes) : void  Register many vendor prefixes with the autoloader, traversing  $prefixes  and\npassing each key/value pair to  registerPrefix() .",
+            "location": "/standard-autoloader/#registerprefixes", 
+            "text": "registerPrefixes(array|Traversable $prefixes) : void  Register many vendor prefixes with the autoloader, traversing  $prefixes  and\npassing each key/value pair to  registerPrefix() .", 
             "title": "registerPrefixes"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#autoload",
-            "text": "autoload(string $class) : false|string  Attempts to load the class specified. Returns a boolean  false  on failure, or a\nstring indicating the class loaded on success.",
+            "location": "/standard-autoloader/#autoload", 
+            "text": "autoload(string $class) : false|string  Attempts to load the class specified. Returns a boolean  false  on failure, or a\nstring indicating the class loaded on success.", 
             "title": "autoload"
-        },
+        }, 
         {
-            "location": "/standard-autoloader/#register",
-            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .",
+            "location": "/standard-autoloader/#register", 
+            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .", 
             "title": "register"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/",
-            "text": "The ClassMapAutoloader\n\n\nThe \nClassMapAutoloader\n is designed with performance in mind. Instead of doing\na filesystem lookup, it checks the class against an in-memory classmap, loading\nthe file associated with that class on a match.  This avoids unnecessary\nfilesystem operations, and can also ensure the autoloader \"plays nice\" with\nopcode caches and PHP's realpath cache.\n\n\nThe zend-loader component provides a tool for generating classmaps via\n\nbin/classmap_generator.php\n; read the \ntool's documentation\n for more details.\n\n\nQuick Start\n\n\nThe first step is to generate a class map file. You may run this over any\ndirectory containing source code anywhere underneath it.\n\n\n$ php classmap_generator.php Some/Directory/\n\n\n\n\nThis will create a file named \nSome/Directory/autoload_classmap.php\n, which is a\nPHP file returning an associative array that represents the class map.\n\n\nWithin your code, you will now instantiate the \nClassMapAutoloader\n, and provide\nit the location of the map.\n\n\n// This example assumes the ClassMapAutoloader is autoloadable.\nuse Zend\\Loader\\ClassMapAutoloader;\n\n$loader = new ClassMapAutoloader();\n\n// Register the class map:\n$loader->registerAutoloadMap('Some/Directory/autoload_classmap.php');\n\n// Register with spl_autoload:\n$loader->register();\n\n\n\n\nAt this point, you may now use any classes referenced in your class map.\n\n\nConfiguration Options\n\n\nThe \nClassMapAutoloader\n expects an array of options, where each option is\neither a filename referencing a class map, or an associative array of class\nname/filename pairs.\n\n\nAs an example:\n\n\n// Configuration defining both a file-based class map, and an array map\n$config = [\n    __DIR__ . '/library/autoloader_classmap.php', // file-based class map\n    [                                             // array class map\n        'Application\\Bootstrap' => __DIR__ . '/application/Bootstrap.php',\n        'Test\\Bootstrap'        => __DIR__ . '/tests/Bootstrap.php',\n    ],\n];\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nInitialize and configure the object \n__construct($options = null)\n; \n$options\n\nwill be passed to \nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nConfigures the state of the autoloader, including registering class maps.\n\n$options\n will be passed to \nregisterAutoloadMaps()\n.\n\n\nregisterAutoloadMap\n\n\nregisterAutoloadMap(string|array $map) : void\n\n\n\n\nRegisters a class map with the autoloader. \n$map\n may be either a string\nreferencing a PHP script that returns a class map, or an array defining a class\nmap.\n\n\nMore than one class map may be registered; each will be merged with the\nprevious, meaning it's possible for a later class map to overwrite entries from\na previously registered map.\n\n\nregisterAutoloadMaps\n\n\nregisterAutoloadMaps(array|Traversable $maps) : void\n\n\n\n\nRegister multiple class maps with the autoloader, iterating over \n$maps\n and\npassing each value to \nregisterAutoloadMap()\n.\n\n\ngetAutoloadMap\n\n\ngetAutoloadMap() : array\n\n\n\n\nRetrieves the current class map as an associative array.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the class specified. Returns a boolean \nfalse\n on failure, or a\nstring indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.\n\n\nExamples\n\n\nUsing configuration to seed ClassMapAutoloader\n\n\nYou can use configuration to seed a \nClassMapAutoloader\n; values might come from\na configuration file, a cache, or even a PHP array.  The following is an example\nof a PHP array that could be used to configure the autoloader:\n\n\n// Configuration defining both a file-based class map, and an array map\n$config = [\n    APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map\n    [                                                         // array class map\n        'Application\\Bootstrap' => APPLICATION_PATH . '/Bootstrap.php',\n        'Test\\Bootstrap'        => APPLICATION_PATH . '/../tests/Bootstrap.php',\n    ],\n];\n\n\n\n\nOnce you have your configuration, you can pass it either to the constructor of\nthe \nClassMapAutoloader\n, to its \nsetOptions()\n method, or to\n\nregisterAutoloadMaps()\n.\n\n\nuse Zend\\Loader\\ClassMapAutoloader;\n\n/* The following are all equivalent */\n\n// To the constructor:\n$loader = new ClassMapAutoloader($config);\n\n// To setOptions():\n$loader = new ClassMapAutoloader();\n$loader->setOptions($config);\n\n// To registerAutoloadMaps():\n$loader = new ClassMapAutoloader();\n$loader->registerAutoloadMaps($config);",
+            "location": "/class-map-autoloader/", 
+            "text": "The ClassMapAutoloader\n\n\nThe \nClassMapAutoloader\n is designed with performance in mind. Instead of doing\na filesystem lookup, it checks the class against an in-memory classmap, loading\nthe file associated with that class on a match.  This avoids unnecessary\nfilesystem operations, and can also ensure the autoloader \"plays nice\" with\nopcode caches and PHP's realpath cache.\n\n\nThe zend-loader component provides a tool for generating classmaps via\n\nbin/classmap_generator.php\n; read the \ntool's documentation\n for more details.\n\n\nQuick Start\n\n\nThe first step is to generate a class map file. You may run this over any\ndirectory containing source code anywhere underneath it.\n\n\n$ php classmap_generator.php Some/Directory/\n\n\n\n\nThis will create a file named \nSome/Directory/autoload_classmap.php\n, which is a\nPHP file returning an associative array that represents the class map.\n\n\nWithin your code, you will now instantiate the \nClassMapAutoloader\n, and provide\nit the location of the map.\n\n\n// This example assumes the ClassMapAutoloader is autoloadable.\nuse Zend\\Loader\\ClassMapAutoloader;\n\n$loader = new ClassMapAutoloader();\n\n// Register the class map:\n$loader-\nregisterAutoloadMap('Some/Directory/autoload_classmap.php');\n\n// Register with spl_autoload:\n$loader-\nregister();\n\n\n\n\nAt this point, you may now use any classes referenced in your class map.\n\n\nConfiguration Options\n\n\nThe \nClassMapAutoloader\n expects an array of options, where each option is\neither a filename referencing a class map, or an associative array of class\nname/filename pairs.\n\n\nAs an example:\n\n\n// Configuration defining both a file-based class map, and an array map\n$config = [\n    __DIR__ . '/library/autoloader_classmap.php', // file-based class map\n    [                                             // array class map\n        'Application\\Bootstrap' =\n __DIR__ . '/application/Bootstrap.php',\n        'Test\\Bootstrap'        =\n __DIR__ . '/tests/Bootstrap.php',\n    ],\n];\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nInitialize and configure the object \n__construct($options = null)\n; \n$options\n\nwill be passed to \nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nConfigures the state of the autoloader, including registering class maps.\n\n$options\n will be passed to \nregisterAutoloadMaps()\n.\n\n\nregisterAutoloadMap\n\n\nregisterAutoloadMap(string|array $map) : void\n\n\n\n\nRegisters a class map with the autoloader. \n$map\n may be either a string\nreferencing a PHP script that returns a class map, or an array defining a class\nmap.\n\n\nMore than one class map may be registered; each will be merged with the\nprevious, meaning it's possible for a later class map to overwrite entries from\na previously registered map.\n\n\nregisterAutoloadMaps\n\n\nregisterAutoloadMaps(array|Traversable $maps) : void\n\n\n\n\nRegister multiple class maps with the autoloader, iterating over \n$maps\n and\npassing each value to \nregisterAutoloadMap()\n.\n\n\ngetAutoloadMap\n\n\ngetAutoloadMap() : array\n\n\n\n\nRetrieves the current class map as an associative array.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the class specified. Returns a boolean \nfalse\n on failure, or a\nstring indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.\n\n\nExamples\n\n\nUsing configuration to seed ClassMapAutoloader\n\n\nYou can use configuration to seed a \nClassMapAutoloader\n; values might come from\na configuration file, a cache, or even a PHP array.  The following is an example\nof a PHP array that could be used to configure the autoloader:\n\n\n// Configuration defining both a file-based class map, and an array map\n$config = [\n    APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map\n    [                                                         // array class map\n        'Application\\Bootstrap' =\n APPLICATION_PATH . '/Bootstrap.php',\n        'Test\\Bootstrap'        =\n APPLICATION_PATH . '/../tests/Bootstrap.php',\n    ],\n];\n\n\n\n\nOnce you have your configuration, you can pass it either to the constructor of\nthe \nClassMapAutoloader\n, to its \nsetOptions()\n method, or to\n\nregisterAutoloadMaps()\n.\n\n\nuse Zend\\Loader\\ClassMapAutoloader;\n\n/* The following are all equivalent */\n\n// To the constructor:\n$loader = new ClassMapAutoloader($config);\n\n// To setOptions():\n$loader = new ClassMapAutoloader();\n$loader-\nsetOptions($config);\n\n// To registerAutoloadMaps():\n$loader = new ClassMapAutoloader();\n$loader-\nregisterAutoloadMaps($config);", 
             "title": "ClassMapAutoloader"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#the-classmapautoloader",
-            "text": "The  ClassMapAutoloader  is designed with performance in mind. Instead of doing\na filesystem lookup, it checks the class against an in-memory classmap, loading\nthe file associated with that class on a match.  This avoids unnecessary\nfilesystem operations, and can also ensure the autoloader \"plays nice\" with\nopcode caches and PHP's realpath cache.  The zend-loader component provides a tool for generating classmaps via bin/classmap_generator.php ; read the  tool's documentation  for more details.",
+            "location": "/class-map-autoloader/#the-classmapautoloader", 
+            "text": "The  ClassMapAutoloader  is designed with performance in mind. Instead of doing\na filesystem lookup, it checks the class against an in-memory classmap, loading\nthe file associated with that class on a match.  This avoids unnecessary\nfilesystem operations, and can also ensure the autoloader \"plays nice\" with\nopcode caches and PHP's realpath cache.  The zend-loader component provides a tool for generating classmaps via bin/classmap_generator.php ; read the  tool's documentation  for more details.", 
             "title": "The ClassMapAutoloader"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#quick-start",
-            "text": "The first step is to generate a class map file. You may run this over any\ndirectory containing source code anywhere underneath it.  $ php classmap_generator.php Some/Directory/  This will create a file named  Some/Directory/autoload_classmap.php , which is a\nPHP file returning an associative array that represents the class map.  Within your code, you will now instantiate the  ClassMapAutoloader , and provide\nit the location of the map.  // This example assumes the ClassMapAutoloader is autoloadable.\nuse Zend\\Loader\\ClassMapAutoloader;\n\n$loader = new ClassMapAutoloader();\n\n// Register the class map:\n$loader->registerAutoloadMap('Some/Directory/autoload_classmap.php');\n\n// Register with spl_autoload:\n$loader->register();  At this point, you may now use any classes referenced in your class map.",
+            "location": "/class-map-autoloader/#quick-start", 
+            "text": "The first step is to generate a class map file. You may run this over any\ndirectory containing source code anywhere underneath it.  $ php classmap_generator.php Some/Directory/  This will create a file named  Some/Directory/autoload_classmap.php , which is a\nPHP file returning an associative array that represents the class map.  Within your code, you will now instantiate the  ClassMapAutoloader , and provide\nit the location of the map.  // This example assumes the ClassMapAutoloader is autoloadable.\nuse Zend\\Loader\\ClassMapAutoloader;\n\n$loader = new ClassMapAutoloader();\n\n// Register the class map:\n$loader- registerAutoloadMap('Some/Directory/autoload_classmap.php');\n\n// Register with spl_autoload:\n$loader- register();  At this point, you may now use any classes referenced in your class map.", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#configuration-options",
-            "text": "The  ClassMapAutoloader  expects an array of options, where each option is\neither a filename referencing a class map, or an associative array of class\nname/filename pairs.  As an example:  // Configuration defining both a file-based class map, and an array map\n$config = [\n    __DIR__ . '/library/autoloader_classmap.php', // file-based class map\n    [                                             // array class map\n        'Application\\Bootstrap' => __DIR__ . '/application/Bootstrap.php',\n        'Test\\Bootstrap'        => __DIR__ . '/tests/Bootstrap.php',\n    ],\n];",
+            "location": "/class-map-autoloader/#configuration-options", 
+            "text": "The  ClassMapAutoloader  expects an array of options, where each option is\neither a filename referencing a class map, or an associative array of class\nname/filename pairs.  As an example:  // Configuration defining both a file-based class map, and an array map\n$config = [\n    __DIR__ . '/library/autoloader_classmap.php', // file-based class map\n    [                                             // array class map\n        'Application\\Bootstrap' =  __DIR__ . '/application/Bootstrap.php',\n        'Test\\Bootstrap'        =  __DIR__ . '/tests/Bootstrap.php',\n    ],\n];", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#available-methods",
-            "text": "",
+            "location": "/class-map-autoloader/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#9595construct",
-            "text": "__construct(array|Traversable $options = null) : void  Initialize and configure the object  __construct($options = null) ;  $options \nwill be passed to  setOptions() .",
+            "location": "/class-map-autoloader/#9595construct", 
+            "text": "__construct(array|Traversable $options = null) : void  Initialize and configure the object  __construct($options = null) ;  $options \nwill be passed to  setOptions() .", 
             "title": "__construct"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#setoptions",
-            "text": "setOptions(array|Traversable $options) : void  Configures the state of the autoloader, including registering class maps. $options  will be passed to  registerAutoloadMaps() .",
+            "location": "/class-map-autoloader/#setoptions", 
+            "text": "setOptions(array|Traversable $options) : void  Configures the state of the autoloader, including registering class maps. $options  will be passed to  registerAutoloadMaps() .", 
             "title": "setOptions"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#registerautoloadmap",
-            "text": "registerAutoloadMap(string|array $map) : void  Registers a class map with the autoloader.  $map  may be either a string\nreferencing a PHP script that returns a class map, or an array defining a class\nmap.  More than one class map may be registered; each will be merged with the\nprevious, meaning it's possible for a later class map to overwrite entries from\na previously registered map.",
+            "location": "/class-map-autoloader/#registerautoloadmap", 
+            "text": "registerAutoloadMap(string|array $map) : void  Registers a class map with the autoloader.  $map  may be either a string\nreferencing a PHP script that returns a class map, or an array defining a class\nmap.  More than one class map may be registered; each will be merged with the\nprevious, meaning it's possible for a later class map to overwrite entries from\na previously registered map.", 
             "title": "registerAutoloadMap"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#registerautoloadmaps",
-            "text": "registerAutoloadMaps(array|Traversable $maps) : void  Register multiple class maps with the autoloader, iterating over  $maps  and\npassing each value to  registerAutoloadMap() .",
+            "location": "/class-map-autoloader/#registerautoloadmaps", 
+            "text": "registerAutoloadMaps(array|Traversable $maps) : void  Register multiple class maps with the autoloader, iterating over  $maps  and\npassing each value to  registerAutoloadMap() .", 
             "title": "registerAutoloadMaps"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#getautoloadmap",
-            "text": "getAutoloadMap() : array  Retrieves the current class map as an associative array.",
+            "location": "/class-map-autoloader/#getautoloadmap", 
+            "text": "getAutoloadMap() : array  Retrieves the current class map as an associative array.", 
             "title": "getAutoloadMap"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#autoload",
-            "text": "autoload(string $class) : false|string  Attempts to load the class specified. Returns a boolean  false  on failure, or a\nstring indicating the class loaded on success.",
+            "location": "/class-map-autoloader/#autoload", 
+            "text": "autoload(string $class) : false|string  Attempts to load the class specified. Returns a boolean  false  on failure, or a\nstring indicating the class loaded on success.", 
             "title": "autoload"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#register",
-            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .",
+            "location": "/class-map-autoloader/#register", 
+            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .", 
             "title": "register"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#examples",
-            "text": "",
+            "location": "/class-map-autoloader/#examples", 
+            "text": "", 
             "title": "Examples"
-        },
+        }, 
         {
-            "location": "/class-map-autoloader/#using-configuration-to-seed-classmapautoloader",
-            "text": "You can use configuration to seed a  ClassMapAutoloader ; values might come from\na configuration file, a cache, or even a PHP array.  The following is an example\nof a PHP array that could be used to configure the autoloader:  // Configuration defining both a file-based class map, and an array map\n$config = [\n    APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map\n    [                                                         // array class map\n        'Application\\Bootstrap' => APPLICATION_PATH . '/Bootstrap.php',\n        'Test\\Bootstrap'        => APPLICATION_PATH . '/../tests/Bootstrap.php',\n    ],\n];  Once you have your configuration, you can pass it either to the constructor of\nthe  ClassMapAutoloader , to its  setOptions()  method, or to registerAutoloadMaps() .  use Zend\\Loader\\ClassMapAutoloader;\n\n/* The following are all equivalent */\n\n// To the constructor:\n$loader = new ClassMapAutoloader($config);\n\n// To setOptions():\n$loader = new ClassMapAutoloader();\n$loader->setOptions($config);\n\n// To registerAutoloadMaps():\n$loader = new ClassMapAutoloader();\n$loader->registerAutoloadMaps($config);",
+            "location": "/class-map-autoloader/#using-configuration-to-seed-classmapautoloader", 
+            "text": "You can use configuration to seed a  ClassMapAutoloader ; values might come from\na configuration file, a cache, or even a PHP array.  The following is an example\nof a PHP array that could be used to configure the autoloader:  // Configuration defining both a file-based class map, and an array map\n$config = [\n    APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map\n    [                                                         // array class map\n        'Application\\Bootstrap' =  APPLICATION_PATH . '/Bootstrap.php',\n        'Test\\Bootstrap'        =  APPLICATION_PATH . '/../tests/Bootstrap.php',\n    ],\n];  Once you have your configuration, you can pass it either to the constructor of\nthe  ClassMapAutoloader , to its  setOptions()  method, or to registerAutoloadMaps() .  use Zend\\Loader\\ClassMapAutoloader;\n\n/* The following are all equivalent */\n\n// To the constructor:\n$loader = new ClassMapAutoloader($config);\n\n// To setOptions():\n$loader = new ClassMapAutoloader();\n$loader- setOptions($config);\n\n// To registerAutoloadMaps():\n$loader = new ClassMapAutoloader();\n$loader- registerAutoloadMaps($config);", 
             "title": "Using configuration to seed ClassMapAutoloader"
-        },
+        }, 
         {
-            "location": "/module-autoloader/",
-            "text": "The ModuleAutoloader\n\n\nZend\\Loader\\ModuleAutoloader\n is a special implementation of the\n\nSplAutoloader\n interface, and is consumed by\n\nzend-modulemanager\n to\nautoload \nModule\n classes from different locations.\n\n\nApart from being able to autoload modules from directories, the\n\nModuleAutoloader\n can also autoload modules packaged as \nPhar\narchives\n, which allows for packaging your modules in a\nsingle file for easier distribution. Supported archive formats are: \n.phar\n,\n\n.phar.gz\n, \n.phar.bz2\n, \n.phar.tar\n, \n.phar.tar.gz\n, \n.phar.tar.bz2\n,\n\n.phar.zip\n, \n.tar\n, \ntar.gz\n, \n.tar.bz2\n and \n.zip\n. It is, however,\nrecommended to avoid compressing your packages (be it either gz, bz2 or zip\ncompression), as it introduces additional CPU overhead to every request.\n\n\nQuickstart\n\n\nAs the \nModuleAutoloader\n is meant to be used with the \nModuleManager\n, for\nexamples of it's usage and how to configure it, please see the\n\nModule Autoloader Usage\n\ndocumentation.\n\n\nConfiguration Options\n\n\nThe \nModuleAutoloader\n expects an array of options, where each option is either\na path to scan for modules, or a key/value pair of explicit module paths. In the\ncase of explicit module paths, the key is the module's name, and the value is\nthe path to that module.\n\n\n$options = [\n    '/path/to/modules',\n    '/path/to/other/modules',\n    'MyModule' => '/explicit/path/mymodule-v1.2'\n];\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nInitialize and configure the object; if \n$options\n are provided, they will be\npassed to \nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nConfigures the state of the autoloader, registering paths to modules. \n$options\n\nwill be passed to \nregisterPaths()\n.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the specified \nModule\n class. Returns a boolean \nfalse\n on\nfailure, or a string indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.\n\n\nunregister\n\n\nunregister() : void\n\n\n\n\nUnregisters the \nautoload()\n method of the current instance with\n\nspl_autoload_unregister()\n.\n\n\nregisterPaths\n\n\nregisterPaths(array|Traversable $paths) : void\n\n\n\n\nRegister paths to modules. For an example array, please see the\n\nConfiguration options\n section.\n\n\nregisterPath\n\n\nregisterPath(string $path, string $moduleName = false) : void\n\n\n\n\nRegister a single path with the autoloader. The first parameter, \n$path\n, is\nexpected to be a string. The second parameter, \n$moduleName\n, is expected to be\na module name, which allows for registering an explicit path to that module.\n\n\ngetPaths\n\n\ngetPaths() : string[]\n\n\n\n\nReturns an array of all the paths registered.",
+            "location": "/module-autoloader/", 
+            "text": "The ModuleAutoloader\n\n\nZend\\Loader\\ModuleAutoloader\n is a special implementation of the\n\nSplAutoloader\n interface, and is consumed by\n\nzend-modulemanager\n to\nautoload \nModule\n classes from different locations.\n\n\nApart from being able to autoload modules from directories, the\n\nModuleAutoloader\n can also autoload modules packaged as \nPhar\narchives\n, which allows for packaging your modules in a\nsingle file for easier distribution. Supported archive formats are: \n.phar\n,\n\n.phar.gz\n, \n.phar.bz2\n, \n.phar.tar\n, \n.phar.tar.gz\n, \n.phar.tar.bz2\n,\n\n.phar.zip\n, \n.tar\n, \ntar.gz\n, \n.tar.bz2\n and \n.zip\n. It is, however,\nrecommended to avoid compressing your packages (be it either gz, bz2 or zip\ncompression), as it introduces additional CPU overhead to every request.\n\n\nQuickstart\n\n\nAs the \nModuleAutoloader\n is meant to be used with the \nModuleManager\n, for\nexamples of it's usage and how to configure it, please see the\n\nModule Autoloader Usage\n\ndocumentation.\n\n\nConfiguration Options\n\n\nThe \nModuleAutoloader\n expects an array of options, where each option is either\na path to scan for modules, or a key/value pair of explicit module paths. In the\ncase of explicit module paths, the key is the module's name, and the value is\nthe path to that module.\n\n\n$options = [\n    '/path/to/modules',\n    '/path/to/other/modules',\n    'MyModule' =\n '/explicit/path/mymodule-v1.2'\n];\n\n\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(array|Traversable $options = null) : void\n\n\n\n\nInitialize and configure the object; if \n$options\n are provided, they will be\npassed to \nsetOptions()\n.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nConfigures the state of the autoloader, registering paths to modules. \n$options\n\nwill be passed to \nregisterPaths()\n.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nAttempts to load the specified \nModule\n class. Returns a boolean \nfalse\n on\nfailure, or a string indicating the class loaded on success.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nRegisters the \nautoload()\n method of the current instance with\n\nspl_autoload_register()\n.\n\n\nunregister\n\n\nunregister() : void\n\n\n\n\nUnregisters the \nautoload()\n method of the current instance with\n\nspl_autoload_unregister()\n.\n\n\nregisterPaths\n\n\nregisterPaths(array|Traversable $paths) : void\n\n\n\n\nRegister paths to modules. For an example array, please see the\n\nConfiguration options\n section.\n\n\nregisterPath\n\n\nregisterPath(string $path, string $moduleName = false) : void\n\n\n\n\nRegister a single path with the autoloader. The first parameter, \n$path\n, is\nexpected to be a string. The second parameter, \n$moduleName\n, is expected to be\na module name, which allows for registering an explicit path to that module.\n\n\ngetPaths\n\n\ngetPaths() : string[]\n\n\n\n\nReturns an array of all the paths registered.", 
             "title": "ModuleAutoloader"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#the-moduleautoloader",
-            "text": "Zend\\Loader\\ModuleAutoloader  is a special implementation of the SplAutoloader  interface, and is consumed by zend-modulemanager  to\nautoload  Module  classes from different locations.  Apart from being able to autoload modules from directories, the ModuleAutoloader  can also autoload modules packaged as  Phar\narchives , which allows for packaging your modules in a\nsingle file for easier distribution. Supported archive formats are:  .phar , .phar.gz ,  .phar.bz2 ,  .phar.tar ,  .phar.tar.gz ,  .phar.tar.bz2 , .phar.zip ,  .tar ,  tar.gz ,  .tar.bz2  and  .zip . It is, however,\nrecommended to avoid compressing your packages (be it either gz, bz2 or zip\ncompression), as it introduces additional CPU overhead to every request.",
+            "location": "/module-autoloader/#the-moduleautoloader", 
+            "text": "Zend\\Loader\\ModuleAutoloader  is a special implementation of the SplAutoloader  interface, and is consumed by zend-modulemanager  to\nautoload  Module  classes from different locations.  Apart from being able to autoload modules from directories, the ModuleAutoloader  can also autoload modules packaged as  Phar\narchives , which allows for packaging your modules in a\nsingle file for easier distribution. Supported archive formats are:  .phar , .phar.gz ,  .phar.bz2 ,  .phar.tar ,  .phar.tar.gz ,  .phar.tar.bz2 , .phar.zip ,  .tar ,  tar.gz ,  .tar.bz2  and  .zip . It is, however,\nrecommended to avoid compressing your packages (be it either gz, bz2 or zip\ncompression), as it introduces additional CPU overhead to every request.", 
             "title": "The ModuleAutoloader"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#quickstart",
-            "text": "As the  ModuleAutoloader  is meant to be used with the  ModuleManager , for\nexamples of it's usage and how to configure it, please see the Module Autoloader Usage \ndocumentation.",
+            "location": "/module-autoloader/#quickstart", 
+            "text": "As the  ModuleAutoloader  is meant to be used with the  ModuleManager , for\nexamples of it's usage and how to configure it, please see the Module Autoloader Usage \ndocumentation.", 
             "title": "Quickstart"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#configuration-options",
-            "text": "The  ModuleAutoloader  expects an array of options, where each option is either\na path to scan for modules, or a key/value pair of explicit module paths. In the\ncase of explicit module paths, the key is the module's name, and the value is\nthe path to that module.  $options = [\n    '/path/to/modules',\n    '/path/to/other/modules',\n    'MyModule' => '/explicit/path/mymodule-v1.2'\n];",
+            "location": "/module-autoloader/#configuration-options", 
+            "text": "The  ModuleAutoloader  expects an array of options, where each option is either\na path to scan for modules, or a key/value pair of explicit module paths. In the\ncase of explicit module paths, the key is the module's name, and the value is\nthe path to that module.  $options = [\n    '/path/to/modules',\n    '/path/to/other/modules',\n    'MyModule' =  '/explicit/path/mymodule-v1.2'\n];", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#available-methods",
-            "text": "",
+            "location": "/module-autoloader/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#9595construct",
-            "text": "__construct(array|Traversable $options = null) : void  Initialize and configure the object; if  $options  are provided, they will be\npassed to  setOptions() .",
+            "location": "/module-autoloader/#9595construct", 
+            "text": "__construct(array|Traversable $options = null) : void  Initialize and configure the object; if  $options  are provided, they will be\npassed to  setOptions() .", 
             "title": "__construct"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#setoptions",
-            "text": "setOptions(array|Traversable $options) : void  Configures the state of the autoloader, registering paths to modules.  $options \nwill be passed to  registerPaths() .",
+            "location": "/module-autoloader/#setoptions", 
+            "text": "setOptions(array|Traversable $options) : void  Configures the state of the autoloader, registering paths to modules.  $options \nwill be passed to  registerPaths() .", 
             "title": "setOptions"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#autoload",
-            "text": "autoload(string $class) : false|string  Attempts to load the specified  Module  class. Returns a boolean  false  on\nfailure, or a string indicating the class loaded on success.",
+            "location": "/module-autoloader/#autoload", 
+            "text": "autoload(string $class) : false|string  Attempts to load the specified  Module  class. Returns a boolean  false  on\nfailure, or a string indicating the class loaded on success.", 
             "title": "autoload"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#register",
-            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .",
+            "location": "/module-autoloader/#register", 
+            "text": "register() : void  Registers the  autoload()  method of the current instance with spl_autoload_register() .", 
             "title": "register"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#unregister",
-            "text": "unregister() : void  Unregisters the  autoload()  method of the current instance with spl_autoload_unregister() .",
+            "location": "/module-autoloader/#unregister", 
+            "text": "unregister() : void  Unregisters the  autoload()  method of the current instance with spl_autoload_unregister() .", 
             "title": "unregister"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#registerpaths",
-            "text": "registerPaths(array|Traversable $paths) : void  Register paths to modules. For an example array, please see the Configuration options  section.",
+            "location": "/module-autoloader/#registerpaths", 
+            "text": "registerPaths(array|Traversable $paths) : void  Register paths to modules. For an example array, please see the Configuration options  section.", 
             "title": "registerPaths"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#registerpath",
-            "text": "registerPath(string $path, string $moduleName = false) : void  Register a single path with the autoloader. The first parameter,  $path , is\nexpected to be a string. The second parameter,  $moduleName , is expected to be\na module name, which allows for registering an explicit path to that module.",
+            "location": "/module-autoloader/#registerpath", 
+            "text": "registerPath(string $path, string $moduleName = false) : void  Register a single path with the autoloader. The first parameter,  $path , is\nexpected to be a string. The second parameter,  $moduleName , is expected to be\na module name, which allows for registering an explicit path to that module.", 
             "title": "registerPath"
-        },
+        }, 
         {
-            "location": "/module-autoloader/#getpaths",
-            "text": "getPaths() : string[]  Returns an array of all the paths registered.",
+            "location": "/module-autoloader/#getpaths", 
+            "text": "getPaths() : string[]  Returns an array of all the paths registered.", 
             "title": "getPaths"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/",
-            "text": "The SplAutoloader Interface\n\n\nWhile any valid PHP callback may be registered with \nspl_autoload_register()\n,\nthe autoloaders zend-loader provides offer more flexibility by being stateful\nand allowing configuration. To provide a common interface for such autoloaders,\nzend-loader provides the \nSplAutoloader\n interface.\n\n\nObjects implementing this interface provide a standard mechanism for\nconfiguration, a method that may be invoked to attempt to load a class, and a\nmethod for registering with the SPL autoloading mechanism.\n\n\nQuick Start\n\n\nTo create your own autoloading mechanism, create a class implementing the\n\nSplAutoloader\n interface (you may review the methods defined in the \nmethods\nsection\n). As an example, consider the following autoloader,\nwhich will look for a class file named after the class within a list of\nregistered directories.\n\n\nnamespace Custom;\n\nuse InvalidArgumentException;\nuse Traversable;\nuse Zend\\Loader\\SplAutoloader;\n\nclass ModifiedIncludePathAutoloader implements SplAutoloader\n{\n    protected $paths = array();\n\n    public function __construct($options = null)\n    {\n        if (null !== $options) {\n            $this->setOptions($options);\n        }\n    }\n\n    public function setOptions($options)\n    {\n        if (! is_array($options) && ! $options instanceof Traversable) {\n            throw new InvalidArgumentException();\n        }\n\n        foreach ($options as $path) {\n            if (! in_array($path, $this->paths)) {\n                $this->paths[] = $path;\n            }\n        }\n    }\n\n    public function autoload($classname)\n    {\n        $filename = $classname . '.php';\n        foreach ($this->paths as $path) {\n            $test = sprintf('%s/%s', $path, $filename);\n            if (file_exists($test)) {\n                return include($test);\n            }\n        }\n        return false;\n    }\n\n    public function register()\n    {\n        spl_autoload_register([$this, 'autoload']);\n    }\n}\n\n\n\n\nTo use this \nModifiedIncludePathAutoloader\n from the previous example:\n\n\n$options = [\n   '/path/one',\n   '/path/two',\n];\n$autoloader = new Custom\\ModifiedIncludePathAutoloader($options);\n$autoloader->register();\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct($options = null) : void\n\n\n\n\nAutoloader constructors should optionally receive configuration. Typically, if\nreceived, these will be passed to the \nsetOptions()\n method to process.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nUsed to configure the autoloader. Typically, it should expect either an array or\na \nTraversable\n object, though validation of the options is left to\nimplementation.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nThis method should be used to resolve a class name to the file defining it. When\na positive match is found, return the class name; otherwise, return a boolean\n\nfalse\n.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nShould be used to register the autoloader instance with\n\nspl_autoload_register()\n. Invariably, the method should look like the\nfollowing:\n\n\npublic function register()\n{\n    spl_autoload_register([$this, 'autoload']);\n}",
+            "location": "/spl-autoloader/", 
+            "text": "The SplAutoloader Interface\n\n\nWhile any valid PHP callback may be registered with \nspl_autoload_register()\n,\nthe autoloaders zend-loader provides offer more flexibility by being stateful\nand allowing configuration. To provide a common interface for such autoloaders,\nzend-loader provides the \nSplAutoloader\n interface.\n\n\nObjects implementing this interface provide a standard mechanism for\nconfiguration, a method that may be invoked to attempt to load a class, and a\nmethod for registering with the SPL autoloading mechanism.\n\n\nQuick Start\n\n\nTo create your own autoloading mechanism, create a class implementing the\n\nSplAutoloader\n interface (you may review the methods defined in the \nmethods\nsection\n). As an example, consider the following autoloader,\nwhich will look for a class file named after the class within a list of\nregistered directories.\n\n\nnamespace Custom;\n\nuse InvalidArgumentException;\nuse Traversable;\nuse Zend\\Loader\\SplAutoloader;\n\nclass ModifiedIncludePathAutoloader implements SplAutoloader\n{\n    protected $paths = array();\n\n    public function __construct($options = null)\n    {\n        if (null !== $options) {\n            $this-\nsetOptions($options);\n        }\n    }\n\n    public function setOptions($options)\n    {\n        if (! is_array($options) \n ! $options instanceof Traversable) {\n            throw new InvalidArgumentException();\n        }\n\n        foreach ($options as $path) {\n            if (! in_array($path, $this-\npaths)) {\n                $this-\npaths[] = $path;\n            }\n        }\n    }\n\n    public function autoload($classname)\n    {\n        $filename = $classname . '.php';\n        foreach ($this-\npaths as $path) {\n            $test = sprintf('%s/%s', $path, $filename);\n            if (file_exists($test)) {\n                return include($test);\n            }\n        }\n        return false;\n    }\n\n    public function register()\n    {\n        spl_autoload_register([$this, 'autoload']);\n    }\n}\n\n\n\n\nTo use this \nModifiedIncludePathAutoloader\n from the previous example:\n\n\n$options = [\n   '/path/one',\n   '/path/two',\n];\n$autoloader = new Custom\\ModifiedIncludePathAutoloader($options);\n$autoloader-\nregister();\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct($options = null) : void\n\n\n\n\nAutoloader constructors should optionally receive configuration. Typically, if\nreceived, these will be passed to the \nsetOptions()\n method to process.\n\n\nsetOptions\n\n\nsetOptions(array|Traversable $options) : void\n\n\n\n\nUsed to configure the autoloader. Typically, it should expect either an array or\na \nTraversable\n object, though validation of the options is left to\nimplementation.\n\n\nautoload\n\n\nautoload(string $class) : false|string\n\n\n\n\nThis method should be used to resolve a class name to the file defining it. When\na positive match is found, return the class name; otherwise, return a boolean\n\nfalse\n.\n\n\nregister\n\n\nregister() : void\n\n\n\n\nShould be used to register the autoloader instance with\n\nspl_autoload_register()\n. Invariably, the method should look like the\nfollowing:\n\n\npublic function register()\n{\n    spl_autoload_register([$this, 'autoload']);\n}", 
             "title": "SplAutoloader"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#the-splautoloader-interface",
-            "text": "While any valid PHP callback may be registered with  spl_autoload_register() ,\nthe autoloaders zend-loader provides offer more flexibility by being stateful\nand allowing configuration. To provide a common interface for such autoloaders,\nzend-loader provides the  SplAutoloader  interface.  Objects implementing this interface provide a standard mechanism for\nconfiguration, a method that may be invoked to attempt to load a class, and a\nmethod for registering with the SPL autoloading mechanism.",
+            "location": "/spl-autoloader/#the-splautoloader-interface", 
+            "text": "While any valid PHP callback may be registered with  spl_autoload_register() ,\nthe autoloaders zend-loader provides offer more flexibility by being stateful\nand allowing configuration. To provide a common interface for such autoloaders,\nzend-loader provides the  SplAutoloader  interface.  Objects implementing this interface provide a standard mechanism for\nconfiguration, a method that may be invoked to attempt to load a class, and a\nmethod for registering with the SPL autoloading mechanism.", 
             "title": "The SplAutoloader Interface"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#quick-start",
-            "text": "To create your own autoloading mechanism, create a class implementing the SplAutoloader  interface (you may review the methods defined in the  methods\nsection ). As an example, consider the following autoloader,\nwhich will look for a class file named after the class within a list of\nregistered directories.  namespace Custom;\n\nuse InvalidArgumentException;\nuse Traversable;\nuse Zend\\Loader\\SplAutoloader;\n\nclass ModifiedIncludePathAutoloader implements SplAutoloader\n{\n    protected $paths = array();\n\n    public function __construct($options = null)\n    {\n        if (null !== $options) {\n            $this->setOptions($options);\n        }\n    }\n\n    public function setOptions($options)\n    {\n        if (! is_array($options) && ! $options instanceof Traversable) {\n            throw new InvalidArgumentException();\n        }\n\n        foreach ($options as $path) {\n            if (! in_array($path, $this->paths)) {\n                $this->paths[] = $path;\n            }\n        }\n    }\n\n    public function autoload($classname)\n    {\n        $filename = $classname . '.php';\n        foreach ($this->paths as $path) {\n            $test = sprintf('%s/%s', $path, $filename);\n            if (file_exists($test)) {\n                return include($test);\n            }\n        }\n        return false;\n    }\n\n    public function register()\n    {\n        spl_autoload_register([$this, 'autoload']);\n    }\n}  To use this  ModifiedIncludePathAutoloader  from the previous example:  $options = [\n   '/path/one',\n   '/path/two',\n];\n$autoloader = new Custom\\ModifiedIncludePathAutoloader($options);\n$autoloader->register();",
+            "location": "/spl-autoloader/#quick-start", 
+            "text": "To create your own autoloading mechanism, create a class implementing the SplAutoloader  interface (you may review the methods defined in the  methods\nsection ). As an example, consider the following autoloader,\nwhich will look for a class file named after the class within a list of\nregistered directories.  namespace Custom;\n\nuse InvalidArgumentException;\nuse Traversable;\nuse Zend\\Loader\\SplAutoloader;\n\nclass ModifiedIncludePathAutoloader implements SplAutoloader\n{\n    protected $paths = array();\n\n    public function __construct($options = null)\n    {\n        if (null !== $options) {\n            $this- setOptions($options);\n        }\n    }\n\n    public function setOptions($options)\n    {\n        if (! is_array($options)   ! $options instanceof Traversable) {\n            throw new InvalidArgumentException();\n        }\n\n        foreach ($options as $path) {\n            if (! in_array($path, $this- paths)) {\n                $this- paths[] = $path;\n            }\n        }\n    }\n\n    public function autoload($classname)\n    {\n        $filename = $classname . '.php';\n        foreach ($this- paths as $path) {\n            $test = sprintf('%s/%s', $path, $filename);\n            if (file_exists($test)) {\n                return include($test);\n            }\n        }\n        return false;\n    }\n\n    public function register()\n    {\n        spl_autoload_register([$this, 'autoload']);\n    }\n}  To use this  ModifiedIncludePathAutoloader  from the previous example:  $options = [\n   '/path/one',\n   '/path/two',\n];\n$autoloader = new Custom\\ModifiedIncludePathAutoloader($options);\n$autoloader- register();", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#configuration-options",
-            "text": "This component defines no configuration options, as it is an interface.",
+            "location": "/spl-autoloader/#configuration-options", 
+            "text": "This component defines no configuration options, as it is an interface.", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#available-methods",
-            "text": "",
+            "location": "/spl-autoloader/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#9595construct",
-            "text": "__construct($options = null) : void  Autoloader constructors should optionally receive configuration. Typically, if\nreceived, these will be passed to the  setOptions()  method to process.",
+            "location": "/spl-autoloader/#9595construct", 
+            "text": "__construct($options = null) : void  Autoloader constructors should optionally receive configuration. Typically, if\nreceived, these will be passed to the  setOptions()  method to process.", 
             "title": "__construct"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#setoptions",
-            "text": "setOptions(array|Traversable $options) : void  Used to configure the autoloader. Typically, it should expect either an array or\na  Traversable  object, though validation of the options is left to\nimplementation.",
+            "location": "/spl-autoloader/#setoptions", 
+            "text": "setOptions(array|Traversable $options) : void  Used to configure the autoloader. Typically, it should expect either an array or\na  Traversable  object, though validation of the options is left to\nimplementation.", 
             "title": "setOptions"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#autoload",
-            "text": "autoload(string $class) : false|string  This method should be used to resolve a class name to the file defining it. When\na positive match is found, return the class name; otherwise, return a boolean false .",
+            "location": "/spl-autoloader/#autoload", 
+            "text": "autoload(string $class) : false|string  This method should be used to resolve a class name to the file defining it. When\na positive match is found, return the class name; otherwise, return a boolean false .", 
             "title": "autoload"
-        },
+        }, 
         {
-            "location": "/spl-autoloader/#register",
-            "text": "register() : void  Should be used to register the autoloader instance with spl_autoload_register() . Invariably, the method should look like the\nfollowing:  public function register()\n{\n    spl_autoload_register([$this, 'autoload']);\n}",
+            "location": "/spl-autoloader/#register", 
+            "text": "register() : void  Should be used to register the autoloader instance with spl_autoload_register() . Invariably, the method should look like the\nfollowing:  public function register()\n{\n    spl_autoload_register([$this, 'autoload']);\n}", 
             "title": "register"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/",
-            "text": "The PluginClassLoader\n\n\nResolving plugin names to class names is a common requirement within\napplications.  The \nPluginClassLoader\n implements the interfaces\n\nPluginClassLocator\n,\n\nShortNameLocator\n, and \nIteratorAggregate\n, providing a\nmechanism for aliasing plugin names to classnames for later retrieval.\n\n\nWhile it can act as a standalone class, it is intended that developers will\nextend the class to provide a per-component plugin map. This allows seeding the\nmap with the most often-used plugins, while simultaneously allowing the end-user\nto overwrite existing or register new plugins.\n\n\nAdditionally, \nPluginClassLoader\n provides the ability to statically seed all\nnew instances of a given \nPluginClassLoader\n or one of its extensions (via Late\nStatic Binding). If your application will always call for defining or overriding\nparticular plugin maps on given \nPluginClassLoader\n extensions, this is a\npowerful capability.\n\n\nQuick Start\n\n\nTypical use cases involve instantiating a \nPluginClassLoader\n, seeding it\nwith one or more plugin/class name associations, and then using it to retrieve\nthe class name associated with a given plugin name.\n\n\nuse Zend\\Http\\HeaderLoader;\n\n// Provide a global map, or override defaults:\nHeaderLoader::addStaticMap([\n    'xrequestedfor' => 'My\\Http\\Header\\XRequestedFor',\n]);\n\n// Instantiate the loader:\n$loader = new Zend\\Http\\HeaderLoader();\n\n// Register a new plugin:\n$loader->registerPlugin('xForwardedFor', 'My\\Http\\Header\\XForwardedFor');\n\n// Load/retrieve the associated plugin class:\n$class = $loader->load('xrequestedfor'); // 'My\\Http\\Header\\XRequestedFor'\n\n\n\n\n\n\nCase Sensitivity\n\n\nThe \nPluginClassLoader\n is designed to do case-insensitive plugin name\nlookups. While the above example defines an \"xForwardedFor\" plugin name,\ninternally, this will be stored as \"xforwardedfor\". If another plugin is\nregistered with the same word but using a different casing structure, it will\noverwrite this entry.\n\n\n\n\nConfiguration Options\n\n\nThe constructor may take a single option, an array or \nTraversable\n object of key/value pairs\ncorresponding to a plugin name and class name, respectively.\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(string|array|Traversable $map = null) : void\n\n\n\n\nThe constructor is used to instantiate and initialize the plugin class loader.\nIf passed a string, an array, or a \nTraversable\n object, it will pass this to\nthe \nregisterPlugins()\n method in order to seed (or overwrite)\nthe plugin class map.\n\n\naddStaticMap\n\n\nstatic addStaticMap(array|Traversable $map) : void\n\n\n\n\nStatic method for globally pre-seeding the loader with a class map. It accepts\neither an array or \nTraversable\n object of plugin name/class name pairs.\n\n\nWhen using this method, be certain you understand the precedence in which maps\nwill be merged; in decreasing order of preference:\n\n\n\n\nManually registered plugin/class name pairs (e.g., via\n  \nregisterPlugin()\n or\n  \nregisterPlugins()\n.\n\n\nA map passed to the constructor.\n\n\nThe static map.\n\n\nThe map defined within the class itself.\n\n\n\n\nAlso, please note that calling the method will \nnot\n affect any instances\nalready created.\n\n\nregisterPlugin\n\n\nregisterPlugin(string $shortName, string $className) : void\n\n\n\n\nDefined by the \nPluginClassLocator\n interface. Expects\ntwo string arguments, the plugin \n$shortName\n, and the class \n$className\n which\nit represents.\n\n\nregisterPlugins\n\n\nregisterPlugins(string|array|Traversable $map) : void\n\n\n\n\nIf a string argument is provided, \nregisterPlugins()\n assumes this is a class\nname. If the class does not exist, an exception will be thrown. If it does, it\nthen instantiates the class and checks to see whether or not it implements\n\nTraversable\n, iterating it if it does.\n\n\nEach key/value pair obtained during iteration is then passed to\n\nregisterPlugin()\n using the key as the plugin name and the\nvalue as the class name.\n\n\nunregisterPlugin\n\n\nunregisterPlugin(string $shortName) : void\n\n\n\n\nDefined by the \nPluginClassLocator\n interface; remove a plugin/class association\nfrom the plugin class map.\n\n\ngetRegisteredPlugins\n\n\ngetRegisteredPlugins() : array\n\n\n\n\nDefined by the \nPluginClassLocator\n interface; return the entire plugin class\nmap as an array.\n\n\nisLoaded\n\n\nisLoaded(string $name) : bool\n\n\n\n\nDefined by the \nShortNameLocator\n interface; determine if the given plugin has\nbeen resolved to a class name.\n\n\ngetClassName\n\n\ngetClassName(string $name) : string\n\n\n\n\nDefined by the \nShortNameLocator\n interface; return the class name to which a\nplugin name resolves.\n\n\nload\n\n\nload(string $name) : string|false\n\n\n\n\nDefined by the \nShortNameLocator\n interface; attempt to resolve a plugin name to\na class name. If successful, returns the class name; otherwise, returns a\nboolean \nfalse\n.\n\n\ngetIterator\n\n\ngetIterator() : Traversable\n\n\n\n\nDefined by the \nIteratorAggregate\n interface; allows iteration over the plugin\nclass map. This can come in useful for using \nPluginClassLoader\n instances to\nother \nPluginClassLoader\n instances in order to merge maps.\n\n\nExamples\n\n\nUsing Static Maps\n\n\nIt's often convenient to provide global overrides or additions to the maps in a\n\nPluginClassLoader\n instance. This can be done using the \naddStaticMap()\n\nmethod:\n\n\nuse Zend\\Loader\\PluginClassLoader;\n\nPluginClassLoader::addStaticMap([\n    'xrequestedfor' => 'My\\Http\\Header\\XRequestedFor',\n]);\n\n\n\n\nAny later instances created will now have this map defined, allowing you to load\nthat plugin.\n\n\nuse Zend\\Loader\\PluginClassLoader;\n\n$loader = new PluginClassLoader();\n$class = $loader->load('xrequestedfor'); // My\\Http\\Header\\XRequestedFor\n\n\n\n\nCreating a pre-loaded map\n\n\nIn many cases, you know exactly which plugins you may be drawing upon on a\nregular basis, and which classes they will refer to. In this case, extend\nthe \nPluginClassLoader\n and define the map within the extending class.\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    => 'My\\Plugins\\Foo',\n        'bar'    => 'My\\Plugins\\Bar',\n        'foobar' => 'My\\Plugins\\FooBar',\n    ];\n}\n\n\n\n\nAt this point, you can instantiate the map and immediately use it.\n\n\n$loader = new My\\Plugins\\PluginLoader();\n$class  = $loader->load('foobar'); // My\\Plugins\\FooBar\n\n\n\n\nPluginClassLoader\n makes use of late static binding, allowing per-class static\nmaps. If you want to allow defining a \nstatic map\n specific\nto this extending class, declare a protected static \n$staticMap\n property:\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    protected static $staticMap = [];\n\n    // ...\n}\n\n\n\n\nTo inject the static map, call the \naddStaticMap()\n on the extension class:\n\n\nPluginLoader::addStaticMap([\n    'baz' => 'My\\Plugins\\Baz',\n]);\n\n\n\n\nExtending a plugin map using another plugin map\n\n\nIn some cases, a general map class may already exist; as an example, several\nZend Framework components defining plugin brokers have an associated\n\nPluginClassLoader\n extension defining the plugins available for that component\nwithin the framework. What if you want to define some additions to these? Where\nshould that code go?\n\n\nOne possibility is to define the map in a configuration file, and then inject\nthe configuration into an instance of the plugin loader.\n\n\nAnother solution is to define a new plugin map class. The class name or an\ninstance of the class may then be passed to the constructor or\n\nregisterPlugins()\n.\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\nuse Zend\\Http\\HeaderLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    => 'My\\Plugins\\Foo',\n        'bar'    => 'My\\Plugins\\Bar',\n        'foobar' => 'My\\Plugins\\FooBar',\n    ];\n}\n\n// Inject in constructor:\n$loader = new HeaderLoader(PluginLoader::class); // as string class name\n$loader = new HeaderLoader(new PluginLoader());  // as instance\n\n// Or via registerPlugins():\n$loader->registerPlugins(PluginLoader::class); // as string class name\n$loader->registerPlugins(new PluginLoader());  // as instance",
+            "location": "/plugin-class-loader/", 
+            "text": "The PluginClassLoader\n\n\nResolving plugin names to class names is a common requirement within\napplications.  The \nPluginClassLoader\n implements the interfaces\n\nPluginClassLocator\n,\n\nShortNameLocator\n, and \nIteratorAggregate\n, providing a\nmechanism for aliasing plugin names to classnames for later retrieval.\n\n\nWhile it can act as a standalone class, it is intended that developers will\nextend the class to provide a per-component plugin map. This allows seeding the\nmap with the most often-used plugins, while simultaneously allowing the end-user\nto overwrite existing or register new plugins.\n\n\nAdditionally, \nPluginClassLoader\n provides the ability to statically seed all\nnew instances of a given \nPluginClassLoader\n or one of its extensions (via Late\nStatic Binding). If your application will always call for defining or overriding\nparticular plugin maps on given \nPluginClassLoader\n extensions, this is a\npowerful capability.\n\n\nQuick Start\n\n\nTypical use cases involve instantiating a \nPluginClassLoader\n, seeding it\nwith one or more plugin/class name associations, and then using it to retrieve\nthe class name associated with a given plugin name.\n\n\nuse Zend\\Http\\HeaderLoader;\n\n// Provide a global map, or override defaults:\nHeaderLoader::addStaticMap([\n    'xrequestedfor' =\n 'My\\Http\\Header\\XRequestedFor',\n]);\n\n// Instantiate the loader:\n$loader = new Zend\\Http\\HeaderLoader();\n\n// Register a new plugin:\n$loader-\nregisterPlugin('xForwardedFor', 'My\\Http\\Header\\XForwardedFor');\n\n// Load/retrieve the associated plugin class:\n$class = $loader-\nload('xrequestedfor'); // 'My\\Http\\Header\\XRequestedFor'\n\n\n\n\n\n\nCase Sensitivity\n\n\nThe \nPluginClassLoader\n is designed to do case-insensitive plugin name\nlookups. While the above example defines an \"xForwardedFor\" plugin name,\ninternally, this will be stored as \"xforwardedfor\". If another plugin is\nregistered with the same word but using a different casing structure, it will\noverwrite this entry.\n\n\n\n\nConfiguration Options\n\n\nThe constructor may take a single option, an array or \nTraversable\n object of key/value pairs\ncorresponding to a plugin name and class name, respectively.\n\n\nAvailable Methods\n\n\n__construct\n\n\n__construct(string|array|Traversable $map = null) : void\n\n\n\n\nThe constructor is used to instantiate and initialize the plugin class loader.\nIf passed a string, an array, or a \nTraversable\n object, it will pass this to\nthe \nregisterPlugins()\n method in order to seed (or overwrite)\nthe plugin class map.\n\n\naddStaticMap\n\n\nstatic addStaticMap(array|Traversable $map) : void\n\n\n\n\nStatic method for globally pre-seeding the loader with a class map. It accepts\neither an array or \nTraversable\n object of plugin name/class name pairs.\n\n\nWhen using this method, be certain you understand the precedence in which maps\nwill be merged; in decreasing order of preference:\n\n\n\n\nManually registered plugin/class name pairs (e.g., via\n  \nregisterPlugin()\n or\n  \nregisterPlugins()\n.\n\n\nA map passed to the constructor.\n\n\nThe static map.\n\n\nThe map defined within the class itself.\n\n\n\n\nAlso, please note that calling the method will \nnot\n affect any instances\nalready created.\n\n\nregisterPlugin\n\n\nregisterPlugin(string $shortName, string $className) : void\n\n\n\n\nDefined by the \nPluginClassLocator\n interface. Expects\ntwo string arguments, the plugin \n$shortName\n, and the class \n$className\n which\nit represents.\n\n\nregisterPlugins\n\n\nregisterPlugins(string|array|Traversable $map) : void\n\n\n\n\nIf a string argument is provided, \nregisterPlugins()\n assumes this is a class\nname. If the class does not exist, an exception will be thrown. If it does, it\nthen instantiates the class and checks to see whether or not it implements\n\nTraversable\n, iterating it if it does.\n\n\nEach key/value pair obtained during iteration is then passed to\n\nregisterPlugin()\n using the key as the plugin name and the\nvalue as the class name.\n\n\nunregisterPlugin\n\n\nunregisterPlugin(string $shortName) : void\n\n\n\n\nDefined by the \nPluginClassLocator\n interface; remove a plugin/class association\nfrom the plugin class map.\n\n\ngetRegisteredPlugins\n\n\ngetRegisteredPlugins() : array\n\n\n\n\nDefined by the \nPluginClassLocator\n interface; return the entire plugin class\nmap as an array.\n\n\nisLoaded\n\n\nisLoaded(string $name) : bool\n\n\n\n\nDefined by the \nShortNameLocator\n interface; determine if the given plugin has\nbeen resolved to a class name.\n\n\ngetClassName\n\n\ngetClassName(string $name) : string\n\n\n\n\nDefined by the \nShortNameLocator\n interface; return the class name to which a\nplugin name resolves.\n\n\nload\n\n\nload(string $name) : string|false\n\n\n\n\nDefined by the \nShortNameLocator\n interface; attempt to resolve a plugin name to\na class name. If successful, returns the class name; otherwise, returns a\nboolean \nfalse\n.\n\n\ngetIterator\n\n\ngetIterator() : Traversable\n\n\n\n\nDefined by the \nIteratorAggregate\n interface; allows iteration over the plugin\nclass map. This can come in useful for using \nPluginClassLoader\n instances to\nother \nPluginClassLoader\n instances in order to merge maps.\n\n\nExamples\n\n\nUsing Static Maps\n\n\nIt's often convenient to provide global overrides or additions to the maps in a\n\nPluginClassLoader\n instance. This can be done using the \naddStaticMap()\n\nmethod:\n\n\nuse Zend\\Loader\\PluginClassLoader;\n\nPluginClassLoader::addStaticMap([\n    'xrequestedfor' =\n 'My\\Http\\Header\\XRequestedFor',\n]);\n\n\n\n\nAny later instances created will now have this map defined, allowing you to load\nthat plugin.\n\n\nuse Zend\\Loader\\PluginClassLoader;\n\n$loader = new PluginClassLoader();\n$class = $loader-\nload('xrequestedfor'); // My\\Http\\Header\\XRequestedFor\n\n\n\n\nCreating a pre-loaded map\n\n\nIn many cases, you know exactly which plugins you may be drawing upon on a\nregular basis, and which classes they will refer to. In this case, extend\nthe \nPluginClassLoader\n and define the map within the extending class.\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    =\n 'My\\Plugins\\Foo',\n        'bar'    =\n 'My\\Plugins\\Bar',\n        'foobar' =\n 'My\\Plugins\\FooBar',\n    ];\n}\n\n\n\n\nAt this point, you can instantiate the map and immediately use it.\n\n\n$loader = new My\\Plugins\\PluginLoader();\n$class  = $loader-\nload('foobar'); // My\\Plugins\\FooBar\n\n\n\n\nPluginClassLoader\n makes use of late static binding, allowing per-class static\nmaps. If you want to allow defining a \nstatic map\n specific\nto this extending class, declare a protected static \n$staticMap\n property:\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    protected static $staticMap = [];\n\n    // ...\n}\n\n\n\n\nTo inject the static map, call the \naddStaticMap()\n on the extension class:\n\n\nPluginLoader::addStaticMap([\n    'baz' =\n 'My\\Plugins\\Baz',\n]);\n\n\n\n\nExtending a plugin map using another plugin map\n\n\nIn some cases, a general map class may already exist; as an example, several\nZend Framework components defining plugin brokers have an associated\n\nPluginClassLoader\n extension defining the plugins available for that component\nwithin the framework. What if you want to define some additions to these? Where\nshould that code go?\n\n\nOne possibility is to define the map in a configuration file, and then inject\nthe configuration into an instance of the plugin loader.\n\n\nAnother solution is to define a new plugin map class. The class name or an\ninstance of the class may then be passed to the constructor or\n\nregisterPlugins()\n.\n\n\nnamespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\nuse Zend\\Http\\HeaderLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    =\n 'My\\Plugins\\Foo',\n        'bar'    =\n 'My\\Plugins\\Bar',\n        'foobar' =\n 'My\\Plugins\\FooBar',\n    ];\n}\n\n// Inject in constructor:\n$loader = new HeaderLoader(PluginLoader::class); // as string class name\n$loader = new HeaderLoader(new PluginLoader());  // as instance\n\n// Or via registerPlugins():\n$loader-\nregisterPlugins(PluginLoader::class); // as string class name\n$loader-\nregisterPlugins(new PluginLoader());  // as instance", 
             "title": "PluginClassLoader"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#the-pluginclassloader",
-            "text": "Resolving plugin names to class names is a common requirement within\napplications.  The  PluginClassLoader  implements the interfaces PluginClassLocator , ShortNameLocator , and  IteratorAggregate , providing a\nmechanism for aliasing plugin names to classnames for later retrieval.  While it can act as a standalone class, it is intended that developers will\nextend the class to provide a per-component plugin map. This allows seeding the\nmap with the most often-used plugins, while simultaneously allowing the end-user\nto overwrite existing or register new plugins.  Additionally,  PluginClassLoader  provides the ability to statically seed all\nnew instances of a given  PluginClassLoader  or one of its extensions (via Late\nStatic Binding). If your application will always call for defining or overriding\nparticular plugin maps on given  PluginClassLoader  extensions, this is a\npowerful capability.",
+            "location": "/plugin-class-loader/#the-pluginclassloader", 
+            "text": "Resolving plugin names to class names is a common requirement within\napplications.  The  PluginClassLoader  implements the interfaces PluginClassLocator , ShortNameLocator , and  IteratorAggregate , providing a\nmechanism for aliasing plugin names to classnames for later retrieval.  While it can act as a standalone class, it is intended that developers will\nextend the class to provide a per-component plugin map. This allows seeding the\nmap with the most often-used plugins, while simultaneously allowing the end-user\nto overwrite existing or register new plugins.  Additionally,  PluginClassLoader  provides the ability to statically seed all\nnew instances of a given  PluginClassLoader  or one of its extensions (via Late\nStatic Binding). If your application will always call for defining or overriding\nparticular plugin maps on given  PluginClassLoader  extensions, this is a\npowerful capability.", 
             "title": "The PluginClassLoader"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#quick-start",
-            "text": "Typical use cases involve instantiating a  PluginClassLoader , seeding it\nwith one or more plugin/class name associations, and then using it to retrieve\nthe class name associated with a given plugin name.  use Zend\\Http\\HeaderLoader;\n\n// Provide a global map, or override defaults:\nHeaderLoader::addStaticMap([\n    'xrequestedfor' => 'My\\Http\\Header\\XRequestedFor',\n]);\n\n// Instantiate the loader:\n$loader = new Zend\\Http\\HeaderLoader();\n\n// Register a new plugin:\n$loader->registerPlugin('xForwardedFor', 'My\\Http\\Header\\XForwardedFor');\n\n// Load/retrieve the associated plugin class:\n$class = $loader->load('xrequestedfor'); // 'My\\Http\\Header\\XRequestedFor'",
+            "location": "/plugin-class-loader/#quick-start", 
+            "text": "Typical use cases involve instantiating a  PluginClassLoader , seeding it\nwith one or more plugin/class name associations, and then using it to retrieve\nthe class name associated with a given plugin name.  use Zend\\Http\\HeaderLoader;\n\n// Provide a global map, or override defaults:\nHeaderLoader::addStaticMap([\n    'xrequestedfor' =  'My\\Http\\Header\\XRequestedFor',\n]);\n\n// Instantiate the loader:\n$loader = new Zend\\Http\\HeaderLoader();\n\n// Register a new plugin:\n$loader- registerPlugin('xForwardedFor', 'My\\Http\\Header\\XForwardedFor');\n\n// Load/retrieve the associated plugin class:\n$class = $loader- load('xrequestedfor'); // 'My\\Http\\Header\\XRequestedFor'", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#case-sensitivity",
-            "text": "The  PluginClassLoader  is designed to do case-insensitive plugin name\nlookups. While the above example defines an \"xForwardedFor\" plugin name,\ninternally, this will be stored as \"xforwardedfor\". If another plugin is\nregistered with the same word but using a different casing structure, it will\noverwrite this entry.",
+            "location": "/plugin-class-loader/#case-sensitivity", 
+            "text": "The  PluginClassLoader  is designed to do case-insensitive plugin name\nlookups. While the above example defines an \"xForwardedFor\" plugin name,\ninternally, this will be stored as \"xforwardedfor\". If another plugin is\nregistered with the same word but using a different casing structure, it will\noverwrite this entry.", 
             "title": "Case Sensitivity"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#configuration-options",
-            "text": "The constructor may take a single option, an array or  Traversable  object of key/value pairs\ncorresponding to a plugin name and class name, respectively.",
+            "location": "/plugin-class-loader/#configuration-options", 
+            "text": "The constructor may take a single option, an array or  Traversable  object of key/value pairs\ncorresponding to a plugin name and class name, respectively.", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#available-methods",
-            "text": "",
+            "location": "/plugin-class-loader/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#9595construct",
-            "text": "__construct(string|array|Traversable $map = null) : void  The constructor is used to instantiate and initialize the plugin class loader.\nIf passed a string, an array, or a  Traversable  object, it will pass this to\nthe  registerPlugins()  method in order to seed (or overwrite)\nthe plugin class map.",
+            "location": "/plugin-class-loader/#9595construct", 
+            "text": "__construct(string|array|Traversable $map = null) : void  The constructor is used to instantiate and initialize the plugin class loader.\nIf passed a string, an array, or a  Traversable  object, it will pass this to\nthe  registerPlugins()  method in order to seed (or overwrite)\nthe plugin class map.", 
             "title": "__construct"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#addstaticmap",
-            "text": "static addStaticMap(array|Traversable $map) : void  Static method for globally pre-seeding the loader with a class map. It accepts\neither an array or  Traversable  object of plugin name/class name pairs.  When using this method, be certain you understand the precedence in which maps\nwill be merged; in decreasing order of preference:   Manually registered plugin/class name pairs (e.g., via\n   registerPlugin()  or\n   registerPlugins() .  A map passed to the constructor.  The static map.  The map defined within the class itself.   Also, please note that calling the method will  not  affect any instances\nalready created.",
+            "location": "/plugin-class-loader/#addstaticmap", 
+            "text": "static addStaticMap(array|Traversable $map) : void  Static method for globally pre-seeding the loader with a class map. It accepts\neither an array or  Traversable  object of plugin name/class name pairs.  When using this method, be certain you understand the precedence in which maps\nwill be merged; in decreasing order of preference:   Manually registered plugin/class name pairs (e.g., via\n   registerPlugin()  or\n   registerPlugins() .  A map passed to the constructor.  The static map.  The map defined within the class itself.   Also, please note that calling the method will  not  affect any instances\nalready created.", 
             "title": "addStaticMap"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#registerplugin",
-            "text": "registerPlugin(string $shortName, string $className) : void  Defined by the  PluginClassLocator  interface. Expects\ntwo string arguments, the plugin  $shortName , and the class  $className  which\nit represents.",
+            "location": "/plugin-class-loader/#registerplugin", 
+            "text": "registerPlugin(string $shortName, string $className) : void  Defined by the  PluginClassLocator  interface. Expects\ntwo string arguments, the plugin  $shortName , and the class  $className  which\nit represents.", 
             "title": "registerPlugin"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#registerplugins",
-            "text": "registerPlugins(string|array|Traversable $map) : void  If a string argument is provided,  registerPlugins()  assumes this is a class\nname. If the class does not exist, an exception will be thrown. If it does, it\nthen instantiates the class and checks to see whether or not it implements Traversable , iterating it if it does.  Each key/value pair obtained during iteration is then passed to registerPlugin()  using the key as the plugin name and the\nvalue as the class name.",
+            "location": "/plugin-class-loader/#registerplugins", 
+            "text": "registerPlugins(string|array|Traversable $map) : void  If a string argument is provided,  registerPlugins()  assumes this is a class\nname. If the class does not exist, an exception will be thrown. If it does, it\nthen instantiates the class and checks to see whether or not it implements Traversable , iterating it if it does.  Each key/value pair obtained during iteration is then passed to registerPlugin()  using the key as the plugin name and the\nvalue as the class name.", 
             "title": "registerPlugins"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#unregisterplugin",
-            "text": "unregisterPlugin(string $shortName) : void  Defined by the  PluginClassLocator  interface; remove a plugin/class association\nfrom the plugin class map.",
+            "location": "/plugin-class-loader/#unregisterplugin", 
+            "text": "unregisterPlugin(string $shortName) : void  Defined by the  PluginClassLocator  interface; remove a plugin/class association\nfrom the plugin class map.", 
             "title": "unregisterPlugin"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#getregisteredplugins",
-            "text": "getRegisteredPlugins() : array  Defined by the  PluginClassLocator  interface; return the entire plugin class\nmap as an array.",
+            "location": "/plugin-class-loader/#getregisteredplugins", 
+            "text": "getRegisteredPlugins() : array  Defined by the  PluginClassLocator  interface; return the entire plugin class\nmap as an array.", 
             "title": "getRegisteredPlugins"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#isloaded",
-            "text": "isLoaded(string $name) : bool  Defined by the  ShortNameLocator  interface; determine if the given plugin has\nbeen resolved to a class name.",
+            "location": "/plugin-class-loader/#isloaded", 
+            "text": "isLoaded(string $name) : bool  Defined by the  ShortNameLocator  interface; determine if the given plugin has\nbeen resolved to a class name.", 
             "title": "isLoaded"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#getclassname",
-            "text": "getClassName(string $name) : string  Defined by the  ShortNameLocator  interface; return the class name to which a\nplugin name resolves.",
+            "location": "/plugin-class-loader/#getclassname", 
+            "text": "getClassName(string $name) : string  Defined by the  ShortNameLocator  interface; return the class name to which a\nplugin name resolves.", 
             "title": "getClassName"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#load",
-            "text": "load(string $name) : string|false  Defined by the  ShortNameLocator  interface; attempt to resolve a plugin name to\na class name. If successful, returns the class name; otherwise, returns a\nboolean  false .",
+            "location": "/plugin-class-loader/#load", 
+            "text": "load(string $name) : string|false  Defined by the  ShortNameLocator  interface; attempt to resolve a plugin name to\na class name. If successful, returns the class name; otherwise, returns a\nboolean  false .", 
             "title": "load"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#getiterator",
-            "text": "getIterator() : Traversable  Defined by the  IteratorAggregate  interface; allows iteration over the plugin\nclass map. This can come in useful for using  PluginClassLoader  instances to\nother  PluginClassLoader  instances in order to merge maps.",
+            "location": "/plugin-class-loader/#getiterator", 
+            "text": "getIterator() : Traversable  Defined by the  IteratorAggregate  interface; allows iteration over the plugin\nclass map. This can come in useful for using  PluginClassLoader  instances to\nother  PluginClassLoader  instances in order to merge maps.", 
             "title": "getIterator"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#examples",
-            "text": "",
+            "location": "/plugin-class-loader/#examples", 
+            "text": "", 
             "title": "Examples"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#using-static-maps",
-            "text": "It's often convenient to provide global overrides or additions to the maps in a PluginClassLoader  instance. This can be done using the  addStaticMap() \nmethod:  use Zend\\Loader\\PluginClassLoader;\n\nPluginClassLoader::addStaticMap([\n    'xrequestedfor' => 'My\\Http\\Header\\XRequestedFor',\n]);  Any later instances created will now have this map defined, allowing you to load\nthat plugin.  use Zend\\Loader\\PluginClassLoader;\n\n$loader = new PluginClassLoader();\n$class = $loader->load('xrequestedfor'); // My\\Http\\Header\\XRequestedFor",
+            "location": "/plugin-class-loader/#using-static-maps", 
+            "text": "It's often convenient to provide global overrides or additions to the maps in a PluginClassLoader  instance. This can be done using the  addStaticMap() \nmethod:  use Zend\\Loader\\PluginClassLoader;\n\nPluginClassLoader::addStaticMap([\n    'xrequestedfor' =  'My\\Http\\Header\\XRequestedFor',\n]);  Any later instances created will now have this map defined, allowing you to load\nthat plugin.  use Zend\\Loader\\PluginClassLoader;\n\n$loader = new PluginClassLoader();\n$class = $loader- load('xrequestedfor'); // My\\Http\\Header\\XRequestedFor", 
             "title": "Using Static Maps"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#creating-a-pre-loaded-map",
-            "text": "In many cases, you know exactly which plugins you may be drawing upon on a\nregular basis, and which classes they will refer to. In this case, extend\nthe  PluginClassLoader  and define the map within the extending class.  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    => 'My\\Plugins\\Foo',\n        'bar'    => 'My\\Plugins\\Bar',\n        'foobar' => 'My\\Plugins\\FooBar',\n    ];\n}  At this point, you can instantiate the map and immediately use it.  $loader = new My\\Plugins\\PluginLoader();\n$class  = $loader->load('foobar'); // My\\Plugins\\FooBar  PluginClassLoader  makes use of late static binding, allowing per-class static\nmaps. If you want to allow defining a  static map  specific\nto this extending class, declare a protected static  $staticMap  property:  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    protected static $staticMap = [];\n\n    // ...\n}  To inject the static map, call the  addStaticMap()  on the extension class:  PluginLoader::addStaticMap([\n    'baz' => 'My\\Plugins\\Baz',\n]);",
+            "location": "/plugin-class-loader/#creating-a-pre-loaded-map", 
+            "text": "In many cases, you know exactly which plugins you may be drawing upon on a\nregular basis, and which classes they will refer to. In this case, extend\nthe  PluginClassLoader  and define the map within the extending class.  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    =  'My\\Plugins\\Foo',\n        'bar'    =  'My\\Plugins\\Bar',\n        'foobar' =  'My\\Plugins\\FooBar',\n    ];\n}  At this point, you can instantiate the map and immediately use it.  $loader = new My\\Plugins\\PluginLoader();\n$class  = $loader- load('foobar'); // My\\Plugins\\FooBar  PluginClassLoader  makes use of late static binding, allowing per-class static\nmaps. If you want to allow defining a  static map  specific\nto this extending class, declare a protected static  $staticMap  property:  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    protected static $staticMap = [];\n\n    // ...\n}  To inject the static map, call the  addStaticMap()  on the extension class:  PluginLoader::addStaticMap([\n    'baz' =  'My\\Plugins\\Baz',\n]);", 
             "title": "Creating a pre-loaded map"
-        },
+        }, 
         {
-            "location": "/plugin-class-loader/#extending-a-plugin-map-using-another-plugin-map",
-            "text": "In some cases, a general map class may already exist; as an example, several\nZend Framework components defining plugin brokers have an associated PluginClassLoader  extension defining the plugins available for that component\nwithin the framework. What if you want to define some additions to these? Where\nshould that code go?  One possibility is to define the map in a configuration file, and then inject\nthe configuration into an instance of the plugin loader.  Another solution is to define a new plugin map class. The class name or an\ninstance of the class may then be passed to the constructor or registerPlugins() .  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\nuse Zend\\Http\\HeaderLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    => 'My\\Plugins\\Foo',\n        'bar'    => 'My\\Plugins\\Bar',\n        'foobar' => 'My\\Plugins\\FooBar',\n    ];\n}\n\n// Inject in constructor:\n$loader = new HeaderLoader(PluginLoader::class); // as string class name\n$loader = new HeaderLoader(new PluginLoader());  // as instance\n\n// Or via registerPlugins():\n$loader->registerPlugins(PluginLoader::class); // as string class name\n$loader->registerPlugins(new PluginLoader());  // as instance",
+            "location": "/plugin-class-loader/#extending-a-plugin-map-using-another-plugin-map", 
+            "text": "In some cases, a general map class may already exist; as an example, several\nZend Framework components defining plugin brokers have an associated PluginClassLoader  extension defining the plugins available for that component\nwithin the framework. What if you want to define some additions to these? Where\nshould that code go?  One possibility is to define the map in a configuration file, and then inject\nthe configuration into an instance of the plugin loader.  Another solution is to define a new plugin map class. The class name or an\ninstance of the class may then be passed to the constructor or registerPlugins() .  namespace My\\Plugins;\n\nuse Zend\\Loader\\PluginClassLoader;\nuse Zend\\Http\\HeaderLoader;\n\nclass PluginLoader extends PluginClassLoader\n{\n    /**\n     * @var array Plugin map\n     */\n    protected $plugins = [\n        'foo'    =  'My\\Plugins\\Foo',\n        'bar'    =  'My\\Plugins\\Bar',\n        'foobar' =  'My\\Plugins\\FooBar',\n    ];\n}\n\n// Inject in constructor:\n$loader = new HeaderLoader(PluginLoader::class); // as string class name\n$loader = new HeaderLoader(new PluginLoader());  // as instance\n\n// Or via registerPlugins():\n$loader- registerPlugins(PluginLoader::class); // as string class name\n$loader- registerPlugins(new PluginLoader());  // as instance", 
             "title": "Extending a plugin map using another plugin map"
-        },
+        }, 
         {
-            "location": "/short-name-locator/",
-            "text": "The ShortNameLocator Interface\n\n\nWe often do not wish to refer to plugins by their fully qualified class name,\nbut rather via a shorter, more memorable name: an alias. This also makes\nproviding alternate implementations possible, as developers can register custom\ncode under an existing alias.\n\n\nIn the first case, consider the adapter pattern. It's often unwieldy to utilize\na full class name (e.g., \nZend\\Cloud\\DocumentService\\Adapter\\SimpleDb\n); using\nthe short name of the adapter, \nSimpleDb\n, would be much simpler.\n\n\nIn the second case, consider the case of helpers. Let us assume we have a \"url\"\nhelper; you may find that while the shipped helper does 90% of what you need,\nyou'd like to extend it or provide an alternate implementation. At the same\ntime, you don't want to change your code to reflect the new helper. In this\ncase, a short name allows you to alias an alternate class to utilize.\n\n\nClasses implementing the \nShortNameLocator\n interface provide a mechanism for resolving a short name\nto a fully qualified class name; how they do so is left to the implementers, and may combine\nstrategies defined by other interfaces, such as\n\nPluginClassLocator\n.\n\n\nQuick Start\n\n\nImplementing a \nShortNameLocator\n requires defining three methods, as shown below.\n\n\nnamespace Zend\\Loader;\n\ninterface ShortNameLocator\n{\n    public function isLoaded($name);\n    public function getClassName($name);\n    public function load($name);\n}\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\nisLoaded\n\n\nisLoaded(string $name) : bool\n\n\n\n\nImplement this method to return a boolean indicating whether or not the class\nhas been able to resolve the plugin name to a class.\n\n\ngetClassName\n\n\ngetClassName(string $name) : string\n\n\n\n\nImplement this method to return the class name associated with a plugin name.\n\n\nload\n\n\nload($name) : string|false\n\n\n\n\nThis method should resolve a plugin name to a class name.",
+            "location": "/short-name-locator/", 
+            "text": "The ShortNameLocator Interface\n\n\nWe often do not wish to refer to plugins by their fully qualified class name,\nbut rather via a shorter, more memorable name: an alias. This also makes\nproviding alternate implementations possible, as developers can register custom\ncode under an existing alias.\n\n\nIn the first case, consider the adapter pattern. It's often unwieldy to utilize\na full class name (e.g., \nZend\\Cloud\\DocumentService\\Adapter\\SimpleDb\n); using\nthe short name of the adapter, \nSimpleDb\n, would be much simpler.\n\n\nIn the second case, consider the case of helpers. Let us assume we have a \"url\"\nhelper; you may find that while the shipped helper does 90% of what you need,\nyou'd like to extend it or provide an alternate implementation. At the same\ntime, you don't want to change your code to reflect the new helper. In this\ncase, a short name allows you to alias an alternate class to utilize.\n\n\nClasses implementing the \nShortNameLocator\n interface provide a mechanism for resolving a short name\nto a fully qualified class name; how they do so is left to the implementers, and may combine\nstrategies defined by other interfaces, such as\n\nPluginClassLocator\n.\n\n\nQuick Start\n\n\nImplementing a \nShortNameLocator\n requires defining three methods, as shown below.\n\n\nnamespace Zend\\Loader;\n\ninterface ShortNameLocator\n{\n    public function isLoaded($name);\n    public function getClassName($name);\n    public function load($name);\n}\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\nisLoaded\n\n\nisLoaded(string $name) : bool\n\n\n\n\nImplement this method to return a boolean indicating whether or not the class\nhas been able to resolve the plugin name to a class.\n\n\ngetClassName\n\n\ngetClassName(string $name) : string\n\n\n\n\nImplement this method to return the class name associated with a plugin name.\n\n\nload\n\n\nload($name) : string|false\n\n\n\n\nThis method should resolve a plugin name to a class name.", 
             "title": "ShortNameLocator"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#the-shortnamelocator-interface",
-            "text": "We often do not wish to refer to plugins by their fully qualified class name,\nbut rather via a shorter, more memorable name: an alias. This also makes\nproviding alternate implementations possible, as developers can register custom\ncode under an existing alias.  In the first case, consider the adapter pattern. It's often unwieldy to utilize\na full class name (e.g.,  Zend\\Cloud\\DocumentService\\Adapter\\SimpleDb ); using\nthe short name of the adapter,  SimpleDb , would be much simpler.  In the second case, consider the case of helpers. Let us assume we have a \"url\"\nhelper; you may find that while the shipped helper does 90% of what you need,\nyou'd like to extend it or provide an alternate implementation. At the same\ntime, you don't want to change your code to reflect the new helper. In this\ncase, a short name allows you to alias an alternate class to utilize.  Classes implementing the  ShortNameLocator  interface provide a mechanism for resolving a short name\nto a fully qualified class name; how they do so is left to the implementers, and may combine\nstrategies defined by other interfaces, such as PluginClassLocator .",
+            "location": "/short-name-locator/#the-shortnamelocator-interface", 
+            "text": "We often do not wish to refer to plugins by their fully qualified class name,\nbut rather via a shorter, more memorable name: an alias. This also makes\nproviding alternate implementations possible, as developers can register custom\ncode under an existing alias.  In the first case, consider the adapter pattern. It's often unwieldy to utilize\na full class name (e.g.,  Zend\\Cloud\\DocumentService\\Adapter\\SimpleDb ); using\nthe short name of the adapter,  SimpleDb , would be much simpler.  In the second case, consider the case of helpers. Let us assume we have a \"url\"\nhelper; you may find that while the shipped helper does 90% of what you need,\nyou'd like to extend it or provide an alternate implementation. At the same\ntime, you don't want to change your code to reflect the new helper. In this\ncase, a short name allows you to alias an alternate class to utilize.  Classes implementing the  ShortNameLocator  interface provide a mechanism for resolving a short name\nto a fully qualified class name; how they do so is left to the implementers, and may combine\nstrategies defined by other interfaces, such as PluginClassLocator .", 
             "title": "The ShortNameLocator Interface"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#quick-start",
-            "text": "Implementing a  ShortNameLocator  requires defining three methods, as shown below.  namespace Zend\\Loader;\n\ninterface ShortNameLocator\n{\n    public function isLoaded($name);\n    public function getClassName($name);\n    public function load($name);\n}",
+            "location": "/short-name-locator/#quick-start", 
+            "text": "Implementing a  ShortNameLocator  requires defining three methods, as shown below.  namespace Zend\\Loader;\n\ninterface ShortNameLocator\n{\n    public function isLoaded($name);\n    public function getClassName($name);\n    public function load($name);\n}", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#configuration-options",
-            "text": "This component defines no configuration options, as it is an interface.",
+            "location": "/short-name-locator/#configuration-options", 
+            "text": "This component defines no configuration options, as it is an interface.", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#available-methods",
-            "text": "",
+            "location": "/short-name-locator/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#isloaded",
-            "text": "isLoaded(string $name) : bool  Implement this method to return a boolean indicating whether or not the class\nhas been able to resolve the plugin name to a class.",
+            "location": "/short-name-locator/#isloaded", 
+            "text": "isLoaded(string $name) : bool  Implement this method to return a boolean indicating whether or not the class\nhas been able to resolve the plugin name to a class.", 
             "title": "isLoaded"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#getclassname",
-            "text": "getClassName(string $name) : string  Implement this method to return the class name associated with a plugin name.",
+            "location": "/short-name-locator/#getclassname", 
+            "text": "getClassName(string $name) : string  Implement this method to return the class name associated with a plugin name.", 
             "title": "getClassName"
-        },
+        }, 
         {
-            "location": "/short-name-locator/#load",
-            "text": "load($name) : string|false  This method should resolve a plugin name to a class name.",
+            "location": "/short-name-locator/#load", 
+            "text": "load($name) : string|false  This method should resolve a plugin name to a class name.", 
             "title": "load"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/",
-            "text": "The PluginClassLocator interface\n\n\nThe \nPluginClassLocator\n interface describes a component capable of maintaining\nan internal map of plugin names to actual class names. Classes implementing this\ninterface can register and unregister plugin/class associations, and return the\nentire map.\n\n\nQuick Start\n\n\nClasses implementing the \nPluginClassLocator\n must implement the following three\nmethods:\n\n\nnamespace Zend\\Loader;\n\ninterface PluginClassLocator\n{\n    public function registerPlugin($shortName, $className);\n    public function unregisterPlugin($shortName);\n    public function getRegisteredPlugins();\n}\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\nregisterPlugin\n\n\nregisterPlugin(string $shortName, string $className) : void\n\n\n\n\nImplement this method to add or overwrite plugin name/class name associations in\nthe internal plugin map. \n$shortName\n will be aliased to \n$className\n.\n\n\nunregisterPlugin\n\n\nunregisterPlugin(string $shortName) : void\n\n\n\n\nImplement this to allow removing an existing plugin mapping corresponding to\n\n$shortName\n.\n\n\ngetRegisteredPlugins\n\n\ngetRegisteredPlugins() : array\n\n\n\n\nImplement this to allow returning the plugin name/class name map.",
+            "location": "/plugin-class-locator/", 
+            "text": "The PluginClassLocator interface\n\n\nThe \nPluginClassLocator\n interface describes a component capable of maintaining\nan internal map of plugin names to actual class names. Classes implementing this\ninterface can register and unregister plugin/class associations, and return the\nentire map.\n\n\nQuick Start\n\n\nClasses implementing the \nPluginClassLocator\n must implement the following three\nmethods:\n\n\nnamespace Zend\\Loader;\n\ninterface PluginClassLocator\n{\n    public function registerPlugin($shortName, $className);\n    public function unregisterPlugin($shortName);\n    public function getRegisteredPlugins();\n}\n\n\n\n\nConfiguration Options\n\n\nThis component defines no configuration options, as it is an interface.\n\n\nAvailable Methods\n\n\nregisterPlugin\n\n\nregisterPlugin(string $shortName, string $className) : void\n\n\n\n\nImplement this method to add or overwrite plugin name/class name associations in\nthe internal plugin map. \n$shortName\n will be aliased to \n$className\n.\n\n\nunregisterPlugin\n\n\nunregisterPlugin(string $shortName) : void\n\n\n\n\nImplement this to allow removing an existing plugin mapping corresponding to\n\n$shortName\n.\n\n\ngetRegisteredPlugins\n\n\ngetRegisteredPlugins() : array\n\n\n\n\nImplement this to allow returning the plugin name/class name map.", 
             "title": "PluginClassLocator"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#the-pluginclasslocator-interface",
-            "text": "The  PluginClassLocator  interface describes a component capable of maintaining\nan internal map of plugin names to actual class names. Classes implementing this\ninterface can register and unregister plugin/class associations, and return the\nentire map.",
+            "location": "/plugin-class-locator/#the-pluginclasslocator-interface", 
+            "text": "The  PluginClassLocator  interface describes a component capable of maintaining\nan internal map of plugin names to actual class names. Classes implementing this\ninterface can register and unregister plugin/class associations, and return the\nentire map.", 
             "title": "The PluginClassLocator interface"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#quick-start",
-            "text": "Classes implementing the  PluginClassLocator  must implement the following three\nmethods:  namespace Zend\\Loader;\n\ninterface PluginClassLocator\n{\n    public function registerPlugin($shortName, $className);\n    public function unregisterPlugin($shortName);\n    public function getRegisteredPlugins();\n}",
+            "location": "/plugin-class-locator/#quick-start", 
+            "text": "Classes implementing the  PluginClassLocator  must implement the following three\nmethods:  namespace Zend\\Loader;\n\ninterface PluginClassLocator\n{\n    public function registerPlugin($shortName, $className);\n    public function unregisterPlugin($shortName);\n    public function getRegisteredPlugins();\n}", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#configuration-options",
-            "text": "This component defines no configuration options, as it is an interface.",
+            "location": "/plugin-class-locator/#configuration-options", 
+            "text": "This component defines no configuration options, as it is an interface.", 
             "title": "Configuration Options"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#available-methods",
-            "text": "",
+            "location": "/plugin-class-locator/#available-methods", 
+            "text": "", 
             "title": "Available Methods"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#registerplugin",
-            "text": "registerPlugin(string $shortName, string $className) : void  Implement this method to add or overwrite plugin name/class name associations in\nthe internal plugin map.  $shortName  will be aliased to  $className .",
+            "location": "/plugin-class-locator/#registerplugin", 
+            "text": "registerPlugin(string $shortName, string $className) : void  Implement this method to add or overwrite plugin name/class name associations in\nthe internal plugin map.  $shortName  will be aliased to  $className .", 
             "title": "registerPlugin"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#unregisterplugin",
-            "text": "unregisterPlugin(string $shortName) : void  Implement this to allow removing an existing plugin mapping corresponding to $shortName .",
+            "location": "/plugin-class-locator/#unregisterplugin", 
+            "text": "unregisterPlugin(string $shortName) : void  Implement this to allow removing an existing plugin mapping corresponding to $shortName .", 
             "title": "unregisterPlugin"
-        },
+        }, 
         {
-            "location": "/plugin-class-locator/#getregisteredplugins",
-            "text": "getRegisteredPlugins() : array  Implement this to allow returning the plugin name/class name map.",
+            "location": "/plugin-class-locator/#getregisteredplugins", 
+            "text": "getRegisteredPlugins() : array  Implement this to allow returning the plugin name/class name map.", 
             "title": "getRegisteredPlugins"
-        },
+        }, 
         {
-            "location": "/classmap-generator/",
-            "text": "The Class Map Generator utility: bin/classmap_generator.php\n\n\nThe script \nbin/classmap_generator.php\n can be used to generate class map files for use with the\n\nClassMapAutoloader\n.\n\n\nInternally, it consumes both the \nzend-console getopt functionality\n\n(for parsing command-line options) and the \nzend-file ClassFileLocator\n\nfor recursively finding all PHP class files in a given tree.\n\n\nQuick Start\n\n\nYou may run the script over any directory containing source code. By default, it\nwill look in the current directory, and will write the script to\n\nautoloader_classmap.php\n in the directory you specify.\n\n\n$ php classmap_generator.php Some/Directory/\n\n\n\n\nConfiguration Options\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n--help | -h\n\n\nReturns the usage message. If any other options are provided, they will be ignored.\n\n\n\n\n\n\n--library | -l\n\n\nExpects a single argument, a string specifying the library directory to parse. If this option is not specified, it will assume the current working directory.\n\n\n\n\n\n\n--output | -o\n\n\nWhere to write the autoload class map file. If not provided, assumes \nautoload_classmap.php\n in the library directory.\n\n\n\n\n\n\n--append | -a\n\n\nAppend to autoload file if it exists.\n\n\n\n\n\n\n--overwrite | -w\n\n\nIf an autoload class map file already exists with the name as specified via the \n--output\n option, you can overwrite it by specifying this flag. Otherwise, the script will not write the class map and return a warning.",
+            "location": "/classmap-generator/", 
+            "text": "The Class Map Generator utility: bin/classmap_generator.php\n\n\nThe script \nbin/classmap_generator.php\n can be used to generate class map files for use with the\n\nClassMapAutoloader\n.\n\n\nInternally, it consumes both the \nzend-console getopt functionality\n\n(for parsing command-line options) and the \nzend-file ClassFileLocator\n\nfor recursively finding all PHP class files in a given tree.\n\n\nQuick Start\n\n\nYou may run the script over any directory containing source code. By default, it\nwill look in the current directory, and will write the script to\n\nautoloader_classmap.php\n in the directory you specify.\n\n\n$ php classmap_generator.php Some/Directory/\n\n\n\n\nConfiguration Options\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n--help | -h\n\n\nReturns the usage message. If any other options are provided, they will be ignored.\n\n\n\n\n\n\n--library | -l\n\n\nExpects a single argument, a string specifying the library directory to parse. If this option is not specified, it will assume the current working directory.\n\n\n\n\n\n\n--output | -o\n\n\nWhere to write the autoload class map file. If not provided, assumes \nautoload_classmap.php\n in the library directory.\n\n\n\n\n\n\n--append | -a\n\n\nAppend to autoload file if it exists.\n\n\n\n\n\n\n--overwrite | -w\n\n\nIf an autoload class map file already exists with the name as specified via the \n--output\n option, you can overwrite it by specifying this flag. Otherwise, the script will not write the class map and return a warning.", 
             "title": "ClassMap Generator"
-        },
+        }, 
         {
-            "location": "/classmap-generator/#the-class-map-generator-utility-binclassmap95generatorphp",
-            "text": "The script  bin/classmap_generator.php  can be used to generate class map files for use with the ClassMapAutoloader .  Internally, it consumes both the  zend-console getopt functionality \n(for parsing command-line options) and the  zend-file ClassFileLocator \nfor recursively finding all PHP class files in a given tree.",
+            "location": "/classmap-generator/#the-class-map-generator-utility-binclassmap95generatorphp", 
+            "text": "The script  bin/classmap_generator.php  can be used to generate class map files for use with the ClassMapAutoloader .  Internally, it consumes both the  zend-console getopt functionality \n(for parsing command-line options) and the  zend-file ClassFileLocator \nfor recursively finding all PHP class files in a given tree.", 
             "title": "The Class Map Generator utility: bin/classmap_generator.php"
-        },
+        }, 
         {
-            "location": "/classmap-generator/#quick-start",
-            "text": "You may run the script over any directory containing source code. By default, it\nwill look in the current directory, and will write the script to autoloader_classmap.php  in the directory you specify.  $ php classmap_generator.php Some/Directory/",
+            "location": "/classmap-generator/#quick-start", 
+            "text": "You may run the script over any directory containing source code. By default, it\nwill look in the current directory, and will write the script to autoloader_classmap.php  in the directory you specify.  $ php classmap_generator.php Some/Directory/", 
             "title": "Quick Start"
-        },
+        }, 
         {
-            "location": "/classmap-generator/#configuration-options",
-            "text": "Option  Description      --help | -h  Returns the usage message. If any other options are provided, they will be ignored.    --library | -l  Expects a single argument, a string specifying the library directory to parse. If this option is not specified, it will assume the current working directory.    --output | -o  Where to write the autoload class map file. If not provided, assumes  autoload_classmap.php  in the library directory.    --append | -a  Append to autoload file if it exists.    --overwrite | -w  If an autoload class map file already exists with the name as specified via the  --output  option, you can overwrite it by specifying this flag. Otherwise, the script will not write the class map and return a warning.",
+            "location": "/classmap-generator/#configuration-options", 
+            "text": "Option  Description      --help | -h  Returns the usage message. If any other options are provided, they will be ignored.    --library | -l  Expects a single argument, a string specifying the library directory to parse. If this option is not specified, it will assume the current working directory.    --output | -o  Where to write the autoload class map file. If not provided, assumes  autoload_classmap.php  in the library directory.    --append | -a  Append to autoload file if it exists.    --overwrite | -w  If an autoload class map file already exists with the name as specified via the  --output  option, you can overwrite it by specifying this flag. Otherwise, the script will not write the class map and return a warning.", 
             "title": "Configuration Options"
         }
     ]
