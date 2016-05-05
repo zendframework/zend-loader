@@ -1,0 +1,18 @@
+docs_dir: doc/book
+site_dir: doc/html
+pages:
+    - index.md
+    - Reference:
+        - AutoloaderFactory: autoloader-factory.md
+        - StandardAutoloader: standard-autoloader.md
+        - ClassMapAutoloader: class-map-autoloader.md
+        - ModuleAutoloader: module-autoloader.md
+        - SplAutoloader: spl-autoloader.md
+        - PluginClassLoader: plugin-class-loader.md
+        - ShortNameLocator: short-name-locator.md
+        - PluginClassLocator: plugin-class-locator.md
+        - "ClassMap Generator": classmap-generator.md
+site_name: zend-loader
+site_description: zend-loader
+repo_url: 'https://github.com/zendframework/zend-loader'
+copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
