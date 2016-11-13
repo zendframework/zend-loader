@@ -79,7 +79,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function setOptions($options)
     {
-        if (!is_array($options) && !($options instanceof \Traversable)) {
+        if (! is_array($options) && ! ($options instanceof \Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Options must be either an array or Traversable');
         }
@@ -157,7 +157,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerNamespaces($namespaces)
     {
-        if (!is_array($namespaces) && !$namespaces instanceof \Traversable) {
+        if (! is_array($namespaces) && ! $namespaces instanceof \Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Namespace pairs must be either an array or Traversable');
         }
@@ -191,7 +191,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerPrefixes($prefixes)
     {
-        if (!is_array($prefixes) && !$prefixes instanceof \Traversable) {
+        if (! is_array($prefixes) && ! $prefixes instanceof \Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Prefix pairs must be either an array or Traversable');
         }
@@ -276,7 +276,7 @@ class StandardAutoloader implements SplAutoloader
      */
     protected function loadClass($class, $type)
     {
-        if (!in_array($type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK])) {
+        if (! in_array($type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK])) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException();
         }

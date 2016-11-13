@@ -59,7 +59,7 @@ abstract class AutoloaderFactory
     public static function factory($options = null)
     {
         if (null === $options) {
-            if (!isset(static::$loaders[static::STANDARD_AUTOLOADER])) {
+            if (! isset(static::$loaders[static::STANDARD_AUTOLOADER])) {
                 $autoloader = static::getStandardAutoloader();
                 $autoloader->register();
                 static::$loaders[static::STANDARD_AUTOLOADER] = $autoloader;
@@ -69,7 +69,7 @@ abstract class AutoloaderFactory
             return;
         }
 
-        if (!is_array($options) && !($options instanceof Traversable)) {
+        if (! is_array($options) && ! ($options instanceof Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(
                 'Options provided must be an array or Traversable'
@@ -77,16 +77,16 @@ abstract class AutoloaderFactory
         }
 
         foreach ($options as $class => $autoloaderOptions) {
-            if (!isset(static::$loaders[$class])) {
+            if (! isset(static::$loaders[$class])) {
                 $autoloader = static::getStandardAutoloader();
-                if (!class_exists($class) && !$autoloader->autoload($class)) {
+                if (! class_exists($class) && ! $autoloader->autoload($class)) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class "%s" not loaded', $class)
                     );
                 }
 
-                if (!is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
+                if (! is_subclass_of($class, 'Zend\Loader\SplAutoloader')) {
                     require_once 'Exception/InvalidArgumentException.php';
                     throw new Exception\InvalidArgumentException(
                         sprintf('Autoloader class %s must implement Zend\\Loader\\SplAutoloader', $class)
@@ -127,7 +127,7 @@ abstract class AutoloaderFactory
      */
     public static function getRegisteredAutoloader($class)
     {
-        if (!isset(static::$loaders[$class])) {
+        if (! isset(static::$loaders[$class])) {
             require_once 'Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf('Autoloader class "%s" not loaded', $class));
         }
@@ -156,7 +156,7 @@ abstract class AutoloaderFactory
      */
     public static function unregisterAutoloader($autoloaderClass)
     {
-        if (!isset(static::$loaders[$autoloaderClass])) {
+        if (! isset(static::$loaders[$autoloaderClass])) {
             return false;
         }
 
@@ -182,7 +182,7 @@ abstract class AutoloaderFactory
         }
 
 
-        if (!class_exists(static::STANDARD_AUTOLOADER)) {
+        if (! class_exists(static::STANDARD_AUTOLOADER)) {
             // Extract the filename from the classname
             $stdAutoloader = substr(strrchr(static::STANDARD_AUTOLOADER, '\\'), 1);
             require_once __DIR__ . "/$stdAutoloader.php";

@@ -19,7 +19,7 @@ class ModuleAutoloaderTest extends TestCase
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
+        if (! is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = [];
@@ -214,7 +214,7 @@ class ModuleAutoloaderTest extends TestCase
     {
         $loader = new ModuleAutoloader();
         $loader->setModuleClassMap([
-            'BarModule\Module' =>     __DIR__ . '/_files/BarModule/Module.php',
+            'BarModule\Module' => __DIR__ . '/_files/BarModule/Module.php',
             'PharModuleMap\Module' => __DIR__ . '/_files/PharModuleMap.phar',
         ]);
         $loader->register();

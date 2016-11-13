@@ -193,7 +193,7 @@ class ModuleAutoloader implements SplAutoloader
             $path = $path . $moduleClassPath;
 
             if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
-                if (!$basePath = $this->pharBasePath) {
+                if (! $basePath = $this->pharBasePath) {
                     $basePath = realpath('.');
                 }
 
@@ -216,7 +216,7 @@ class ModuleAutoloader implements SplAutoloader
                         continue;
                     }
 
-                    if (!preg_match('#.+\.' . $pharSuffixPattern . '$#', $entry->getPathname())) {
+                    if (! preg_match('#.+\.' . $pharSuffixPattern . '$#', $entry->getPathname())) {
                         continue;
                     }
 
@@ -274,7 +274,7 @@ class ModuleAutoloader implements SplAutoloader
     {
         $pharPath = static::normalizePath($pharPath, false);
         $file = new SplFileInfo($pharPath);
-        if (!$file->isReadable() || !$file->isFile()) {
+        if (! $file->isReadable() || ! $file->isFile()) {
             return false;
         }
 
@@ -347,7 +347,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function registerPaths($paths)
     {
-        if (!is_array($paths) && !$paths instanceof Traversable) {
+        if (! is_array($paths) && ! $paths instanceof Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(
                 'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
@@ -377,7 +377,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function registerPath($path, $moduleName = false)
     {
-        if (!is_string($path)) {
+        if (! is_string($path)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid path provided; must be a string, received %s',
