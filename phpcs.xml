@@ -5,4 +5,6 @@
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
+    <exclude-pattern>*/TestAsset/*</exclude-pattern>
+    <exclude-pattern>*/_files/*</exclude-pattern>
 </ruleset>
