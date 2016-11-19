@@ -2,6 +2,15 @@
 <ruleset name="Zend Framework coding standard">
     <rule ref="./vendor/zendframework/zend-coding-standard/ruleset.xml"/>
 
+    <rule ref="PSR1.Files.SideEffects">
+        <exclude-pattern>/src/Exception/*</exclude-pattern>
+        <exclude-pattern>/src/SplAutoloader.php</exclude-pattern>
+        <exclude-pattern>/src/AutoloaderFactory.php</exclude-pattern>
+        <exclude-pattern>/src/ClassMapAutoloader.php</exclude-pattern>
+        <exclude-pattern>/src/ModuleAutoloader.php</exclude-pattern>
+        <exclude-pattern>/src/StandardAutoloader.php</exclude-pattern>
+    </rule>
+
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>

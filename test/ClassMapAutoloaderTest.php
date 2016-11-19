@@ -67,7 +67,9 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAllowsRegisteringArrayAutoloadMapDirectly()
     {
         $map = [
+            // @codingStandardsIgnoreStart
             'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
+            // @codingStandardsIgnoreEnd
         ];
         $this->loader->registerAutoloadMap($map);
         $test = $this->loader->getAutoloadMap();
@@ -77,7 +79,9 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testAllowsRegisteringArrayAutoloadMapViaConstructor()
     {
         $map = [
+            // @codingStandardsIgnoreStart
             'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
+            // @codingStandardsIgnoreEnd
         ];
         $loader = new ClassMapAutoloader([$map]);
         $test = $loader->getAutoloadMap();
@@ -101,7 +105,9 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
     public function testRegisteringMultipleMapsMergesThem()
     {
         $map = [
+            // @codingStandardsIgnoreStart
             'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
+            // @codingStandardsIgnoreEnd
             'ZendTest\Loader\StandardAutoloaderTest' => 'some/bogus/path.php',
         ];
         $this->loader->registerAutoloadMap($map);
@@ -110,13 +116,18 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
         $test = $this->loader->getAutoloadMap();
         $this->assertInternalType('array', $test);
         $this->assertEquals(3, count($test));
-        $this->assertNotEquals($map['ZendTest\Loader\StandardAutoloaderTest'], $test['ZendTest\Loader\StandardAutoloaderTest']);
+        $this->assertNotEquals(
+            $map['ZendTest\Loader\StandardAutoloaderTest'],
+            $test['ZendTest\Loader\StandardAutoloaderTest']
+        );
     }
 
     public function testCanRegisterMultipleMapsAtOnce()
     {
         $map = [
+            // @codingStandardsIgnoreStart
             'Zend\Loader\Exception\ExceptionInterface' => __DIR__ . '/../../../library/Zend/Loader/Exception/ExceptionInterface.php',
+            // @codingStandardsIgnoreEnd
             'ZendTest\Loader\StandardAutoloaderTest' => 'some/bogus/path.php',
         ];
         $maps = [$map, __DIR__ . '/_files/goodmap.php'];
@@ -167,14 +178,18 @@ class ClassMapAutoloaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCanLoadClassMapFromPhar()
     {
+        // @codingStandardsIgnoreStart
         $map = 'phar://' . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/_files/classmap.phar/test/.//../autoload_classmap.php');
+        // @codingStandardsIgnoreEnd
         $this->loader->registerAutoloadMap($map);
         $loaded = $this->loader->autoload('some\loadedclass');
         $this->assertSame('some\loadedclass', $loaded);
         $this->assertTrue(class_exists('some\loadedclass', false));
 
         // will not register duplicate, even with a different relative path
+        // @codingStandardsIgnoreStart
         $map = 'phar://' . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/_files/classmap.phar/test/./foo/../../autoload_classmap.php');
+        // @codingStandardsIgnoreEnd
         $this->loader->registerAutoloadMap($map);
         $test = $this->loader->getAutoloadMap();
         $this->assertEquals(1, count($test));
