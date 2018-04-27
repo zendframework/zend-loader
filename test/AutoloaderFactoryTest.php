@@ -21,7 +21,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
+        if (! is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = [];

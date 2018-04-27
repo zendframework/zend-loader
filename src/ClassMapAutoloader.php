@@ -83,7 +83,7 @@ class ClassMapAutoloader implements SplAutoloader
             }
         }
 
-        if (!is_array($map)) {
+        if (! is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not return a map. Map file: "%s"',
@@ -109,7 +109,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function registerAutoloadMaps($locations)
     {
-        if (!is_array($locations) && !($locations instanceof Traversable)) {
+        if (! is_array($locations) && ! ($locations instanceof Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Map list must be an array or implement Traversable');
         }
@@ -166,7 +166,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     protected function loadMapFromFile($location)
     {
-        if (!file_exists($location)) {
+        if (! file_exists($location)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not exist. Map file: "%s"',
@@ -174,7 +174,7 @@ class ClassMapAutoloader implements SplAutoloader
             ));
         }
 
-        if (!$path = static::realPharPath($location)) {
+        if (! $path = static::realPharPath($location)) {
             $path = realpath($location);
         }
 
@@ -197,7 +197,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public static function realPharPath($path)
     {
-        if (!preg_match('|^phar:(/{2,3})|', $path, $match)) {
+        if (! preg_match('|^phar:(/{2,3})|', $path, $match)) {
             return;
         }
 
@@ -209,7 +209,7 @@ class ClassMapAutoloader implements SplAutoloader
 
         array_walk($parts, function ($value, $key) use (&$parts) {
             if ($value === '..') {
-                unset($parts[$key], $parts[$key-1]);
+                unset($parts[$key], $parts[$key - 1]);
                 $parts = array_values($parts);
             }
         });

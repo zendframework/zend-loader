@@ -239,7 +239,9 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new TestAsset\ExtendedPluginClassLoader();
         $this->assertEquals(__CLASS__, $loader->getClassName('loader'));
 
-        $loader = new TestAsset\ExtendedPluginClassLoader(['loader' => 'ZendTest\Loader\TestAsset\ExtendedPluginClassLoader']);
+        $loader = new TestAsset\ExtendedPluginClassLoader(
+            ['loader' => 'ZendTest\Loader\TestAsset\ExtendedPluginClassLoader']
+        );
         $this->assertEquals('ZendTest\Loader\TestAsset\ExtendedPluginClassLoader', $loader->getClassName('loader'));
 
         $loader->registerPlugin('loader', __CLASS__);

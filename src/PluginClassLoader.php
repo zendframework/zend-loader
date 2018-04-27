@@ -38,7 +38,7 @@ class PluginClassLoader implements PluginClassLocator
     public function __construct($map = null)
     {
         // Merge in static overrides
-        if (!empty(static::$staticMap)) {
+        if (! empty(static::$staticMap)) {
             $this->registerPlugins(static::$staticMap);
         }
 
@@ -64,7 +64,7 @@ class PluginClassLoader implements PluginClassLocator
             return;
         }
 
-        if (!is_array($map) && !$map instanceof Traversable) {
+        if (! is_array($map) && ! $map instanceof Traversable) {
             throw new Exception\InvalidArgumentException('Expects an array or Traversable object');
         }
         foreach ($map as $key => $value) {
@@ -105,7 +105,7 @@ class PluginClassLoader implements PluginClassLocator
     public function registerPlugins($map)
     {
         if (is_string($map)) {
-            if (!class_exists($map)) {
+            if (! class_exists($map)) {
                 throw new Exception\InvalidArgumentException('Map class provided is invalid');
             }
             $map = new $map;
@@ -113,7 +113,7 @@ class PluginClassLoader implements PluginClassLocator
         if (is_array($map)) {
             $map = new ArrayIterator($map);
         }
-        if (!$map instanceof Traversable) {
+        if (! $map instanceof Traversable) {
             throw new Exception\InvalidArgumentException('Map provided is invalid; must be traversable');
         }
 
@@ -124,7 +124,7 @@ class PluginClassLoader implements PluginClassLocator
 
         foreach ($map as $name => $class) {
             if (is_int($name) || is_numeric($name)) {
-                if (!is_object($class) && class_exists($class)) {
+                if (! is_object($class) && class_exists($class)) {
                     $class = new $class();
                 }
 
@@ -196,7 +196,7 @@ class PluginClassLoader implements PluginClassLocator
      */
     public function load($name)
     {
-        if (!$this->isLoaded($name)) {
+        if (! $this->isLoaded($name)) {
             return false;
         }
         return $this->plugins[strtolower($name)];
