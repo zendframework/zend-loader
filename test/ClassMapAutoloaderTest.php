@@ -92,13 +92,13 @@ class ClassMapAutoloaderTest extends TestCase
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
         $map = $this->loader->getAutoloadMap();
         $this->assertInternalType('array', $map);
-        $this->assertEquals(2, count($map));
+        $this->assertCount(2, $map);
         // Just to make sure nothing changes after loading the same map again
         // (loadMapFromFile should just return)
         $this->loader->registerAutoloadMap(__DIR__ . '/_files/goodmap.php');
         $map = $this->loader->getAutoloadMap();
         $this->assertInternalType('array', $map);
-        $this->assertEquals(2, count($map));
+        $this->assertCount(2, $map);
     }
 
     public function testRegisteringMultipleMapsMergesThem()
@@ -114,7 +114,7 @@ class ClassMapAutoloaderTest extends TestCase
 
         $test = $this->loader->getAutoloadMap();
         $this->assertInternalType('array', $test);
-        $this->assertEquals(3, count($test));
+        $this->assertCount(3, $test);
         $this->assertNotEquals(
             $map['ZendTest\Loader\StandardAutoloaderTest'],
             $test['ZendTest\Loader\StandardAutoloaderTest']
@@ -133,7 +133,7 @@ class ClassMapAutoloaderTest extends TestCase
         $this->loader->registerAutoloadMaps($maps);
         $test = $this->loader->getAutoloadMap();
         $this->assertInternalType('array', $test);
-        $this->assertEquals(3, count($test));
+        $this->assertCount(3, $test);
     }
 
     public function testRegisterMapsThrowsExceptionForNonTraversableArguments()
@@ -191,6 +191,6 @@ class ClassMapAutoloaderTest extends TestCase
         // @codingStandardsIgnoreEnd
         $this->loader->registerAutoloadMap($map);
         $test = $this->loader->getAutoloadMap();
-        $this->assertEquals(1, count($test));
+        $this->assertCount(1, $test);
     }
 }

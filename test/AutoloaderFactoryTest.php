@@ -60,7 +60,7 @@ class AutoloaderFactoryTest extends TestCase
         $loader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\ClassMapAutoloader');
         $map = $loader->getAutoloadMap();
         $this->assertInternalType('array', $map);
-        $this->assertEquals(2, count($map));
+        $this->assertCount(2, $map);
     }
 
     /**
@@ -85,7 +85,7 @@ class AutoloaderFactoryTest extends TestCase
                 ],
             ],
         ]);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
         AutoloaderFactory::factory([
             'Zend\Loader\StandardAutoloader' => [
                 'namespaces' => [
@@ -93,7 +93,7 @@ class AutoloaderFactoryTest extends TestCase
                 ],
             ],
         ]);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
         $this->assertTrue(class_exists('TestNamespace\NoDuplicateAutoloadersCase'));
         $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\TestPlugins\Foo'));
     }
@@ -108,7 +108,7 @@ class AutoloaderFactoryTest extends TestCase
             ],
         ]);
         AutoloaderFactory::unregisterAutoloaders();
-        $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(0, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testCanUnregisterAutoloadersByClassName()
@@ -121,7 +121,7 @@ class AutoloaderFactoryTest extends TestCase
             ],
         ]);
         AutoloaderFactory::unregisterAutoloader('Zend\Loader\StandardAutoloader');
-        $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(0, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testCanGetValidRegisteredAutoloader()
@@ -142,7 +142,7 @@ class AutoloaderFactoryTest extends TestCase
         AutoloaderFactory::factory();
         $autoloader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\StandardAutoloader');
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $autoloader);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testGetInvalidAutoloaderThrowsException()
@@ -174,7 +174,7 @@ class AutoloaderFactoryTest extends TestCase
     {
         AutoloaderFactory::factory();
         $loaders = AutoloaderFactory::getRegisteredAutoloaders();
-        $this->assertEquals(1, count($loaders));
+        $this->assertCount(1, $loaders);
         $loader = array_shift($loaders);
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
 
