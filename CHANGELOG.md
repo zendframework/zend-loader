@@ -11,6 +11,10 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#8](https://github.com/zendframework/zend-loader/pull/8) adds
   documentation at https://docs.zendframework.com/zend-loader/
 
+### Changed
+
+- Nothing.
+
 ### Deprecated
 
 - Nothing.
