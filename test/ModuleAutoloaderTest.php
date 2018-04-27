@@ -7,9 +7,9 @@
 
 namespace ZendTest\Loader;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Zend\Loader\ModuleAutoloader;
-use InvalidArgumentException;
 
 class ModuleAutoloaderTest extends TestCase
 {

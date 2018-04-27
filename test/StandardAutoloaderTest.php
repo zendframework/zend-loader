@@ -8,9 +8,9 @@
 namespace ZendTest\Loader;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Loader\StandardAutoloader;
-use Zend\Loader\Exception\InvalidArgumentException;
 use ReflectionClass;
+use Zend\Loader\Exception\InvalidArgumentException;
+use Zend\Loader\StandardAutoloader;
 
 /**
  * @group      Loader
