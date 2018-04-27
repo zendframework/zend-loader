@@ -9,13 +9,15 @@
 
 namespace ZendTest\Loader;
 
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Zend\Loader\AutoloaderFactory;
+use Zend\Loader\Exception\InvalidArgumentException;
 
 /**
  * @group      Loader
  */
-class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
+class AutoloaderFactoryTest extends TestCase
 {
     public function setUp()
     {
@@ -147,19 +149,19 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetInvalidAutoloaderThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader = AutoloaderFactory::getRegisteredAutoloader('InvalidAutoloader');
     }
 
     public function testFactoryWithInvalidArgumentThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         AutoloaderFactory::factory('InvalidArgument');
     }
 
     public function testFactoryWithInvalidAutoloaderClassThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         AutoloaderFactory::factory(['InvalidAutoloader' => []]);
     }
 

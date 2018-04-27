@@ -9,6 +9,7 @@
 
 namespace ZendTest\Loader;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Loader\StandardAutoloader;
 use Zend\Loader\Exception\InvalidArgumentException;
 use ReflectionClass;
@@ -16,7 +17,7 @@ use ReflectionClass;
 /**
  * @group      Loader
  */
-class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
+class StandardAutoloaderTest extends TestCase
 {
     public function setUp()
     {

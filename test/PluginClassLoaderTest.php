@@ -9,12 +9,14 @@
 
 namespace ZendTest\Loader;
 
+use PHPUnit\Framework\TestCase;
+use Zend\Loader\Exception\InvalidArgumentException;
 use Zend\Loader\PluginClassLoader;
 
 /**
  * @group      Loader
  */
-class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
+class PluginClassLoaderTest extends TestCase
 {
     /** @var PluginClassLoader */
     public $loader;
@@ -54,13 +56,13 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCallingRegisterPluginsWithInvalidStringMapRaisesException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins('__foobar__');
     }
 
     public function testCallingRegisterPluginsWithStringMapResolvingToNonTraversableClassRaisesException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins('stdClass');
     }
 
@@ -76,7 +78,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCallingRegisterPluginsWithNonArrayNonStringNonTraversableValueRaisesException($arg)
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins($arg);
     }
 

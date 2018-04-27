@@ -9,7 +9,7 @@
 
 namespace ZendTest\Loader;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Loader\ModuleAutoloader;
 use InvalidArgumentException;
 
@@ -188,14 +188,14 @@ class ModuleAutoloaderTest extends TestCase
     public function testInvalidPathThrowsException()
     {
         $loader = new ModuleAutoloader;
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader->registerPath(123);
     }
 
     public function testInvalidPathsThrowsException()
     {
         $loader = new ModuleAutoloader;
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader->registerPaths(123);
     }
 
