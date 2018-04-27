@@ -60,7 +60,7 @@ $config = [
 
 ## Available Methods
 
-### \_\_construct  
+### \_\_construct
 
 ```php
 __construct(array|Traversable $options = null) : void
@@ -69,7 +69,7 @@ __construct(array|Traversable $options = null) : void
 Initialize and configure the object `__construct($options = null)`; `$options`
 will be passed to [setOptions()](#setoptions).
 
-### setOptions  
+### setOptions
 
 ```php
 setOptions(array|Traversable $options) : void
@@ -78,7 +78,7 @@ setOptions(array|Traversable $options) : void
 Configures the state of the autoloader, including registering class maps.
 `$options` will be passed to [registerAutoloadMaps()](#registerautoloadmaps).
 
-### registerAutoloadMap  
+### registerAutoloadMap
 
 ```php
 registerAutoloadMap(string|array $map) : void
@@ -92,7 +92,7 @@ More than one class map may be registered; each will be merged with the
 previous, meaning it's possible for a later class map to overwrite entries from
 a previously registered map.
 
-### registerAutoloadMaps  
+### registerAutoloadMaps
 
 ```php
 registerAutoloadMaps(array|Traversable $maps) : void
@@ -101,7 +101,7 @@ registerAutoloadMaps(array|Traversable $maps) : void
 Register multiple class maps with the autoloader, iterating over `$maps` and
 passing each value to [registerAutoloadMap()](#registerautoloadmap).
 
-### getAutoloadMap  
+### getAutoloadMap
 
 ```php
 getAutoloadMap() : array
@@ -109,7 +109,7 @@ getAutoloadMap() : array
 
 Retrieves the current class map as an associative array.
 
-### autoload  
+### autoload
 
 ```php
 autoload(string $class) : false|string
@@ -118,7 +118,7 @@ autoload(string $class) : false|string
 Attempts to load the class specified. Returns a boolean `false` on failure, or a
 string indicating the class loaded on success.
 
-### register  
+### register
 
 ```php
 register() : void

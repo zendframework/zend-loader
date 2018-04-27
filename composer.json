@@ -1,26 +1,30 @@
 {
     "name": "zendframework/zend-loader",
-    "description": " ",
+    "description": "Autoloading and plugin loading strategies",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "zf",
+        "zendframework",
         "loader"
     ],
-    "homepage": "https://github.com/zendframework/zend-loader",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Loader\\": "src/"
-        }
+    "support": {
+        "docs": "https://docs.zendframework.com/zend-loader/",
+        "issues": "https://github.com/zendframework/zend-loader/issues",
+        "source": "https://github.com/zendframework/zend-loader",
+        "rss": "https://github.com/zendframework/zend-loader/releases.atom",
+        "chat": "https://zendframework-slack.herokuapp.com",
+        "forum": "https://discourse.zendframework.com/c/questions/components"
     },
     "require": {
         "php": "^5.6 || ^7.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.5-dev",
-            "dev-develop": "2.6-dev"
+    "require-dev": {
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zend\\Loader\\": "src/"
         }
     },
     "autoload-dev": {
@@ -28,9 +32,14 @@
             "ZendTest\\Loader\\": "test/"
         }
     },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.4",
-        "zendframework/zend-coding-standard": "~1.0.0"
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.5.x-dev",
+            "dev-develop": "2.6.x-dev"
+        }
     },
     "scripts": {
         "check": [
