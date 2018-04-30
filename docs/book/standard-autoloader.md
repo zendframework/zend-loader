@@ -140,7 +140,7 @@ on the `include_path`). By default, `false`.
 
 ## Available Methods
 
-### \_\_construct  
+### \_\_construct
 
 ```php
 __construct(array|Traversable $options = null) : void
@@ -151,7 +151,7 @@ Create a new instance of the object.
 If `$options` is non-null, the argument is passed to
 [setOptions()](#setoptions).
 
-### setOptions  
+### setOptions
 
 ```php
 setOptions(array|Traversable $options) : void
@@ -169,7 +169,7 @@ with the following behaviors:
 - The `fallback_autoloader` value will be passed to
   [setFallbackAutoloader()](#setfallbackautoloader).
 
-### setFallbackAutoloader  
+### setFallbackAutoloader
 
 ```php
 setFallbackAutoloader(bool $flag) : void
@@ -178,7 +178,7 @@ setFallbackAutoloader(bool $flag) : void
 Takes a boolean flag indicating whether or not to act as a fallback autoloader
 when registered with the SPL autoloader.
 
-### isFallbackAutoloader  
+### isFallbackAutoloader
 
 ```php
 isFallbackAutoloader() : bool
@@ -186,7 +186,7 @@ isFallbackAutoloader() : bool
 
 Indicates whether or not this instance is flagged as a fallback autoloader.
 
-### registerNamespace  
+### registerNamespace
 
 ```php
 registerNamespace(string $namespace, string $directory) : void
@@ -196,7 +196,7 @@ Register a namespace with the autoloader, pointing it to a specific directory on
 the filesystem for class resolution. For classes matching that initial
 namespace, the autoloader will then perform lookups within that directory.
 
-### registerNamespaces  
+### registerNamespaces
 
 ```php
 registerNamespaces(array|Traversable $namespaces) : void
@@ -205,7 +205,7 @@ registerNamespaces(array|Traversable $namespaces) : void
 Register multiple namespaces with the autoloader, iterating through
 `$namespaces` and passing each key and item to [registerNamespace()](#registernamespace).
 
-### registerPrefix  
+### registerPrefix
 
 ```php
 registerPrefix(string $prefix, string $directory) : void
@@ -216,7 +216,7 @@ directory on the filesystem for class resolution. For classes matching that
 initial vendor prefix, the autoloader will then perform lookups within that
 directory.
 
-### registerPrefixes  
+### registerPrefixes
 
 ```php
 registerPrefixes(array|Traversable $prefixes) : void
@@ -225,7 +225,7 @@ registerPrefixes(array|Traversable $prefixes) : void
 Register many vendor prefixes with the autoloader, traversing `$prefixes` and
 passing each key/value pair to [registerPrefix()](#registerprefix).
 
-### autoload  
+### autoload
 
 ```php
 autoload(string $class) : false|string
@@ -234,7 +234,7 @@ autoload(string $class) : false|string
 Attempts to load the class specified. Returns a boolean `false` on failure, or a
 string indicating the class loaded on success.
 
-### register  
+### register
 
 ```php
 register() : void

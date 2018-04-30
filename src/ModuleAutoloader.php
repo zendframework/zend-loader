@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Loader;
@@ -193,7 +191,7 @@ class ModuleAutoloader implements SplAutoloader
             $path = $path . $moduleClassPath;
 
             if ($path == '.' || substr($path, 0, 2) == './' || substr($path, 0, 2) == '.\\') {
-                if (!$basePath = $this->pharBasePath) {
+                if (! $basePath = $this->pharBasePath) {
                     $basePath = realpath('.');
                 }
 
@@ -216,7 +214,7 @@ class ModuleAutoloader implements SplAutoloader
                         continue;
                     }
 
-                    if (!preg_match('#.+\.' . $pharSuffixPattern . '$#', $entry->getPathname())) {
+                    if (! preg_match('#.+\.' . $pharSuffixPattern . '$#', $entry->getPathname())) {
                         continue;
                     }
 
@@ -274,7 +272,7 @@ class ModuleAutoloader implements SplAutoloader
     {
         $pharPath = static::normalizePath($pharPath, false);
         $file = new SplFileInfo($pharPath);
-        if (!$file->isReadable() || !$file->isFile()) {
+        if (! $file->isReadable() || ! $file->isFile()) {
             return false;
         }
 
@@ -347,7 +345,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function registerPaths($paths)
     {
-        if (!is_array($paths) && !$paths instanceof Traversable) {
+        if (! is_array($paths) && ! $paths instanceof Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(
                 'Parameter to \\Zend\\Loader\\ModuleAutoloader\'s '
@@ -377,7 +375,7 @@ class ModuleAutoloader implements SplAutoloader
      */
     public function registerPath($path, $moduleName = false)
     {
-        if (!is_string($path)) {
+        if (! is_string($path)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException(sprintf(
                 'Invalid path provided; must be a string, received %s',

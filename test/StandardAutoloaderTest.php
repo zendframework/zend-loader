@@ -1,28 +1,27 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Loader;
 
-use Zend\Loader\StandardAutoloader;
-use Zend\Loader\Exception\InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Zend\Loader\Exception\InvalidArgumentException;
+use Zend\Loader\StandardAutoloader;
 
 /**
  * @group      Loader
  */
-class StandardAutoloaderTest extends \PHPUnit_Framework_TestCase
+class StandardAutoloaderTest extends TestCase
 {
     public function setUp()
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
+        if (! is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = [];
