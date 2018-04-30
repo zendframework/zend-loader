@@ -1,27 +1,27 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Loader;
 
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Zend\Loader\AutoloaderFactory;
+use Zend\Loader\Exception\InvalidArgumentException;
 
 /**
  * @group      Loader
  */
-class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
+class AutoloaderFactoryTest extends TestCase
 {
     public function setUp()
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
+        if (! is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = [];
@@ -60,7 +60,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         $loader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\ClassMapAutoloader');
         $map = $loader->getAutoloadMap();
         $this->assertInternalType('array', $map);
-        $this->assertEquals(2, count($map));
+        $this->assertCount(2, $map);
     }
 
     /**
@@ -85,7 +85,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ]);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
         AutoloaderFactory::factory([
             'Zend\Loader\StandardAutoloader' => [
                 'namespaces' => [
@@ -93,7 +93,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
                 ],
             ],
         ]);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
         $this->assertTrue(class_exists('TestNamespace\NoDuplicateAutoloadersCase'));
         $this->assertTrue(class_exists('ZendTest\Loader\TestAsset\TestPlugins\Foo'));
     }
@@ -108,7 +108,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
             ],
         ]);
         AutoloaderFactory::unregisterAutoloaders();
-        $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(0, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testCanUnregisterAutoloadersByClassName()
@@ -121,7 +121,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
             ],
         ]);
         AutoloaderFactory::unregisterAutoloader('Zend\Loader\StandardAutoloader');
-        $this->assertEquals(0, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(0, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testCanGetValidRegisteredAutoloader()
@@ -142,24 +142,24 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
         AutoloaderFactory::factory();
         $autoloader = AutoloaderFactory::getRegisteredAutoloader('Zend\Loader\StandardAutoloader');
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $autoloader);
-        $this->assertEquals(1, count(AutoloaderFactory::getRegisteredAutoloaders()));
+        $this->assertCount(1, AutoloaderFactory::getRegisteredAutoloaders());
     }
 
     public function testGetInvalidAutoloaderThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader = AutoloaderFactory::getRegisteredAutoloader('InvalidAutoloader');
     }
 
     public function testFactoryWithInvalidArgumentThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         AutoloaderFactory::factory('InvalidArgument');
     }
 
     public function testFactoryWithInvalidAutoloaderClassThrowsException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         AutoloaderFactory::factory(['InvalidAutoloader' => []]);
     }
 
@@ -174,7 +174,7 @@ class AutoloaderFactoryTest extends \PHPUnit_Framework_TestCase
     {
         AutoloaderFactory::factory();
         $loaders = AutoloaderFactory::getRegisteredAutoloaders();
-        $this->assertEquals(1, count($loaders));
+        $this->assertCount(1, $loaders);
         $loader = array_shift($loaders);
         $this->assertInstanceOf('Zend\Loader\StandardAutoloader', $loader);
 

@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Loader;
@@ -79,7 +77,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function setOptions($options)
     {
-        if (!is_array($options) && !($options instanceof \Traversable)) {
+        if (! is_array($options) && ! ($options instanceof \Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Options must be either an array or Traversable');
         }
@@ -89,7 +87,10 @@ class StandardAutoloader implements SplAutoloader
                 case self::AUTOREGISTER_ZF:
                     if ($pairs) {
                         $this->registerNamespace('Zend', dirname(__DIR__));
-                        $this->registerNamespace('ZendXml', dirname(dirname((__DIR__))) . DIRECTORY_SEPARATOR .  'ZendXml');
+                        $this->registerNamespace(
+                            'ZendXml',
+                            dirname(dirname((__DIR__))) . DIRECTORY_SEPARATOR .  'ZendXml'
+                        );
                     }
                     break;
                 case self::LOAD_NS:
@@ -157,7 +158,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerNamespaces($namespaces)
     {
-        if (!is_array($namespaces) && !$namespaces instanceof \Traversable) {
+        if (! is_array($namespaces) && ! $namespaces instanceof \Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Namespace pairs must be either an array or Traversable');
         }
@@ -191,7 +192,7 @@ class StandardAutoloader implements SplAutoloader
      */
     public function registerPrefixes($prefixes)
     {
-        if (!is_array($prefixes) && !$prefixes instanceof \Traversable) {
+        if (! is_array($prefixes) && ! $prefixes instanceof \Traversable) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException('Prefix pairs must be either an array or Traversable');
         }
@@ -276,7 +277,7 @@ class StandardAutoloader implements SplAutoloader
      */
     protected function loadClass($class, $type)
     {
-        if (!in_array($type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK])) {
+        if (! in_array($type, [self::LOAD_NS, self::LOAD_PREFIX, self::ACT_AS_FALLBACK])) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
             throw new Exception\InvalidArgumentException();
         }

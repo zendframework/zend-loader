@@ -18,7 +18,7 @@ compression), as it introduces additional CPU overhead to every request.
 
 As the `ModuleAutoloader` is meant to be used with the `ModuleManager`, for
 examples of it's usage and how to configure it, please see the
-[Module Autoloader Usage](http://framework.zend.com/manual/current/en/modules/zend.module-manager.module-autoloader.html)
+[Module Autoloader Usage](https://docs.zendframework.com/zend-modulemanager/module-autoloader/)
 documentation.
 
 ## Configuration Options
@@ -38,7 +38,7 @@ $options = [
 
 ## Available Methods
 
-### \_\_construct  
+### \_\_construct
 
 ```php
 __construct(array|Traversable $options = null) : void
@@ -47,7 +47,7 @@ __construct(array|Traversable $options = null) : void
 Initialize and configure the object; if `$options` are provided, they will be
 passed to [setOptions()](#setoptions).
 
-### setOptions  
+### setOptions
 
 ```php
 setOptions(array|Traversable $options) : void
@@ -56,7 +56,7 @@ setOptions(array|Traversable $options) : void
 Configures the state of the autoloader, registering paths to modules. `$options`
 will be passed to [registerPaths()](#registerpaths).
 
-### autoload  
+### autoload
 
 ```php
 autoload(string $class) : false|string
@@ -65,7 +65,7 @@ autoload(string $class) : false|string
 Attempts to load the specified `Module` class. Returns a boolean `false` on
 failure, or a string indicating the class loaded on success.
 
-### register  
+### register
 
 ```php
 register() : void
@@ -74,7 +74,7 @@ register() : void
 Registers the `autoload()` method of the current instance with
 `spl_autoload_register()`.
 
-### unregister  
+### unregister
 
 ```php
 unregister() : void
@@ -83,7 +83,7 @@ unregister() : void
 Unregisters the `autoload()` method of the current instance with
 `spl_autoload_unregister()`.
 
-### registerPaths  
+### registerPaths
 
 ```php
 registerPaths(array|Traversable $paths) : void
@@ -92,7 +92,7 @@ registerPaths(array|Traversable $paths) : void
 Register paths to modules. For an example array, please see the
 [Configuration options](#configuration-options) section.
 
-### registerPath  
+### registerPath
 
 ```php
 registerPath(string $path, string $moduleName = false) : void
@@ -102,7 +102,7 @@ Register a single path with the autoloader. The first parameter, `$path`, is
 expected to be a string. The second parameter, `$moduleName`, is expected to be
 a module name, which allows for registering an explicit path to that module.
 
-### getPaths  
+### getPaths
 
 ```php
 getPaths() : string[]

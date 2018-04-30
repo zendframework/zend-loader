@@ -53,7 +53,7 @@ If the class is not found, or does not implement the
 
 ## Available methods
 
-### factory  
+### factory
 
 ```php
 static factory(array|Traversable $options) : void
@@ -65,7 +65,7 @@ This method is **static**, and is used to instantiate autoloaders and register t
 with the SPL autoloader. It expects either an array or `Traversable` object as denoted in the
 [options section](#configuration options).
 
-### getRegisteredAutoloaders  
+### getRegisteredAutoloaders
 
 ```php
 static getRegisteredAutoloaders() : SplAutoloader[]
@@ -77,7 +77,7 @@ This method is **static**, and may be used to retrieve a list of all autoloaders
 registered via the `factory()` method. It returns an array of `SplAutoloader`
 instances.
 
-### getRegisteredAutoloader  
+### getRegisteredAutoloader
 
 ```php
 static getRegisteredAutoloader($class) : SplAutoloader
@@ -88,7 +88,7 @@ Retrieve an autoloader by class name.
 This method is **static**, and is used to retrieve a specific autoloader by
 class name. If the autoloader is not registered, an exception will be thrown.
 
-### unregisterAutoloaders  
+### unregisterAutoloaders
 
 ```php
 static unregisterAutoloaders() : void
@@ -100,7 +100,7 @@ This method is **static**, and can be used to unregister all autoloaders that
 were registered via the factory. Note that this will **not** unregister
 autoloaders that were registered outside of the factory.
 
-### unregisterAutoloader  
+### unregisterAutoloader
 
 ```php
 static unregisterAutoloader($class) : bool

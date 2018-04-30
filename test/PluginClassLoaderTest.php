@@ -1,20 +1,20 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Loader;
 
+use PHPUnit\Framework\TestCase;
+use Zend\Loader\Exception\InvalidArgumentException;
 use Zend\Loader\PluginClassLoader;
 
 /**
  * @group      Loader
  */
-class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
+class PluginClassLoaderTest extends TestCase
 {
     /** @var PluginClassLoader */
     public $loader;
@@ -54,13 +54,13 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCallingRegisterPluginsWithInvalidStringMapRaisesException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins('__foobar__');
     }
 
     public function testCallingRegisterPluginsWithStringMapResolvingToNonTraversableClassRaisesException()
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins('stdClass');
     }
 
@@ -76,7 +76,7 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCallingRegisterPluginsWithNonArrayNonStringNonTraversableValueRaisesException($arg)
     {
-        $this->setExpectedException('Zend\Loader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $this->loader->registerPlugins($arg);
     }
 
@@ -239,7 +239,9 @@ class PluginClassLoaderTest extends \PHPUnit_Framework_TestCase
         $loader = new TestAsset\ExtendedPluginClassLoader();
         $this->assertEquals(__CLASS__, $loader->getClassName('loader'));
 
-        $loader = new TestAsset\ExtendedPluginClassLoader(['loader' => 'ZendTest\Loader\TestAsset\ExtendedPluginClassLoader']);
+        $loader = new TestAsset\ExtendedPluginClassLoader(
+            ['loader' => 'ZendTest\Loader\TestAsset\ExtendedPluginClassLoader']
+        );
         $this->assertEquals('ZendTest\Loader\TestAsset\ExtendedPluginClassLoader', $loader->getClassName('loader'));
 
         $loader->registerPlugin('loader', __CLASS__);

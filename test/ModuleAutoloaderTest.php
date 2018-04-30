@@ -1,17 +1,15 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-loader for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-loader/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Loader;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Loader\ModuleAutoloader;
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use Zend\Loader\ModuleAutoloader;
 
 class ModuleAutoloaderTest extends TestCase
 {
@@ -19,7 +17,7 @@ class ModuleAutoloaderTest extends TestCase
     {
         // Store original autoloaders
         $this->loaders = spl_autoload_functions();
-        if (!is_array($this->loaders)) {
+        if (! is_array($this->loaders)) {
             // spl_autoload_functions does not return empty array when no
             // autoloaders registered...
             $this->loaders = [];
@@ -188,14 +186,14 @@ class ModuleAutoloaderTest extends TestCase
     public function testInvalidPathThrowsException()
     {
         $loader = new ModuleAutoloader;
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader->registerPath(123);
     }
 
     public function testInvalidPathsThrowsException()
     {
         $loader = new ModuleAutoloader;
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $loader->registerPaths(123);
     }
 
@@ -214,7 +212,7 @@ class ModuleAutoloaderTest extends TestCase
     {
         $loader = new ModuleAutoloader();
         $loader->setModuleClassMap([
-            'BarModule\Module' =>     __DIR__ . '/_files/BarModule/Module.php',
+            'BarModule\Module' => __DIR__ . '/_files/BarModule/Module.php',
             'PharModuleMap\Module' => __DIR__ . '/_files/PharModuleMap.phar',
         ]);
         $loader->register();
