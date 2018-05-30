@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,55 +13,55 @@
         
     <url>
      <loc>/autoloader-factory/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/standard-autoloader/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/class-map-autoloader/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/module-autoloader/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/spl-autoloader/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/plugin-class-loader/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/short-name-locator/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/plugin-class-locator/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/classmap-generator/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
