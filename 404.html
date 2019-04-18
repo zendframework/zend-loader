@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="zend-loader">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>SplAutoloader - zend-loader - Zend Framework Docs</title>
+    <title>zend-loader - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-loader</a>
+            <a href="/.">zend-loader</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,7 +75,7 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-loader</a>
+                        <a href="/." class="subnavigation__link">zend-loader</a>
                     </li>
                 
             
@@ -86,55 +86,55 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../autoloader-factory/" class="subnavigation__link">AutoloaderFactory</a>
+        <a href="/autoloader-factory/" class="subnavigation__link">AutoloaderFactory</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../standard-autoloader/" class="subnavigation__link">StandardAutoloader</a>
+        <a href="/standard-autoloader/" class="subnavigation__link">StandardAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../class-map-autoloader/" class="subnavigation__link">ClassMapAutoloader</a>
+        <a href="/class-map-autoloader/" class="subnavigation__link">ClassMapAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../module-autoloader/" class="subnavigation__link">ModuleAutoloader</a>
-    </li>
-
-                            
-                                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">SplAutoloader</a>
+        <a href="/module-autoloader/" class="subnavigation__link">ModuleAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../plugin-class-loader/" class="subnavigation__link">PluginClassLoader</a>
+        <a href="/spl-autoloader/" class="subnavigation__link">SplAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../short-name-locator/" class="subnavigation__link">ShortNameLocator</a>
+        <a href="/plugin-class-loader/" class="subnavigation__link">PluginClassLoader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../plugin-class-locator/" class="subnavigation__link">PluginClassLocator</a>
+        <a href="/short-name-locator/" class="subnavigation__link">ShortNameLocator</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../classmap-generator/" class="subnavigation__link">ClassMap Generator</a>
+        <a href="/plugin-class-locator/" class="subnavigation__link">PluginClassLocator</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="/classmap-generator/" class="subnavigation__link">ClassMap Generator</a>
     </li>
 
                             
@@ -211,195 +211,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="..">zend-loader</a></li>
-
-            
-                
-                    <li>Reference</li>
-                
-            
-
-            <li class="active">SplAutoloader</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-        <h2 class="chapter__headline">Reference</h2>
-    
-
-    
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#quick-start" class="toc__link">Quick Start</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#configuration-options" class="toc__link">Configuration Options</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#available-methods" class="toc__link">Available Methods</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
-
-    <h1 id="the-splautoloader-interface">The SplAutoloader Interface</h1>
-<p>While any valid PHP callback may be registered with <code>spl_autoload_register()</code>,
-the autoloaders zend-loader provides offer more flexibility by being stateful
-and allowing configuration. To provide a common interface for such autoloaders,
-zend-loader provides the <code>SplAutoloader</code> interface.</p>
-<p>Objects implementing this interface provide a standard mechanism for
-configuration, a method that may be invoked to attempt to load a class, and a
-method for registering with the SPL autoloading mechanism.</p>
-<h2 id="quick-start">Quick Start</h2>
-<p>To create your own autoloading mechanism, create a class implementing the
-<code>SplAutoloader</code> interface (you may review the methods defined in the <a href="#available-methods">methods
-section</a>). As an example, consider the following autoloader,
-which will look for a class file named after the class within a list of
-registered directories.</p>
-<pre class="codehilite"><code class="language-php">namespace Custom;
-
-use InvalidArgumentException;
-use Traversable;
-use Zend\Loader\SplAutoloader;
-
-class ModifiedIncludePathAutoloader implements SplAutoloader
-{
-    protected $paths = array();
-
-    public function __construct($options = null)
-    {
-        if (null !== $options) {
-            $this-&gt;setOptions($options);
-        }
-    }
-
-    public function setOptions($options)
-    {
-        if (! is_array($options) &amp;&amp; ! $options instanceof Traversable) {
-            throw new InvalidArgumentException();
-        }
-
-        foreach ($options as $path) {
-            if (! in_array($path, $this-&gt;paths)) {
-                $this-&gt;paths[] = $path;
-            }
-        }
-    }
-
-    public function autoload($classname)
-    {
-        $filename = $classname . '.php';
-        foreach ($this-&gt;paths as $path) {
-            $test = sprintf('%s/%s', $path, $filename);
-            if (file_exists($test)) {
-                return include($test);
-            }
-        }
-        return false;
-    }
-
-    public function register()
-    {
-        spl_autoload_register([$this, 'autoload']);
-    }
-}</code></pre>
-
-<p>To use this <code>ModifiedIncludePathAutoloader</code> from the previous example:</p>
-<pre class="codehilite"><code class="language-php">$options = [
-   '/path/one',
-   '/path/two',
-];
-$autoloader = new Custom\ModifiedIncludePathAutoloader($options);
-$autoloader-&gt;register();</code></pre>
-
-<h2 id="configuration-options">Configuration Options</h2>
-<p>This component defines no configuration options, as it is an interface.</p>
-<h2 id="available-methods">Available Methods</h2>
-<h3 id="9595construct">__construct</h3>
-<pre class="codehilite"><code class="language-php">__construct($options = null) : void</code></pre>
-
-<p>Autoloader constructors should optionally receive configuration. Typically, if
-received, these will be passed to the <code>setOptions()</code> method to process.</p>
-<h3 id="setoptions">setOptions</h3>
-<pre class="codehilite"><code class="language-php">setOptions(array|Traversable $options) : void</code></pre>
-
-<p>Used to configure the autoloader. Typically, it should expect either an array or
-a <code>Traversable</code> object, though validation of the options is left to
-implementation.</p>
-<h3 id="autoload">autoload</h3>
-<pre class="codehilite"><code class="language-php">autoload(string $class) : false|string</code></pre>
-
-<p>This method should be used to resolve a class name to the file defining it. When
-a positive match is found, return the class name; otherwise, return a boolean
-<code>false</code>.</p>
-<h3 id="register">register</h3>
-<pre class="codehilite"><code class="language-php">register() : void</code></pre>
-
-<p>Should be used to register the autoloader instance with
-<code>spl_autoload_register()</code>. Invariably, the method should look like the
-following:</p>
-<pre class="codehilite"><code class="language-php">public function register()
-{
-    spl_autoload_register([$this, 'autoload']);
-}</code></pre>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../module-autoloader/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../plugin-class-loader/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/spl-autoloader.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -415,7 +238,7 @@ following:</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-loader</a>
+            <a href="/.">zend-loader</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -424,7 +247,7 @@ following:</p>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-loader</a>
+                        <a href="/." class="subnavigation__link">zend-loader</a>
                     </li>
                 
             
@@ -435,55 +258,55 @@ following:</p>
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../autoloader-factory/" class="subnavigation__link">AutoloaderFactory</a>
+        <a href="/autoloader-factory/" class="subnavigation__link">AutoloaderFactory</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../standard-autoloader/" class="subnavigation__link">StandardAutoloader</a>
+        <a href="/standard-autoloader/" class="subnavigation__link">StandardAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../class-map-autoloader/" class="subnavigation__link">ClassMapAutoloader</a>
+        <a href="/class-map-autoloader/" class="subnavigation__link">ClassMapAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../module-autoloader/" class="subnavigation__link">ModuleAutoloader</a>
-    </li>
-
-                            
-                                
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">SplAutoloader</a>
+        <a href="/module-autoloader/" class="subnavigation__link">ModuleAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../plugin-class-loader/" class="subnavigation__link">PluginClassLoader</a>
+        <a href="/spl-autoloader/" class="subnavigation__link">SplAutoloader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../short-name-locator/" class="subnavigation__link">ShortNameLocator</a>
+        <a href="/plugin-class-loader/" class="subnavigation__link">PluginClassLoader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../plugin-class-locator/" class="subnavigation__link">PluginClassLocator</a>
+        <a href="/short-name-locator/" class="subnavigation__link">ShortNameLocator</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../classmap-generator/" class="subnavigation__link">ClassMap Generator</a>
+        <a href="/plugin-class-locator/" class="subnavigation__link">PluginClassLocator</a>
+    </li>
+
+                            
+                                
+    <li class="subnavigation__list-item ">
+        <a href="/classmap-generator/" class="subnavigation__link">ClassMap Generator</a>
     </li>
 
                             
@@ -562,11 +385,11 @@ following:</p>
 </footer>
 
     <script>
-        var base_url = '..',
+        var base_url = '/',
             siteName = 'zend-loader';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
