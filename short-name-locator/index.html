@@ -296,30 +296,26 @@ strategies defined by other interfaces, such as
 <a href="../plugin-class-locator/">PluginClassLocator</a>.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>Implementing a <code>ShortNameLocator</code> requires defining three methods, as shown below.</p>
-<pre class="codehilite"><code class="language-php">namespace Zend\Loader;
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Loader;
 
 interface ShortNameLocator
 {
     public function isLoaded($name);
     public function getClassName($name);
     public function load($name);
-}</code></pre>
-
+}</code></pre></p>
 <h2 id="configuration-options">Configuration Options</h2>
 <p>This component defines no configuration options, as it is an interface.</p>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="isloaded">isLoaded</h3>
-<pre class="codehilite"><code class="language-php">isLoaded(string $name) : bool</code></pre>
-
+<h3>isLoaded</h3>
+<p> <pre class=codehilite><code class=language-php>isLoaded(string $name) : bool</code></pre></p>
 <p>Implement this method to return a boolean indicating whether or not the class
 has been able to resolve the plugin name to a class.</p>
-<h3 id="getclassname">getClassName</h3>
-<pre class="codehilite"><code class="language-php">getClassName(string $name) : string</code></pre>
-
+<h3>getClassName</h3>
+<p> <pre class=codehilite><code class=language-php>getClassName(string $name) : string</code></pre></p>
 <p>Implement this method to return the class name associated with a plugin name.</p>
-<h3 id="load">load</h3>
-<pre class="codehilite"><code class="language-php">load($name) : string|false</code></pre>
-
+<h3>load</h3>
+<p> <pre class=codehilite><code class=language-php>load($name) : string|false</code></pre></p>
 <p>This method should resolve a plugin name to a class name.</p>
 
 
@@ -354,7 +350,7 @@ has been able to resolve the plugin name to a class.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/short-name-locator.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/short-name-locator.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

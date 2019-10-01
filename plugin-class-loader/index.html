@@ -300,7 +300,7 @@ powerful capability.</p>
 <p>Typical use cases involve instantiating a <code>PluginClassLoader</code>, seeding it
 with one or more plugin/class name associations, and then using it to retrieve
 the class name associated with a given plugin name.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Http\HeaderLoader;
+<p> <pre class=codehilite><code class=language-php>use Zend\Http\HeaderLoader;
 
 // Provide a global map, or override defaults:
 HeaderLoader::addStaticMap([
@@ -314,10 +314,9 @@ $loader = new Zend\Http\HeaderLoader();
 $loader-&gt;registerPlugin('xForwardedFor', 'My\Http\Header\XForwardedFor');
 
 // Load/retrieve the associated plugin class:
-$class = $loader-&gt;load('xrequestedfor'); // 'My\Http\Header\XRequestedFor'</code></pre>
-
+$class = $loader-&gt;load('xrequestedfor'); // 'My\Http\Header\XRequestedFor'</code></pre></p>
 <blockquote>
-<h3 id="case-sensitivity">Case Sensitivity</h3>
+<h3>Case Sensitivity</h3>
 <p>The <code>PluginClassLoader</code> is designed to do case-insensitive plugin name
 lookups. While the above example defines an "xForwardedFor" plugin name,
 internally, this will be stored as "xforwardedfor". If another plugin is
@@ -328,16 +327,14 @@ overwrite this entry.</p>
 <p>The constructor may take a single option, an array or <code>Traversable</code> object of key/value pairs
 corresponding to a plugin name and class name, respectively.</p>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="9595construct">__construct</h3>
-<pre class="codehilite"><code class="language-php">__construct(string|array|Traversable $map = null) : void</code></pre>
-
+<h3>__construct</h3>
+<p> <pre class=codehilite><code class=language-php>__construct(string|array|Traversable $map = null) : void</code></pre></p>
 <p>The constructor is used to instantiate and initialize the plugin class loader.
 If passed a string, an array, or a <code>Traversable</code> object, it will pass this to
 the <a href="#registerplugins">registerPlugins()</a> method in order to seed (or overwrite)
 the plugin class map.</p>
-<h3 id="addstaticmap">addStaticMap</h3>
-<pre class="codehilite"><code class="language-php">static addStaticMap(array|Traversable $map) : void</code></pre>
-
+<h3>addStaticMap</h3>
+<p> <pre class=codehilite><code class=language-php>static addStaticMap(array|Traversable $map) : void</code></pre></p>
 <p>Static method for globally pre-seeding the loader with a class map. It accepts
 either an array or <code>Traversable</code> object of plugin name/class name pairs.</p>
 <p>When using this method, be certain you understand the precedence in which maps
@@ -352,15 +349,13 @@ will be merged; in decreasing order of preference:</p>
 </ul>
 <p>Also, please note that calling the method will <strong>not</strong> affect any instances
 already created.</p>
-<h3 id="registerplugin">registerPlugin</h3>
-<pre class="codehilite"><code class="language-php">registerPlugin(string $shortName, string $className) : void</code></pre>
-
+<h3>registerPlugin</h3>
+<p> <pre class=codehilite><code class=language-php>registerPlugin(string $shortName, string $className) : void</code></pre></p>
 <p>Defined by the <a href="../plugin-class-locator/">PluginClassLocator</a> interface. Expects
 two string arguments, the plugin <code>$shortName</code>, and the class <code>$className</code> which
 it represents.</p>
-<h3 id="registerplugins">registerPlugins</h3>
-<pre class="codehilite"><code class="language-php">registerPlugins(string|array|Traversable $map) : void</code></pre>
-
+<h3>registerPlugins</h3>
+<p> <pre class=codehilite><code class=language-php>registerPlugins(string|array|Traversable $map) : void</code></pre></p>
 <p>If a string argument is provided, <code>registerPlugins()</code> assumes this is a class
 name. If the class does not exist, an exception will be thrown. If it does, it
 then instantiates the class and checks to see whether or not it implements
@@ -368,61 +363,53 @@ then instantiates the class and checks to see whether or not it implements
 <p>Each key/value pair obtained during iteration is then passed to
 <a href="#registerPlugin">registerPlugin()</a> using the key as the plugin name and the
 value as the class name.</p>
-<h3 id="unregisterplugin">unregisterPlugin</h3>
-<pre class="codehilite"><code class="language-php">unregisterPlugin(string $shortName) : void</code></pre>
-
+<h3>unregisterPlugin</h3>
+<p> <pre class=codehilite><code class=language-php>unregisterPlugin(string $shortName) : void</code></pre></p>
 <p>Defined by the <code>PluginClassLocator</code> interface; remove a plugin/class association
 from the plugin class map.</p>
-<h3 id="getregisteredplugins">getRegisteredPlugins</h3>
-<pre class="codehilite"><code class="language-php">getRegisteredPlugins() : array</code></pre>
-
+<h3>getRegisteredPlugins</h3>
+<p> <pre class=codehilite><code class=language-php>getRegisteredPlugins() : array</code></pre></p>
 <p>Defined by the <code>PluginClassLocator</code> interface; return the entire plugin class
 map as an array.</p>
-<h3 id="isloaded">isLoaded</h3>
-<pre class="codehilite"><code class="language-php">isLoaded(string $name) : bool</code></pre>
-
+<h3>isLoaded</h3>
+<p> <pre class=codehilite><code class=language-php>isLoaded(string $name) : bool</code></pre></p>
 <p>Defined by the <code>ShortNameLocator</code> interface; determine if the given plugin has
 been resolved to a class name.</p>
-<h3 id="getclassname">getClassName</h3>
-<pre class="codehilite"><code class="language-php">getClassName(string $name) : string</code></pre>
-
+<h3>getClassName</h3>
+<p> <pre class=codehilite><code class=language-php>getClassName(string $name) : string</code></pre></p>
 <p>Defined by the <code>ShortNameLocator</code> interface; return the class name to which a
 plugin name resolves.</p>
-<h3 id="load">load</h3>
-<pre class="codehilite"><code class="language-php">load(string $name) : string|false</code></pre>
-
+<h3>load</h3>
+<p> <pre class=codehilite><code class=language-php>load(string $name) : string|false</code></pre></p>
 <p>Defined by the <code>ShortNameLocator</code> interface; attempt to resolve a plugin name to
 a class name. If successful, returns the class name; otherwise, returns a
 boolean <code>false</code>.</p>
-<h3 id="getiterator">getIterator</h3>
-<pre class="codehilite"><code class="language-php">getIterator() : Traversable</code></pre>
-
+<h3>getIterator</h3>
+<p> <pre class=codehilite><code class=language-php>getIterator() : Traversable</code></pre></p>
 <p>Defined by the <code>IteratorAggregate</code> interface; allows iteration over the plugin
 class map. This can come in useful for using <code>PluginClassLoader</code> instances to
 other <code>PluginClassLoader</code> instances in order to merge maps.</p>
 <h2 id="examples">Examples</h2>
-<h3 id="using-static-maps">Using Static Maps</h3>
+<h3>Using Static Maps</h3>
 <p>It's often convenient to provide global overrides or additions to the maps in a
 <code>PluginClassLoader</code> instance. This can be done using the <code>addStaticMap()</code>
 method:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Loader\PluginClassLoader;
+<p> <pre class=codehilite><code class=language-php>use Zend\Loader\PluginClassLoader;
 
 PluginClassLoader::addStaticMap([
     'xrequestedfor' =&gt; 'My\Http\Header\XRequestedFor',
-]);</code></pre>
-
+]);</code></pre></p>
 <p>Any later instances created will now have this map defined, allowing you to load
 that plugin.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Loader\PluginClassLoader;
+<p> <pre class=codehilite><code class=language-php>use Zend\Loader\PluginClassLoader;
 
 $loader = new PluginClassLoader();
-$class = $loader-&gt;load('xrequestedfor'); // My\Http\Header\XRequestedFor</code></pre>
-
-<h3 id="creating-a-pre-loaded-map">Creating a pre-loaded map</h3>
+$class = $loader-&gt;load('xrequestedfor'); // My\Http\Header\XRequestedFor</code></pre></p>
+<h3>Creating a pre-loaded map</h3>
 <p>In many cases, you know exactly which plugins you may be drawing upon on a
 regular basis, and which classes they will refer to. In this case, extend
 the <code>PluginClassLoader</code> and define the map within the extending class.</p>
-<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+<p> <pre class=codehilite><code class=language-php>namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader;
 
@@ -436,16 +423,14 @@ class PluginLoader extends PluginClassLoader
         'bar'    =&gt; 'My\Plugins\Bar',
         'foobar' =&gt; 'My\Plugins\FooBar',
     ];
-}</code></pre>
-
+}</code></pre></p>
 <p>At this point, you can instantiate the map and immediately use it.</p>
-<pre class="codehilite"><code class="language-php">$loader = new My\Plugins\PluginLoader();
-$class  = $loader-&gt;load('foobar'); // My\Plugins\FooBar</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$loader = new My\Plugins\PluginLoader();
+$class  = $loader-&gt;load('foobar'); // My\Plugins\FooBar</code></pre></p>
 <p><code>PluginClassLoader</code> makes use of late static binding, allowing per-class static
 maps. If you want to allow defining a <a href="#using-static-maps">static map</a> specific
 to this extending class, declare a protected static <code>$staticMap</code> property:</p>
-<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+<p> <pre class=codehilite><code class=language-php>namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader;
 
@@ -454,14 +439,12 @@ class PluginLoader extends PluginClassLoader
     protected static $staticMap = [];
 
     // ...
-}</code></pre>
-
+}</code></pre></p>
 <p>To inject the static map, call the <code>addStaticMap()</code> on the extension class:</p>
-<pre class="codehilite"><code class="language-php">PluginLoader::addStaticMap([
+<p> <pre class=codehilite><code class=language-php>PluginLoader::addStaticMap([
     'baz' =&gt; 'My\Plugins\Baz',
-]);</code></pre>
-
-<h3 id="extending-a-plugin-map-using-another-plugin-map">Extending a plugin map using another plugin map</h3>
+]);</code></pre></p>
+<h3>Extending a plugin map using another plugin map</h3>
 <p>In some cases, a general map class may already exist; as an example, several
 Zend Framework components defining plugin brokers have an associated
 <code>PluginClassLoader</code> extension defining the plugins available for that component
@@ -472,7 +455,7 @@ the configuration into an instance of the plugin loader.</p>
 <p>Another solution is to define a new plugin map class. The class name or an
 instance of the class may then be passed to the constructor or
 <code>registerPlugins()</code>.</p>
-<pre class="codehilite"><code class="language-php">namespace My\Plugins;
+<p> <pre class=codehilite><code class=language-php>namespace My\Plugins;
 
 use Zend\Loader\PluginClassLoader;
 use Zend\Http\HeaderLoader;
@@ -495,7 +478,7 @@ $loader = new HeaderLoader(new PluginLoader());  // as instance
 
 // Or via registerPlugins():
 $loader-&gt;registerPlugins(PluginLoader::class); // as string class name
-$loader-&gt;registerPlugins(new PluginLoader());  // as instance</code></pre>
+$loader-&gt;registerPlugins(new PluginLoader());  // as instance</code></pre></p>
 
 
 
@@ -529,7 +512,7 @@ $loader-&gt;registerPlugins(new PluginLoader());  // as instance</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/plugin-class-loader.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/plugin-class-loader.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -285,31 +285,27 @@ entire map.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>Classes implementing the <code>PluginClassLocator</code> must implement the following three
 methods:</p>
-<pre class="codehilite"><code class="language-php">namespace Zend\Loader;
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Loader;
 
 interface PluginClassLocator
 {
     public function registerPlugin($shortName, $className);
     public function unregisterPlugin($shortName);
     public function getRegisteredPlugins();
-}</code></pre>
-
+}</code></pre></p>
 <h2 id="configuration-options">Configuration Options</h2>
 <p>This component defines no configuration options, as it is an interface.</p>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="registerplugin">registerPlugin</h3>
-<pre class="codehilite"><code class="language-php">registerPlugin(string $shortName, string $className) : void</code></pre>
-
+<h3>registerPlugin</h3>
+<p> <pre class=codehilite><code class=language-php>registerPlugin(string $shortName, string $className) : void</code></pre></p>
 <p>Implement this method to add or overwrite plugin name/class name associations in
 the internal plugin map. <code>$shortName</code> will be aliased to <code>$className</code>.</p>
-<h3 id="unregisterplugin">unregisterPlugin</h3>
-<pre class="codehilite"><code class="language-php">unregisterPlugin(string $shortName) : void</code></pre>
-
+<h3>unregisterPlugin</h3>
+<p> <pre class=codehilite><code class=language-php>unregisterPlugin(string $shortName) : void</code></pre></p>
 <p>Implement this to allow removing an existing plugin mapping corresponding to
 <code>$shortName</code>.</p>
-<h3 id="getregisteredplugins">getRegisteredPlugins</h3>
-<pre class="codehilite"><code class="language-php">getRegisteredPlugins() : array</code></pre>
-
+<h3>getRegisteredPlugins</h3>
+<p> <pre class=codehilite><code class=language-php>getRegisteredPlugins() : array</code></pre></p>
 <p>Implement this to allow returning the plugin name/class name map.</p>
 
 
@@ -344,7 +340,7 @@ the internal plugin map. <code>$shortName</code> will be aliased to <code>$class
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/plugin-class-locator.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/plugin-class-locator.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -300,52 +300,43 @@ documentation.</p>
 a path to scan for modules, or a key/value pair of explicit module paths. In the
 case of explicit module paths, the key is the module's name, and the value is
 the path to that module.</p>
-<pre class="codehilite"><code class="language-php">$options = [
+<p> <pre class=codehilite><code class=language-php>$options = [
     '/path/to/modules',
     '/path/to/other/modules',
     'MyModule' =&gt; '/explicit/path/mymodule-v1.2'
-];</code></pre>
-
+];</code></pre></p>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="9595construct">__construct</h3>
-<pre class="codehilite"><code class="language-php">__construct(array|Traversable $options = null) : void</code></pre>
-
+<h3>__construct</h3>
+<p> <pre class=codehilite><code class=language-php>__construct(array|Traversable $options = null) : void</code></pre></p>
 <p>Initialize and configure the object; if <code>$options</code> are provided, they will be
 passed to <a href="#setoptions">setOptions()</a>.</p>
-<h3 id="setoptions">setOptions</h3>
-<pre class="codehilite"><code class="language-php">setOptions(array|Traversable $options) : void</code></pre>
-
+<h3>setOptions</h3>
+<p> <pre class=codehilite><code class=language-php>setOptions(array|Traversable $options) : void</code></pre></p>
 <p>Configures the state of the autoloader, registering paths to modules. <code>$options</code>
 will be passed to <a href="#registerpaths">registerPaths()</a>.</p>
-<h3 id="autoload">autoload</h3>
-<pre class="codehilite"><code class="language-php">autoload(string $class) : false|string</code></pre>
-
+<h3>autoload</h3>
+<p> <pre class=codehilite><code class=language-php>autoload(string $class) : false|string</code></pre></p>
 <p>Attempts to load the specified <code>Module</code> class. Returns a boolean <code>false</code> on
 failure, or a string indicating the class loaded on success.</p>
-<h3 id="register">register</h3>
-<pre class="codehilite"><code class="language-php">register() : void</code></pre>
-
+<h3>register</h3>
+<p> <pre class=codehilite><code class=language-php>register() : void</code></pre></p>
 <p>Registers the <code>autoload()</code> method of the current instance with
 <code>spl_autoload_register()</code>.</p>
-<h3 id="unregister">unregister</h3>
-<pre class="codehilite"><code class="language-php">unregister() : void</code></pre>
-
+<h3>unregister</h3>
+<p> <pre class=codehilite><code class=language-php>unregister() : void</code></pre></p>
 <p>Unregisters the <code>autoload()</code> method of the current instance with
 <code>spl_autoload_unregister()</code>.</p>
-<h3 id="registerpaths">registerPaths</h3>
-<pre class="codehilite"><code class="language-php">registerPaths(array|Traversable $paths) : void</code></pre>
-
+<h3>registerPaths</h3>
+<p> <pre class=codehilite><code class=language-php>registerPaths(array|Traversable $paths) : void</code></pre></p>
 <p>Register paths to modules. For an example array, please see the
 <a href="#configuration-options">Configuration options</a> section.</p>
-<h3 id="registerpath">registerPath</h3>
-<pre class="codehilite"><code class="language-php">registerPath(string $path, string $moduleName = false) : void</code></pre>
-
+<h3>registerPath</h3>
+<p> <pre class=codehilite><code class=language-php>registerPath(string $path, string $moduleName = false) : void</code></pre></p>
 <p>Register a single path with the autoloader. The first parameter, <code>$path</code>, is
 expected to be a string. The second parameter, <code>$moduleName</code>, is expected to be
 a module name, which allows for registering an explicit path to that module.</p>
-<h3 id="getpaths">getPaths</h3>
-<pre class="codehilite"><code class="language-php">getPaths() : string[]</code></pre>
-
+<h3>getPaths</h3>
+<p> <pre class=codehilite><code class=language-php>getPaths() : string[]</code></pre></p>
 <p>Returns an array of all the paths registered.</p>
 
 
@@ -380,7 +371,7 @@ a module name, which allows for registering an explicit path to that module.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/module-autoloader.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/module-autoloader.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

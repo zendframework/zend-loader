@@ -288,12 +288,11 @@
 autoloader. It assumes a 1:1 mapping of the namespace+classname to the
 filesystem, wherein namespace separators and underscores are translated to
 directory separators. The following statement illustrates how resolution works:</p>
-<pre class="codehilite"><code class="language-php">$filename = str_replace(
+<p> <pre class=codehilite><code class=language-php>$filename = str_replace(
     ['_', '\\'],
     DIRECTORY_SEPARATOR,
     $classname
-) . '.php';</code></pre>
-
+) . '.php';</code></pre></p>
 <p>The <code>StandardAutoloader</code> requires that you explicitly register namespace/path
 pairs (or vendor prefix/path pairs), and will only load a file if it exists
 within the given path. Multiple pairs may be provided.</p>
@@ -304,7 +303,7 @@ due to performance implications.</p>
 <p>Finally, as with all autoloaders in zend-loader, the <code>StandardAutoloader</code> is
 capable of registering itself with PHP's SPL autoloader registry.</p>
 <blockquote>
-<h3 id="vocabulary-namespaces-vs-vendor-prefixes">Vocabulary: Namespaces vs. Vendor Prefixes</h3>
+<h3>Vocabulary: Namespaces vs. Vendor Prefixes</h3>
 <p>In terms of autoloading, a "namespace" corresponds to PHP's own definition of
 namespaces.</p>
 <p>A "vendor prefix" refers to the practice, popularized in PHP versions prior to
@@ -321,26 +320,25 @@ to an appropriate path.</p>
 This can either be done at instantiation, or via explicit method calls after the
 object has been initialized.  Calling <code>register()</code> will register the autoloader
 with the SPL autoloader registry.</p>
-<h3 id="manual-configuration">Manual Configuration</h3>
-<pre class="codehilite"><code class="language-php">use Zend\Loader\StandardAutoloader;
+<h3>Manual Configuration</h3>
+<p> <pre class=codehilite><code class=language-php>use Zend\Loader\StandardAutoloader;
 
 // This example assumes the StandardAutoloader is autoloadable.
 $loader = new StandardAutoloader();
 
-// Register the "Phly" namespace:
+// Register the &quot;Phly&quot; namespace:
 $loader-&gt;registerNamespace('Phly', APPLICATION_PATH . '/../library/Phly');
 
-// Register the "Scapi" vendor prefix:
+// Register the &quot;Scapi&quot; vendor prefix:
 $loader-&gt;registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
 
-// Optionally, specify the autoloader as a "fallback" autoloader;
+// Optionally, specify the autoloader as a &quot;fallback&quot; autoloader;
 // this is not recommended.
 $loader-&gt;setFallbackAutoloader(true);
 
 // Register with spl_autoload:
-$loader-&gt;register();</code></pre>
-
-<h3 id="configuration-at-instantiation">Configuration at Instantiation</h3>
+$loader-&gt;register();</code></pre></p>
+<h3>Configuration at Instantiation</h3>
 <p>The <code>StandardAutoloader</code> may also be configured at instantiation. Please note:</p>
 <ul>
 <li>The argument passed may be either an array or a <code>Traversable</code> object.</li>
@@ -348,7 +346,7 @@ $loader-&gt;register();</code></pre>
   <code>setOptions()</code> method.</li>
 </ul>
 <p>The following is equivalent to the previous example.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Loader\StandardAutoloader;
+<p> <pre class=codehilite><code class=language-php>use Zend\Loader\StandardAutoloader;
 
 $loader = new StandardAutoloader([
     'namespaces' =&gt; [
@@ -361,24 +359,23 @@ $loader = new StandardAutoloader([
 ]);
 
 // Register with spl_autoload:
-$loader-&gt;register();</code></pre>
-
+$loader-&gt;register();</code></pre></p>
 <h2 id="configuration-options">Configuration Options</h2>
 <p>The <code>StandardAutoloader</code> defines the following options.</p>
-<h3 id="namespaces">namespaces</h3>
+<h3>namespaces</h3>
 <p>An associative array of namespace/path pairs. The path should be an absolute
 path or path relative to the calling script, and contain only classes that live
 in that namespace (or its subnamespaces).</p>
-<h3 id="prefixes">prefixes</h3>
+<h3>prefixes</h3>
 <p>An associative array of vendor prefix/path pairs. The path should be an absolute
 path or path relative to the calling script, and contain only classes that begin
 with the provided vendor prefix.</p>
-<h3 id="fallback_autoloader">fallback_autoloader</h3>
+<h3>fallback_autoloader</h3>
 <p>A boolean value indicating whether or not this instance should act as a
 "fallback" autoloader (i.e., look for classes of any namespace or vendor prefix
 on the <code>include_path</code>). By default, <code>false</code>.</p>
 <blockquote>
-<h3 id="autoregister_zf-is-deprecated">autoregister_zf is deprecated</h3>
+<h3>autoregister_zf is deprecated</h3>
 <p>One other option is available to the <code>StandardAutoloader</code>: <code>autoregister_zf</code>.
 We do not document it any longer, as it is no longer relevant.</p>
 <p>Starting with the 2.5.0 release of Zend Framework, the framework package
@@ -392,15 +389,13 @@ using <a href="https://getcomposer.org">Composer</a>'s autoloader for autoloadin
 Zend Framework classes.</p>
 </blockquote>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="9595construct">__construct</h3>
-<pre class="codehilite"><code class="language-php">__construct(array|Traversable $options = null) : void</code></pre>
-
+<h3>__construct</h3>
+<p> <pre class=codehilite><code class=language-php>__construct(array|Traversable $options = null) : void</code></pre></p>
 <p>Create a new instance of the object.</p>
 <p>If <code>$options</code> is non-null, the argument is passed to
 <a href="#setoptions">setOptions()</a>.</p>
-<h3 id="setoptions">setOptions</h3>
-<pre class="codehilite"><code class="language-php">setOptions(array|Traversable $options) : void</code></pre>
-
+<h3>setOptions</h3>
+<p> <pre class=codehilite><code class=language-php>setOptions(array|Traversable $options) : void</code></pre></p>
 <p>Set object state based on provided options.</p>
 <p>Recognized keys are detailed under <a href="#configuration-options">Configuration options</a>,
 with the following behaviors:</p>
@@ -412,46 +407,38 @@ with the following behaviors:</p>
 <li>The <code>fallback_autoloader</code> value will be passed to
   <a href="#setfallbackautoloader">setFallbackAutoloader()</a>.</li>
 </ul>
-<h3 id="setfallbackautoloader">setFallbackAutoloader</h3>
-<pre class="codehilite"><code class="language-php">setFallbackAutoloader(bool $flag) : void</code></pre>
-
+<h3>setFallbackAutoloader</h3>
+<p> <pre class=codehilite><code class=language-php>setFallbackAutoloader(bool $flag) : void</code></pre></p>
 <p>Takes a boolean flag indicating whether or not to act as a fallback autoloader
 when registered with the SPL autoloader.</p>
-<h3 id="isfallbackautoloader">isFallbackAutoloader</h3>
-<pre class="codehilite"><code class="language-php">isFallbackAutoloader() : bool</code></pre>
-
+<h3>isFallbackAutoloader</h3>
+<p> <pre class=codehilite><code class=language-php>isFallbackAutoloader() : bool</code></pre></p>
 <p>Indicates whether or not this instance is flagged as a fallback autoloader.</p>
-<h3 id="registernamespace">registerNamespace</h3>
-<pre class="codehilite"><code class="language-php">registerNamespace(string $namespace, string $directory) : void</code></pre>
-
+<h3>registerNamespace</h3>
+<p> <pre class=codehilite><code class=language-php>registerNamespace(string $namespace, string $directory) : void</code></pre></p>
 <p>Register a namespace with the autoloader, pointing it to a specific directory on
 the filesystem for class resolution. For classes matching that initial
 namespace, the autoloader will then perform lookups within that directory.</p>
-<h3 id="registernamespaces">registerNamespaces</h3>
-<pre class="codehilite"><code class="language-php">registerNamespaces(array|Traversable $namespaces) : void</code></pre>
-
+<h3>registerNamespaces</h3>
+<p> <pre class=codehilite><code class=language-php>registerNamespaces(array|Traversable $namespaces) : void</code></pre></p>
 <p>Register multiple namespaces with the autoloader, iterating through
 <code>$namespaces</code> and passing each key and item to <a href="#registernamespace">registerNamespace()</a>.</p>
-<h3 id="registerprefix">registerPrefix</h3>
-<pre class="codehilite"><code class="language-php">registerPrefix(string $prefix, string $directory) : void</code></pre>
-
+<h3>registerPrefix</h3>
+<p> <pre class=codehilite><code class=language-php>registerPrefix(string $prefix, string $directory) : void</code></pre></p>
 <p>Register a vendor prefix with the autoloader, pointing it to a specific
 directory on the filesystem for class resolution. For classes matching that
 initial vendor prefix, the autoloader will then perform lookups within that
 directory.</p>
-<h3 id="registerprefixes">registerPrefixes</h3>
-<pre class="codehilite"><code class="language-php">registerPrefixes(array|Traversable $prefixes) : void</code></pre>
-
+<h3>registerPrefixes</h3>
+<p> <pre class=codehilite><code class=language-php>registerPrefixes(array|Traversable $prefixes) : void</code></pre></p>
 <p>Register many vendor prefixes with the autoloader, traversing <code>$prefixes</code> and
 passing each key/value pair to <a href="#registerprefix">registerPrefix()</a>.</p>
-<h3 id="autoload">autoload</h3>
-<pre class="codehilite"><code class="language-php">autoload(string $class) : false|string</code></pre>
-
+<h3>autoload</h3>
+<p> <pre class=codehilite><code class=language-php>autoload(string $class) : false|string</code></pre></p>
 <p>Attempts to load the class specified. Returns a boolean <code>false</code> on failure, or a
 string indicating the class loaded on success.</p>
-<h3 id="register">register</h3>
-<pre class="codehilite"><code class="language-php">register() : void</code></pre>
-
+<h3>register</h3>
+<p> <pre class=codehilite><code class=language-php>register() : void</code></pre></p>
 <p>Registers the <code>autoload()</code> method of the current instance with
 <code>spl_autoload_register()</code>.</p>
 
@@ -487,7 +474,7 @@ string indicating the class loaded on success.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/standard-autoloader.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/standard-autoloader.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

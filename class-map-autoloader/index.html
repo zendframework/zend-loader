@@ -292,13 +292,12 @@ opcode caches and PHP's realpath cache.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>The first step is to generate a class map file. You may run this over any
 directory containing source code anywhere underneath it.</p>
-<pre class="codehilite"><code class="language-bash">$ php classmap_generator.php Some/Directory/</code></pre>
-
+<p> <pre class=codehilite><code class=language-bash>$ php classmap_generator.php Some/Directory/</code></pre></p>
 <p>This will create a file named <code>Some/Directory/autoload_classmap.php</code>, which is a
 PHP file returning an associative array that represents the class map.</p>
 <p>Within your code, you will now instantiate the <code>ClassMapAutoloader</code>, and provide
 it the location of the map.</p>
-<pre class="codehilite"><code class="language-php">// This example assumes the ClassMapAutoloader is autoloadable.
+<p> <pre class=codehilite><code class=language-php>// This example assumes the ClassMapAutoloader is autoloadable.
 use Zend\Loader\ClassMapAutoloader;
 
 $loader = new ClassMapAutoloader();
@@ -307,80 +306,70 @@ $loader = new ClassMapAutoloader();
 $loader-&gt;registerAutoloadMap('Some/Directory/autoload_classmap.php');
 
 // Register with spl_autoload:
-$loader-&gt;register();</code></pre>
-
+$loader-&gt;register();</code></pre></p>
 <p>At this point, you may now use any classes referenced in your class map.</p>
 <h2 id="configuration-options">Configuration Options</h2>
 <p>The <code>ClassMapAutoloader</code> expects an array of options, where each option is
 either a filename referencing a class map, or an associative array of class
 name/filename pairs.</p>
 <p>As an example:</p>
-<pre class="codehilite"><code class="language-php">// Configuration defining both a file-based class map, and an array map
+<p> <pre class=codehilite><code class=language-php>// Configuration defining both a file-based class map, and an array map
 $config = [
     __DIR__ . '/library/autoloader_classmap.php', // file-based class map
     [                                             // array class map
         'Application\Bootstrap' =&gt; __DIR__ . '/application/Bootstrap.php',
         'Test\Bootstrap'        =&gt; __DIR__ . '/tests/Bootstrap.php',
     ],
-];</code></pre>
-
+];</code></pre></p>
 <h2 id="available-methods">Available Methods</h2>
-<h3 id="9595construct">__construct</h3>
-<pre class="codehilite"><code class="language-php">__construct(array|Traversable $options = null) : void</code></pre>
-
+<h3>__construct</h3>
+<p> <pre class=codehilite><code class=language-php>__construct(array|Traversable $options = null) : void</code></pre></p>
 <p>Initialize and configure the object <code>__construct($options = null)</code>; <code>$options</code>
 will be passed to <a href="#setoptions">setOptions()</a>.</p>
-<h3 id="setoptions">setOptions</h3>
-<pre class="codehilite"><code class="language-php">setOptions(array|Traversable $options) : void</code></pre>
-
+<h3>setOptions</h3>
+<p> <pre class=codehilite><code class=language-php>setOptions(array|Traversable $options) : void</code></pre></p>
 <p>Configures the state of the autoloader, including registering class maps.
 <code>$options</code> will be passed to <a href="#registerautoloadmaps">registerAutoloadMaps()</a>.</p>
-<h3 id="registerautoloadmap">registerAutoloadMap</h3>
-<pre class="codehilite"><code class="language-php">registerAutoloadMap(string|array $map) : void</code></pre>
-
+<h3>registerAutoloadMap</h3>
+<p> <pre class=codehilite><code class=language-php>registerAutoloadMap(string|array $map) : void</code></pre></p>
 <p>Registers a class map with the autoloader. <code>$map</code> may be either a string
 referencing a PHP script that returns a class map, or an array defining a class
 map.</p>
 <p>More than one class map may be registered; each will be merged with the
 previous, meaning it's possible for a later class map to overwrite entries from
 a previously registered map.</p>
-<h3 id="registerautoloadmaps">registerAutoloadMaps</h3>
-<pre class="codehilite"><code class="language-php">registerAutoloadMaps(array|Traversable $maps) : void</code></pre>
-
+<h3>registerAutoloadMaps</h3>
+<p> <pre class=codehilite><code class=language-php>registerAutoloadMaps(array|Traversable $maps) : void</code></pre></p>
 <p>Register multiple class maps with the autoloader, iterating over <code>$maps</code> and
 passing each value to <a href="#registerautoloadmap">registerAutoloadMap()</a>.</p>
-<h3 id="getautoloadmap">getAutoloadMap</h3>
-<pre class="codehilite"><code class="language-php">getAutoloadMap() : array</code></pre>
-
+<h3>getAutoloadMap</h3>
+<p> <pre class=codehilite><code class=language-php>getAutoloadMap() : array</code></pre></p>
 <p>Retrieves the current class map as an associative array.</p>
-<h3 id="autoload">autoload</h3>
-<pre class="codehilite"><code class="language-php">autoload(string $class) : false|string</code></pre>
-
+<h3>autoload</h3>
+<p> <pre class=codehilite><code class=language-php>autoload(string $class) : false|string</code></pre></p>
 <p>Attempts to load the class specified. Returns a boolean <code>false</code> on failure, or a
 string indicating the class loaded on success.</p>
-<h3 id="register">register</h3>
-<pre class="codehilite"><code class="language-php">register() : void</code></pre>
-
+<h3>register</h3>
+<p> <pre class=codehilite><code class=language-php>register() : void</code></pre></p>
 <p>Registers the <code>autoload()</code> method of the current instance with
 <code>spl_autoload_register()</code>.</p>
 <h2 id="examples">Examples</h2>
-<h3 id="using-configuration-to-seed-classmapautoloader">Using configuration to seed ClassMapAutoloader</h3>
+<h3>Using configuration to seed ClassMapAutoloader</h3>
 <p>You can use configuration to seed a <code>ClassMapAutoloader</code>; values might come from
 a configuration file, a cache, or even a PHP array.  The following is an example
 of a PHP array that could be used to configure the autoloader:</p>
-<pre class="codehilite"><code class="language-php">// Configuration defining both a file-based class map, and an array map
+<p> <pre class=codehilite><code class=language-php>// Configuration defining both a file-based class map, and an array map
 $config = [
     APPLICATION_PATH . '/../library/autoloader_classmap.php', // file-based class map
     [                                                         // array class map
         'Application\Bootstrap' =&gt; APPLICATION_PATH . '/Bootstrap.php',
         'Test\Bootstrap'        =&gt; APPLICATION_PATH . '/../tests/Bootstrap.php',
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>Once you have your configuration, you can pass it either to the constructor of
 the <code>ClassMapAutoloader</code>, to its <code>setOptions()</code> method, or to
 <code>registerAutoloadMaps()</code>.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Loader\ClassMapAutoloader;
+<p> <pre class=codehilite><code class=language-php>use Zend\Loader\ClassMapAutoloader;
 
 /* The following are all equivalent */
 
@@ -393,7 +382,7 @@ $loader-&gt;setOptions($config);
 
 // To registerAutoloadMaps():
 $loader = new ClassMapAutoloader();
-$loader-&gt;registerAutoloadMaps($config);</code></pre>
+$loader-&gt;registerAutoloadMaps($config);</code></pre></p>
 
 
 
@@ -427,7 +416,7 @@ $loader-&gt;registerAutoloadMaps($config);</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/class-map-autoloader.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/class-map-autoloader.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -286,7 +286,7 @@ for 3rd party libraries. The factory uses configuration, allowing you to cache
 your autoloader definitions or define them centrally for your application.</p>
 <h2 id="quick-start">Quick Start</h2>
 <p>The <code>AutoloaderFactory</code> expects an array of configuration.</p>
-<pre class="codehilite"><code class="language-php">$config = [
+<p> <pre class=codehilite><code class=language-php>$config = [
     'Zend\Loader\ClassMapAutoloader' =&gt; [
         'application' =&gt; APPLICATION_PATH . '/.classmap.php',
         'zf'          =&gt; APPLICATION_PATH . '/../library/Zend/.classmap.php',
@@ -297,15 +297,13 @@ your autoloader definitions or define them centrally for your application.</p>
             'Doctrine'      =&gt; APPLICATION_PATH . '/../library/Doctrine',
         ],
     ],
-];</code></pre>
-
+];</code></pre></p>
 <p>Once you have your configuration in a PHP array, pass it to the
 <code>AutoloaderFactory</code>:</p>
-<pre class="codehilite"><code class="language-php">// This example assumes that the AutoloaderFactory is itself autoloadable!
+<p> <pre class=codehilite><code class=language-php>// This example assumes that the AutoloaderFactory is itself autoloadable!
 use Zend\Loader\AutoloaderFactory;
 
-AutoloaderFactory::factory($config);</code></pre>
-
+AutoloaderFactory::factory($config);</code></pre></p>
 <p>The <code>AutoloaderFactory</code> will instantiate each autoloader with the given options,
 and also call its <code>register()</code> method to register it with the SPL autoloader.</p>
 <h2 id="configuration-options">Configuration options</h2>
@@ -318,36 +316,31 @@ to attempt to load the class via the <a href="http://php.net/include_path">inclu
 If the class is not found, or does not implement the
 <a href="../spl-autoloader/">SplAutoloader</a> interface, an exception will be raised.</p>
 <h2 id="available-methods">Available methods</h2>
-<h3 id="factory">factory</h3>
-<pre class="codehilite"><code class="language-php">static factory(array|Traversable $options) : void</code></pre>
-
+<h3>factory</h3>
+<p> <pre class=codehilite><code class=language-php>static factory(array|Traversable $options) : void</code></pre></p>
 <p>Instantiate and register autoloaders.</p>
 <p>This method is <strong>static</strong>, and is used to instantiate autoloaders and register them
 with the SPL autoloader. It expects either an array or <code>Traversable</code> object as denoted in the
 <a href="#configuration options">options section</a>.</p>
-<h3 id="getregisteredautoloaders">getRegisteredAutoloaders</h3>
-<pre class="codehilite"><code class="language-php">static getRegisteredAutoloaders() : SplAutoloader[]</code></pre>
-
+<h3>getRegisteredAutoloaders</h3>
+<p> <pre class=codehilite><code class=language-php>static getRegisteredAutoloaders() : SplAutoloader[]</code></pre></p>
 <p>Retrieve a list of all autoloaders registered using the factory.</p>
 <p>This method is <strong>static</strong>, and may be used to retrieve a list of all autoloaders
 registered via the <code>factory()</code> method. It returns an array of <code>SplAutoloader</code>
 instances.</p>
-<h3 id="getregisteredautoloader">getRegisteredAutoloader</h3>
-<pre class="codehilite"><code class="language-php">static getRegisteredAutoloader($class) : SplAutoloader</code></pre>
-
+<h3>getRegisteredAutoloader</h3>
+<p> <pre class=codehilite><code class=language-php>static getRegisteredAutoloader($class) : SplAutoloader</code></pre></p>
 <p>Retrieve an autoloader by class name.</p>
 <p>This method is <strong>static</strong>, and is used to retrieve a specific autoloader by
 class name. If the autoloader is not registered, an exception will be thrown.</p>
-<h3 id="unregisterautoloaders">unregisterAutoloaders</h3>
-<pre class="codehilite"><code class="language-php">static unregisterAutoloaders() : void</code></pre>
-
+<h3>unregisterAutoloaders</h3>
+<p> <pre class=codehilite><code class=language-php>static unregisterAutoloaders() : void</code></pre></p>
 <p>Unregister all autoloaders registered via the factory.</p>
 <p>This method is <strong>static</strong>, and can be used to unregister all autoloaders that
 were registered via the factory. Note that this will <strong>not</strong> unregister
 autoloaders that were registered outside of the factory.</p>
-<h3 id="unregisterautoloader">unregisterAutoloader</h3>
-<pre class="codehilite"><code class="language-php">static unregisterAutoloader($class) : bool</code></pre>
-
+<h3>unregisterAutoloader</h3>
+<p> <pre class=codehilite><code class=language-php>static unregisterAutoloader($class) : bool</code></pre></p>
 <p>Unregister an autoloader registered via the factory.</p>
 <p>This method is <strong>static</strong>, and can be used to unregister an autoloader that was
 registered via the factory. Note that this will <strong>not</strong> unregister autoloaders
@@ -386,7 +379,7 @@ the factory, after unregistering it will return <code>TRUE</code>, otherwise <co
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/autoloader-factory.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-loader/edit/master/docs/book/autoloader-factory.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
