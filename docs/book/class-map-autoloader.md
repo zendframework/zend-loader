@@ -6,23 +6,14 @@ the file associated with that class on a match.  This avoids unnecessary
 filesystem operations, and can also ensure the autoloader "plays nice" with
 opcode caches and PHP's realpath cache.
 
-The zend-loader component provides a tool for generating classmaps via
-`bin/classmap_generator.php`; read the [tool's documentation](classmap-generator.md) for more details.
-
 ## Quick Start
 
-The first step is to generate a class map file. You may run this over any
-directory containing source code anywhere underneath it.
+The first step is to generate a class map file in form of a PHP file returning an
+associative array that represents the class map. In this example, the class map
+is located at `Some/Directory/autoload_classmap.php`.
 
-```bash
-$ php classmap_generator.php Some/Directory/
-```
-
-This will create a file named `Some/Directory/autoload_classmap.php`, which is a
-PHP file returning an associative array that represents the class map.
-
-Within your code, you will now instantiate the `ClassMapAutoloader`, and provide
-it the location of the map.
+Within your code, instantiate the `ClassMapAutoloader`, and provide it the
+location of the map.
 
 ```php
 // This example assumes the ClassMapAutoloader is autoloadable.
