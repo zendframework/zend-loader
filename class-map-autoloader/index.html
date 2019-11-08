@@ -287,16 +287,12 @@ a filesystem lookup, it checks the class against an in-memory classmap, loading
 the file associated with that class on a match.  This avoids unnecessary
 filesystem operations, and can also ensure the autoloader "plays nice" with
 opcode caches and PHP's realpath cache.</p>
-<p>The zend-loader component provides a tool for generating classmaps via
-<code>bin/classmap_generator.php</code>; read the <a href="../classmap-generator/">tool's documentation</a> for more details.</p>
 <h2 id="quick-start">Quick Start</h2>
-<p>The first step is to generate a class map file. You may run this over any
-directory containing source code anywhere underneath it.</p>
-<p> <pre class=codehilite><code class=language-bash>$ php classmap_generator.php Some/Directory/</code></pre></p>
-<p>This will create a file named <code>Some/Directory/autoload_classmap.php</code>, which is a
-PHP file returning an associative array that represents the class map.</p>
-<p>Within your code, you will now instantiate the <code>ClassMapAutoloader</code>, and provide
-it the location of the map.</p>
+<p>The first step is to create a class map file in form of a PHP file returning an
+associative array that represents the class map. In this example, the class map
+is located at <code>Some/Directory/autoload_classmap.php</code>.</p>
+<p>Within your code, instantiate the <code>ClassMapAutoloader</code>, and provide it the
+location of the map.</p>
 <p> <pre class=codehilite><code class=language-php>// This example assumes the ClassMapAutoloader is autoloadable.
 use Zend\Loader\ClassMapAutoloader;
 

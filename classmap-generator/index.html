@@ -255,66 +255,16 @@
 
     
     
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#quick-start" class="toc__link">Quick Start</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#configuration-options" class="toc__link">Configuration Options</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
 
     </div>
 
     <h1 id="the-class-map-generator-utility-binclassmap95generatorphp">The Class Map Generator utility: bin/classmap_generator.php</h1>
-<p>The script <code>bin/classmap_generator.php</code> can be used to generate class map files for use with the
-<a href="../class-map-autoloader/">ClassMapAutoloader</a>.</p>
-<p>Internally, it consumes both the <a href="https://docs.zendframework.com/zend-console/getopt/intro/">zend-console getopt functionality</a>
-(for parsing command-line options) and the <a href="https://docs.zendframework.com/zend-file/class-file-locator/">zend-file ClassFileLocator</a>
-for recursively finding all PHP class files in a given tree.</p>
-<h2 id="quick-start">Quick Start</h2>
-<p>You may run the script over any directory containing source code. By default, it
-will look in the current directory, and will write the script to
-<code>autoloader_classmap.php</code> in the directory you specify.</p>
-<p> <pre class=codehilite><code class=language-bash>$ php classmap_generator.php Some/Directory/</code></pre></p>
-<h2 id="configuration-options">Configuration Options</h2>
-<div class="table-responsive"><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--help | -h</code></td>
-<td>Returns the usage message. If any other options are provided, they will be ignored.</td>
-</tr>
-<tr>
-<td><code>--library | -l</code></td>
-<td>Expects a single argument, a string specifying the library directory to parse. If this option is not specified, it will assume the current working directory.</td>
-</tr>
-<tr>
-<td><code>--output | -o</code></td>
-<td>Where to write the autoload class map file. If not provided, assumes <code>autoload_classmap.php</code> in the library directory.</td>
-</tr>
-<tr>
-<td><code>--append | -a</code></td>
-<td>Append to autoload file if it exists.</td>
-</tr>
-<tr>
-<td><code>--overwrite | -w</code></td>
-<td>If an autoload class map file already exists with the name as specified via the <code>--output</code> option, you can overwrite it by specifying this flag. Otherwise, the script will not write the class map and return a warning.</td>
-</tr>
-</tbody>
-</table></div>
+<blockquote>
+<h3>Removed functionality</h3>
+<p>The script <code>bin/classmap_generator.php</code> has been removed and is no longer available.
+Instead, we recommend using <a href="https://getcomposer.org/doc/04-schema.md#autoload">Composer for autoloading</a>.</p>
+</blockquote>
+<p>If you are upgrading from an existing Zend Framework v2 application, please refer to the <a href="https://docs.zendframework.com/tutorials/migration/to-v3/application/#scripts">migration guide</a> for more detailed information.</p>
 
 
 
