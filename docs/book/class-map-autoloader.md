@@ -8,7 +8,7 @@ opcode caches and PHP's realpath cache.
 
 ## Quick Start
 
-The first step is to generate a class map file in form of a PHP file returning an
+The first step is to create a class map file in form of a PHP file returning an
 associative array that represents the class map. In this example, the class map
 is located at `Some/Directory/autoload_classmap.php`.
 
