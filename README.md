@@ -1,5 +1,9 @@
 # zend-loader
 
+> ## Repository abandoned 2019-12-31
+>
+> This repository has moved to laminas/laminas-loader.
+
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-loader.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-loader)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-loader/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-loader?branch=master)
 
