@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Autoloading and plugin loading strategies">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-loader/standard-autoloader/">
+    <link rel="canonical" href="https://docs.zendframework.com/standard-autoloader/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>StandardAutoloader - zend-loader - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -203,9 +203,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-loader/">laminas/laminas-loader.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -288,11 +288,13 @@
 autoloader. It assumes a 1:1 mapping of the namespace+classname to the
 filesystem, wherein namespace separators and underscores are translated to
 directory separators. The following statement illustrates how resolution works:</p>
-<p> <pre class=codehilite><code class=language-php>$filename = str_replace(
+<pre><code class="language-php">$filename = str_replace(
     ['_', '\\'],
     DIRECTORY_SEPARATOR,
     $classname
-) . '.php';</code></pre></p>
+) . '.php';
+</code></pre>
+
 <p>The <code>StandardAutoloader</code> requires that you explicitly register namespace/path
 pairs (or vendor prefix/path pairs), and will only load a file if it exists
 within the given path. Multiple pairs may be provided.</p>
@@ -321,7 +323,7 @@ This can either be done at instantiation, or via explicit method calls after the
 object has been initialized.  Calling <code>register()</code> will register the autoloader
 with the SPL autoloader registry.</p>
 <h3>Manual Configuration</h3>
-<p> <pre class=codehilite><code class=language-php>use Zend\Loader\StandardAutoloader;
+<pre><code class="language-php">use Zend\Loader\StandardAutoloader;
 
 // This example assumes the StandardAutoloader is autoloadable.
 $loader = new StandardAutoloader();
@@ -337,7 +339,9 @@ $loader-&gt;registerPrefix('Scapi', APPLICATION_PATH . '/../library/Scapi');
 $loader-&gt;setFallbackAutoloader(true);
 
 // Register with spl_autoload:
-$loader-&gt;register();</code></pre></p>
+$loader-&gt;register();
+</code></pre>
+
 <h3>Configuration at Instantiation</h3>
 <p>The <code>StandardAutoloader</code> may also be configured at instantiation. Please note:</p>
 <ul>
@@ -346,7 +350,7 @@ $loader-&gt;register();</code></pre></p>
   <code>setOptions()</code> method.</li>
 </ul>
 <p>The following is equivalent to the previous example.</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Loader\StandardAutoloader;
+<pre><code class="language-php">use Zend\Loader\StandardAutoloader;
 
 $loader = new StandardAutoloader([
     'namespaces' =&gt; [
@@ -359,7 +363,9 @@ $loader = new StandardAutoloader([
 ]);
 
 // Register with spl_autoload:
-$loader-&gt;register();</code></pre></p>
+$loader-&gt;register();
+</code></pre>
+
 <h2 id="configuration-options">Configuration Options</h2>
 <p>The <code>StandardAutoloader</code> defines the following options.</p>
 <h3>namespaces</h3>
@@ -390,12 +396,16 @@ Zend Framework classes.</p>
 </blockquote>
 <h2 id="available-methods">Available Methods</h2>
 <h3>__construct</h3>
-<p> <pre class=codehilite><code class=language-php>__construct(array|Traversable $options = null) : void</code></pre></p>
+<pre><code class="language-php">__construct(array|Traversable $options = null) : void
+</code></pre>
+
 <p>Create a new instance of the object.</p>
 <p>If <code>$options</code> is non-null, the argument is passed to
 <a href="#setoptions">setOptions()</a>.</p>
 <h3>setOptions</h3>
-<p> <pre class=codehilite><code class=language-php>setOptions(array|Traversable $options) : void</code></pre></p>
+<pre><code class="language-php">setOptions(array|Traversable $options) : void
+</code></pre>
+
 <p>Set object state based on provided options.</p>
 <p>Recognized keys are detailed under <a href="#configuration-options">Configuration options</a>,
 with the following behaviors:</p>
@@ -408,37 +418,53 @@ with the following behaviors:</p>
   <a href="#setfallbackautoloader">setFallbackAutoloader()</a>.</li>
 </ul>
 <h3>setFallbackAutoloader</h3>
-<p> <pre class=codehilite><code class=language-php>setFallbackAutoloader(bool $flag) : void</code></pre></p>
+<pre><code class="language-php">setFallbackAutoloader(bool $flag) : void
+</code></pre>
+
 <p>Takes a boolean flag indicating whether or not to act as a fallback autoloader
 when registered with the SPL autoloader.</p>
 <h3>isFallbackAutoloader</h3>
-<p> <pre class=codehilite><code class=language-php>isFallbackAutoloader() : bool</code></pre></p>
+<pre><code class="language-php">isFallbackAutoloader() : bool
+</code></pre>
+
 <p>Indicates whether or not this instance is flagged as a fallback autoloader.</p>
 <h3>registerNamespace</h3>
-<p> <pre class=codehilite><code class=language-php>registerNamespace(string $namespace, string $directory) : void</code></pre></p>
+<pre><code class="language-php">registerNamespace(string $namespace, string $directory) : void
+</code></pre>
+
 <p>Register a namespace with the autoloader, pointing it to a specific directory on
 the filesystem for class resolution. For classes matching that initial
 namespace, the autoloader will then perform lookups within that directory.</p>
 <h3>registerNamespaces</h3>
-<p> <pre class=codehilite><code class=language-php>registerNamespaces(array|Traversable $namespaces) : void</code></pre></p>
+<pre><code class="language-php">registerNamespaces(array|Traversable $namespaces) : void
+</code></pre>
+
 <p>Register multiple namespaces with the autoloader, iterating through
 <code>$namespaces</code> and passing each key and item to <a href="#registernamespace">registerNamespace()</a>.</p>
 <h3>registerPrefix</h3>
-<p> <pre class=codehilite><code class=language-php>registerPrefix(string $prefix, string $directory) : void</code></pre></p>
+<pre><code class="language-php">registerPrefix(string $prefix, string $directory) : void
+</code></pre>
+
 <p>Register a vendor prefix with the autoloader, pointing it to a specific
 directory on the filesystem for class resolution. For classes matching that
 initial vendor prefix, the autoloader will then perform lookups within that
 directory.</p>
 <h3>registerPrefixes</h3>
-<p> <pre class=codehilite><code class=language-php>registerPrefixes(array|Traversable $prefixes) : void</code></pre></p>
+<pre><code class="language-php">registerPrefixes(array|Traversable $prefixes) : void
+</code></pre>
+
 <p>Register many vendor prefixes with the autoloader, traversing <code>$prefixes</code> and
 passing each key/value pair to <a href="#registerprefix">registerPrefix()</a>.</p>
 <h3>autoload</h3>
-<p> <pre class=codehilite><code class=language-php>autoload(string $class) : false|string</code></pre></p>
+<pre><code class="language-php">autoload(string $class) : false|string
+</code></pre>
+
 <p>Attempts to load the class specified. Returns a boolean <code>false</code> on failure, or a
 string indicating the class loaded on success.</p>
 <h3>register</h3>
-<p> <pre class=codehilite><code class=language-php>register() : void</code></pre></p>
+<pre><code class="language-php">register() : void
+</code></pre>
+
 <p>Registers the <code>autoload()</code> method of the current instance with
 <code>spl_autoload_register()</code>.</p>
 
@@ -610,7 +636,7 @@ string indicating the class loaded on success.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -618,10 +644,10 @@ string indicating the class loaded on success.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -629,27 +655,28 @@ string indicating the class loaded on success.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-loader';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
